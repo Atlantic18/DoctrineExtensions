@@ -19,3 +19,6 @@ a release.
 ---
 
 ## [Unreleased]
+### Mapping
+#### Fixed
+- Fix failing simplexml_load_file()

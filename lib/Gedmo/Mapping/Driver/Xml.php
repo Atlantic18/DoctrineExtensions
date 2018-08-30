@@ -86,7 +86,7 @@ abstract class Xml extends File
     protected function _loadMappingFile($file)
     {
         $result = array();
-        $xmlElement = simplexml_load_file($file);
+        $xmlElement = simplexml_load_string(file_get_contents($file));
         $xmlElement = $xmlElement->children(self::DOCTRINE_NAMESPACE_URI);
 
         if (isset($xmlElement->entity)) {
