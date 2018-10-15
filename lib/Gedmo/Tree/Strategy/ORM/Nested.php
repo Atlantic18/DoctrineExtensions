@@ -619,6 +619,10 @@ class Nested implements Strategy
                     continue;
                 }
 
+                if (!is_subclass_of($node, $meta->name) && $meta->name !== get_class($node)) {
+                    continue;
+                }
+
                 $oid = spl_object_hash($node);
                 $left = $meta->getReflectionProperty($config['left'])->getValue($node);
                 $currentRoot = isset($config['root']) ? $meta->getReflectionProperty($config['root'])->getValue($node) : null;

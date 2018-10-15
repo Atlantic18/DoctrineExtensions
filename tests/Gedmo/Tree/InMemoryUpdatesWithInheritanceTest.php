@@ -32,14 +32,12 @@ class InMemoryUpdatesWithInheritanceTest extends BaseTestCaseORM
 
     public function testInMemoryTreeInsertsWithInheritance()
     {
-        $nodes = array();
-
-        $man1 = new Man('Root - Man1');
-        $this->em->persist($man1);
+        $manRoot = new Man('Root - Man1');
+        $this->em->persist($manRoot);
 
         $woman1 = new Woman('Level 1 - Woman1');
         $this->em->persist($woman1);
-        $woman1->setParent($man1);
+        $woman1->setParent($manRoot);
 
         $man2 = new Man('Level 2 - Man2');
         $this->em->persist($man2);
@@ -51,9 +49,9 @@ class InMemoryUpdatesWithInheritanceTest extends BaseTestCaseORM
 
         $this->em->flush();
 
-        $left = $man1->getLeft();
-        $right = $man1->getRight();
-        $level = $man1->getLevel();
+        $left = $manRoot->getLeft();
+        $right = $manRoot->getRight();
+        $level = $manRoot->getLevel();
         $this->assertEquals(1, $left);
         $this->assertEquals(8, $right);
         $this->assertEquals(0, $level);

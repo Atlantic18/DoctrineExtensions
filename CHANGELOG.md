@@ -19,3 +19,8 @@ a release.
 ---
 
 ## [Unreleased]
+
+## [2.4.37] - 2018-10-11
+### Tree
+#### Fixed
+- Fix issue with add+delete position synchronization (#1932)
