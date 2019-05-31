@@ -3,6 +3,7 @@
 namespace Gedmo\Mapping;
 
 use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\EventManager;
 use Doctrine\ORM\Mapping\Driver\DriverChain;
@@ -64,5 +65,6 @@ class SoftDeleteableMappingTest extends BaseTestCaseOM
         $this->assertFalse($config['timeAware']);
         $this->assertArrayHasKey('fieldName', $config);
         $this->assertEquals('deletedAt', $config['fieldName']);
+        $this->assertInstanceOf('DateTime', Type::getType($config['type'])->convertToPHPValue('now', $this->em->getConnection()->getDatabasePlatform()));
     }
 }

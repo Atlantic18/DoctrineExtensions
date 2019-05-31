@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+    <entity name="Mapping\Fixture\Xml\SoftDeleteableDateTimeImmutable" table="soft_deleteables_datetime_immutable">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="deletedAt" type="datetime_immutable" nullable="true"/>
+
+        <gedmo:soft-deleteable field-name="deletedAt"/>
+    </entity>
+</doctrine-mapping>

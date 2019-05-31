@@ -4,6 +4,9 @@ namespace Gedmo\SoftDeleteable;
 
 use Gedmo\Mapping\MappedEventSubscriber;
 use Doctrine\Common\EventArgs;
+use Doctrine\DBAL\Types\Type;
+use Doctrine\ODM\MongoDB\Types\DateType as MongoDBDateType;
+use Doctrine\MongoDB\Connection as MongoDBConnection;
 use Doctrine\ODM\MongoDB\UnitOfWork as MongoDBUnitOfWork;
 
 /**
@@ -63,7 +66,11 @@ class SoftDeleteableListener extends MappedEventSubscriber
             if (isset($config['softDeleteable']) && $config['softDeleteable']) {
                 $reflProp = $meta->getReflectionProperty($config['fieldName']);
                 $oldValue = $reflProp->getValue($object);
-                $date = new \DateTime();
+                if ($om->getConnection() instanceof MongoDBConnection) {
+                    $date = MongoDBDateType::getDateTime('now');
+                } else {
+                    $date = Type::getType($config['type'])->convertToPHPValue('now', $om->getConnection()->getDatabasePlatform());
+                }
 
                 // Remove `$oldValue instanceof \DateTime` check when PHP version is bumped to >=5.5
                 if (isset($config['hardDelete']) && $config['hardDelete'] && ($oldValue instanceof \DateTime || $oldValue instanceof \DateTimeInterface) && $oldValue <= $date) {

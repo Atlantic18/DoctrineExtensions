@@ -1,0 +1,16 @@
+---
+Mapping\Fixture\Yaml\SoftDeleteableDateTimeImmutable:
+  type: entity
+  table: soft_deleteables_datetime_immutable
+  gedmo:
+    soft_deleteable:
+      field_name: deletedAt
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    deletedAt:
+      type: datetime_immutable
+      nullable: true

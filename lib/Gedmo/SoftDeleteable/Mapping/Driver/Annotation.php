@@ -52,6 +52,9 @@ class Annotation extends AbstractAnnotationDriver
                 }
                 $config['hardDelete'] = $annot->hardDelete;
             }
+
+            $fieldMapping = $meta->getFieldMapping($annot->fieldName);
+            $config['type'] = $fieldMapping['type'];
         }
 
         $this->validateFullMetadata($meta, $config);
