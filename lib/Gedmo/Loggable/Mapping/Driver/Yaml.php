@@ -145,5 +145,14 @@ class Yaml extends File implements Driver
                 $config['versioned'][] = $field . '.' . $property;
             }
         }
+        if (isset($mapping['embedded'])) {
+            foreach ($mapping['embedded'] as $embeddedField => $fieldMapping) {
+                $this->inspectEmbeddedForVersioned(
+                    $field . '.' . $embeddedField,
+                    $this->_getMapping($fieldMapping['class']),
+                    $config
+                );
+            }
+        }
     }
 }
