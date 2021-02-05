@@ -596,6 +596,8 @@ class UploadableListener extends MappedEventSubscriber
                 ));
             }
         }
+        
+        $info['fileName'] = basename($info['filePath']);        
 
         if (!$this->doMoveFile($fileInfo->getTmpName(), $info['filePath'], $fileInfo->isUploadedFile())) {
             throw new UploadableUploadException(sprintf('File "%s" was not uploaded, or there was a problem moving it to the location "%s".',
