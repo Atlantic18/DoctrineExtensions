@@ -38,7 +38,7 @@ class MultiTableDeleteExecutor extends BaseMultiTableDeleteExecutor
                 $sqlStatements[$index] = str_replace('DELETE FROM', 'UPDATE', $stmt);
                 $sqlStatements[$index] = str_replace(
                     'WHERE',
-                    'SET '.$config['fieldName'].' = '.$platform->getCurrentTimestampSQL().' WHERE',
+                    'SET '.$meta->fieldMappings[$config['fieldName']]['columnName'].' = '.$platform->getCurrentTimestampSQL().' WHERE',
                     $sqlStatements[$index]
                 );
             } else {
