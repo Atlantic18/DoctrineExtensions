@@ -337,6 +337,10 @@ class TranslationWalker extends SqlWalker
                 $originalField = $compTblAlias.'.'.$quoteStrategy->getColumnName($field, $meta, $this->platform);
                 $substituteField = $tblAlias.'.'.$quoteStrategy->getColumnName('content', $transMeta, $this->platform);
 
+                if ($q->getAST()->groupByClause) {
+                    $substituteField = 'MAX('.$substituteField.')';
+                }
+
                 // Treat translation as original field type
                 $fieldMapping = $meta->getFieldMapping($field);
                 if ((($this->platform instanceof MySqlPlatform) &&
