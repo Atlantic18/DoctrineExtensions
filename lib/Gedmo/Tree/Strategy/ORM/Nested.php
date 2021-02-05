@@ -582,26 +582,32 @@ class Nested implements Strategy
 
         $sign = ($delta >= 0) ? ' + ' : ' - ';
         $absDelta = abs($delta);
-        $qb = $em->createQueryBuilder();
-        $qb->update($config['useObjectClass'], 'node')
+        $leftQb = $em->createQueryBuilder();
+        $leftQb->update($config['useObjectClass'], 'node')
             ->set('node.' . $config['left'], "node.{$config['left']} {$sign} {$absDelta}")
-            ->where($qb->expr()->gte('node.' . $config['left'], $first));
+            ->where($leftQb->expr()->gte('node.' . $config['left'], $first));
         if (isset($config['root'])) {
-            $qb->andWhere($qb->expr()->eq('node.' . $config['root'], ':rid'));
-            $qb->setParameter('rid', $root);
+            $leftQb->andWhere($leftQb->expr()->eq('node.' . $config['root'], ':rid'));
+            $leftQb->setParameter('rid', $root);
         }
-        $qb->getQuery()->getSingleScalarResult();
 
-        $qb = $em->createQueryBuilder();
-        $qb->update($config['useObjectClass'], 'node')
+        $rightQb = $em->createQueryBuilder();
+        $rightQb->update($config['useObjectClass'], 'node')
             ->set('node.' . $config['right'], "node.{$config['right']} {$sign} {$absDelta}")
-            ->where($qb->expr()->gte('node.' . $config['right'], $first));
+            ->where($rightQb->expr()->gte('node.' . $config['right'], $first));
         if (isset($config['root'])) {
-            $qb->andWhere($qb->expr()->eq('node.' . $config['root'], ':rid'));
-            $qb->setParameter('rid', $root);
+            $rightQb->andWhere($rightQb->expr()->eq('node.' . $config['root'], ':rid'));
+            $rightQb->setParameter('rid', $root);
         }
 
-        $qb->getQuery()->getSingleScalarResult();
+        if ($delta > 0) {
+            $rightQb->getQuery()->getSingleScalarResult();
+            $leftQb->getQuery()->getSingleScalarResult();
+        } else {
+            $leftQb->getQuery()->getSingleScalarResult();
+            $rightQb->getQuery()->getSingleScalarResult();
+        }
+
         // update in memory nodes increases performance, saves some IO
         foreach ($em->getUnitOfWork()->getIdentityMap() as $className => $nodes) {
             // for inheritance mapped classes, only root is always in the identity map
