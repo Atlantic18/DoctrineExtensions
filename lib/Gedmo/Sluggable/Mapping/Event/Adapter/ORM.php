@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Gedmo\Mapping\Event\Adapter\ORM as BaseAdapterORM;
 use Doctrine\ORM\Query;
 use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
+use Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter;
 use Gedmo\Tool\Wrapper\AbstractWrapper;
 
 /**
@@ -67,10 +68,40 @@ class ORM extends BaseAdapterORM implements SluggableAdapter
                 $qb->setParameter($namedId, $value, $meta->getTypeOfField($namedId));                
             }
         }
+
+        $softDeletableName = $this->getSoftDeletableFilterName();
+
+        if ($softDeletableName) {
+            $em->getFilters()->disable($softDeletableName);
+        }
+
         $q = $qb->getQuery();
         $q->setHydrationMode(Query::HYDRATE_ARRAY);
 
-        return $q->execute();
+        $result = $q->execute();
+
+        if ($softDeletableName) {
+            $em->getFilters()->enable($softDeletableName);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return string|null
+     */
+    private function getSoftDeletableFilterName()
+    {
+        $em = $this->getObjectManager();
+        $filters = $em->getFilters()->getEnabledFilters();
+
+        foreach ($filters as $key => $filter) {
+            if ($filter instanceof SoftDeleteableFilter) {
+                return $key;
+            }
+        }
+
+        return null;
     }
 
     /**

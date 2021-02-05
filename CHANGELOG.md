@@ -49,6 +49,9 @@ a release.
 ### Loggable
 #### Fixed
 - Added missing string casting of `objectId` in `LogEntryRepository::revert()` method (#2009)
+### Sluggable
+#### Fixed
+- Automatically disable/enable the soft-deletable filter when searching for similar slugs
 
 ### ReferenceIntegrity
 #### Fixed
