@@ -315,7 +315,7 @@ class ClosureTreeRepository extends AbstractTreeRepository
                     $tmp = &$refs[$n['parent_id']][$childrenIndex];
                 }
 
-                $key = count($tmp);
+                $key = $tmp ? count($tmp) : 0;
                 $tmp[$key] = $node;
                 $refs[$node[$idField]] = &$tmp[$key];
             }
