@@ -270,9 +270,6 @@ class SoftDeleteableEntityTest extends BaseTestCaseORM
         $this->assertInstanceOf(self::OTHER_COMMENT_CLASS, $foundComment);
     }
 
-    /**
-     * @group datetimeinterface
-     */
     public function testSoftDeleteableWithDateTimeInterface()
     {
         $repo = $this->em->getRepository(self::ARTICLE_CLASS);
@@ -471,6 +468,7 @@ class SoftDeleteableEntityTest extends BaseTestCaseORM
 
         $user = $repo->findOneBy(['username' => $username]);
         $this->assertNotNull($user->getDeletedAt());
+        $this->assertInstanceOf('DateTime', $user->getDeletedAt());
 
         $filter->enableForEntity(self::USER_CLASS);
 

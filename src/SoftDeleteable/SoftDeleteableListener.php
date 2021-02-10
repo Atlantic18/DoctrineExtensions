@@ -3,6 +3,9 @@
 namespace Gedmo\SoftDeleteable;
 
 use Doctrine\Common\EventArgs;
+use Doctrine\DBAL\Types\Type;
+use Doctrine\MongoDB\Connection as MongoDBConnection;
+use Doctrine\ODM\MongoDB\Types\DateType as MongoDBDateType;
 use Doctrine\ODM\MongoDB\UnitOfWork as MongoDBUnitOfWork;
 use Gedmo\Mapping\MappedEventSubscriber;
 
@@ -61,10 +64,18 @@ class SoftDeleteableListener extends MappedEventSubscriber
             if (isset($config['softDeleteable']) && $config['softDeleteable']) {
                 $reflProp = $meta->getReflectionProperty($config['fieldName']);
                 $oldValue = $reflProp->getValue($object);
+// These conflicts are not resolved in order to check if the tests pass without these changes.
+//<<<<<<< HEAD:src/SoftDeleteable/SoftDeleteableListener.php
                 $date = $ea->getDateValue($meta, $config['fieldName']);
+//=======
+//                if ($om->getConnection() instanceof MongoDBConnection) {
+//                    $date = MongoDBDateType::getDateTime('now');
+//                } else {
+//                    $date = Type::getType($config['type'])->convertToPHPValue('now', $om->getConnection()->getDatabasePlatform());
+//                }
+//>>>>>>> c4e77dd0... Add support for "date*_immutable" types:lib/Gedmo/SoftDeleteable/SoftDeleteableListener.php
 
-                // Remove `$oldValue instanceof \DateTime` check when PHP version is bumped to >=5.5
-                if (isset($config['hardDelete']) && $config['hardDelete'] && ($oldValue instanceof \DateTime || $oldValue instanceof \DateTimeInterface) && $oldValue <= $date) {
+                if (isset($config['hardDelete']) && $config['hardDelete'] && $oldValue instanceof \DateTimeInterface && $oldValue <= $date) {
                     continue; // want to hard delete
                 }
 

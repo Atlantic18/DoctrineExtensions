@@ -3,9 +3,9 @@
 namespace Gedmo\Mapping;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\Common\EventManager;
 use Doctrine\ORM\Mapping\Driver\DriverChain;
 use Doctrine\ORM\Mapping\Driver\YamlDriver;
 use Gedmo\SoftDeleteable\SoftDeleteableListener;
@@ -14,14 +14,13 @@ use Tool\BaseTestCaseOM;
 /**
  * These are mapping tests for SoftDeleteable extension
  *
- * @author Gustavo Falco <comfortablynumb84@gmail.com>
- * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
- *
  * @see http://www.gediminasm.org
  *
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
+ *
+ * @author Javier Spagnoletti <phansys@gmail.com>
  */
-class SoftDeleteableMappingTest extends BaseTestCaseOM
+final class SoftDeleteableMappingDateTimeImmutableTest extends BaseTestCaseOM
 {
     /**
      * @var Doctrine\ORM\EntityManager
@@ -35,6 +34,9 @@ class SoftDeleteableMappingTest extends BaseTestCaseOM
 
     public function setUp(): void
     {
+        if (!Type::hasType('datetime_immutable')) {
+            $this->markTestSkipped('This test requires "date*_immutable" types to be defined, which are included with "doctrine/dbal:^2.6"');
+        }
         parent::setUp();
 
         $reader = new AnnotationReader();
@@ -52,13 +54,14 @@ class SoftDeleteableMappingTest extends BaseTestCaseOM
 
         $this->em = $this->getMockSqliteEntityManager([
             'Mapping\Fixture\Yaml\SoftDeleteable',
+            'Mapping\Fixture\Yaml\SoftDeleteableDateTimeImmutable',
             'Mapping\Fixture\SoftDeleteable',
         ], $chain);
     }
 
-    public function testYamlMapping()
+    public function testYamlMappingDateTimeImmutable()
     {
-        $meta = $this->em->getClassMetadata('Mapping\Fixture\Yaml\SoftDeleteable');
+        $meta = $this->em->getClassMetadata('Mapping\Fixture\Yaml\SoftDeleteableDateTimeImmutable');
         $config = $this->softDeleteable->getConfiguration($this->em, $meta->name);
 
         $this->assertArrayHasKey('softDeleteable', $config);
@@ -66,7 +69,8 @@ class SoftDeleteableMappingTest extends BaseTestCaseOM
         $this->assertArrayHasKey('timeAware', $config);
         $this->assertFalse($config['timeAware']);
         $this->assertArrayHasKey('fieldName', $config);
-        $this->assertEquals('deletedAt', $config['fieldName']);
-//        $this->assertInstanceOf('DateTime', Type::getType($config['type'])->convertToPHPValue('now', $this->em->getConnection()->getDatabasePlatform()));
+        $this->assertSame('deletedAt', $config['fieldName']);
+//        $this->assertArrayHasKey('type', $config);
+//        $this->assertInstanceOf('DateTimeImmutable', Type::getType($config['type'])->convertToPHPValue('now', $this->em->getConnection()->getDatabasePlatform()));
     }
 }
