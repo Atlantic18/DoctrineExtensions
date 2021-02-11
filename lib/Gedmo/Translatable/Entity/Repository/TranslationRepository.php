@@ -26,7 +26,7 @@ class TranslationRepository extends EntityRepository
      *
      * @var TranslatableListener
      */
-    private $listener;
+    protected $listener;
 
     /**
      * {@inheritdoc}
@@ -230,7 +230,7 @@ class TranslationRepository extends EntityRepository
      *
      * @return TranslatableListener
      */
-    private function getTranslatableListener()
+    protected function getTranslatableListener()
     {
         if (!$this->listener) {
             foreach ($this->_em->getEventManager()->getListeners() as $event => $listeners) {
