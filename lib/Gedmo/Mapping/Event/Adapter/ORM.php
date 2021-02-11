@@ -169,13 +169,13 @@ class ORM implements AdapterInterface
     /**
      * Creates a ORM specific LifecycleEventArgs.
      *
-     * @param object                                $document
-     * @param \Doctrine\ODM\MongoDB\DocumentManager $documentManager
+     * @param object                               $document
+     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
      *
-     * @return \Doctrine\ODM\MongoDB\Event\LifecycleEventArgs
+     * @return \Doctrine\ORM\Event\LifecycleEventArgs
      */
-    public function createLifecycleEventArgsInstance($document, $documentManager)
+    public function createLifecycleEventArgsInstance($document, $entityManager)
     {
-        return new LifecycleEventArgs($document, $documentManager);
+        return new LifecycleEventArgs($document, $entityManager);
     }
 }

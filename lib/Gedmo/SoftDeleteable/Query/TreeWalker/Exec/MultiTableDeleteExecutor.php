@@ -25,12 +25,7 @@ class MultiTableDeleteExecutor extends BaseMultiTableDeleteExecutor
     {
         parent::__construct($AST, $sqlWalker);
 
-        $reflProp = new \ReflectionProperty(get_class($this), '_sqlStatements');
-        $reflProp->setAccessible(true);
-
-        $sqlStatements = $reflProp->getValue($this);
-
-        foreach ($sqlStatements as $index => $stmt) {
+        foreach ($this->_sqlStatements as $index => $stmt) {
             $matches = array();
             preg_match('/DELETE FROM (\w+) .+/', $stmt, $matches);
 
@@ -43,10 +38,8 @@ class MultiTableDeleteExecutor extends BaseMultiTableDeleteExecutor
                 );
             } else {
                 // We have to avoid the removal of registers of child entities of a SoftDeleteable entity
-                unset($sqlStatements[$index]);
+                unset($this->_sqlStatements[$index]);
             }
         }
-
-        $reflProp->setValue($this, $sqlStatements);
     }
 }
