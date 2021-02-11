@@ -139,6 +139,11 @@ class Xml extends BaseXml
                         throw new InvalidMappingException("Tree PathSource field - [{$field}] type is not valid. It can be any of the integer variants, double, float or string in class - {$meta->name}");
                     }
                     $config['path_source'] = $field;
+                } elseif (isset($mapping->{'tree-path-hash'})) {
+                    if (!$validator->isValidFieldForPathSource($meta, $field)) {
+                        throw new InvalidMappingException("Tree PathHash field - [{$field}] type is not valid and must be 'string' in class - {$meta->name}");
+                    }
+                    $config['path_hash'] = $field;
                 } elseif (isset($mapping->{'tree-lock-time'})) {
                     if (!$validator->isValidFieldForLockTime($meta, $field)) {
                         throw new InvalidMappingException("Tree LockTime field - [{$field}] type is not valid. It must be \"date\" in class - {$meta->name}");
