@@ -232,22 +232,24 @@ class LoggableListener extends MappedEventSubscriber
                 continue;
             }
             $value = $changes[1];
-            if ($meta->isSingleValuedAssociation($field) && $value) {
-                if ($wrapped->isEmbeddedAssociation($field)) {
-                    $value = $this->getObjectChangeSetData($ea, $value, $logEntry);
-                } else {
-                    $oid          = spl_object_hash($value);
-                    $wrappedAssoc = AbstractWrapper::wrap($value, $om);
-                    $value        = $wrappedAssoc->getIdentifier(false);
-                    if (!is_array($value) && !$value) {
-                        $this->pendingRelatedObjects[$oid][] = array(
-                            'log'   => $logEntry,
-                            'field' => $field,
-                        );
+            if($changes[0] != $changes[1]) {
+                if ($meta->isSingleValuedAssociation($field) && $value) {
+                    if ($wrapped->isEmbeddedAssociation($field)) {
+                        $value = $this->getObjectChangeSetData($ea, $value, $logEntry);
+                    } else {
+                        $oid          = spl_object_hash($value);
+                        $wrappedAssoc = AbstractWrapper::wrap($value, $om);
+                        $value        = $wrappedAssoc->getIdentifier(false);
+                        if (!is_array($value) && !$value) {
+                            $this->pendingRelatedObjects[$oid][] = array(
+                                'log'   => $logEntry,
+                                'field' => $field,
+                            );
+                        }
                     }
                 }
+                $newValues[$field] = $value;
             }
-            $newValues[$field] = $value;
         }
 
         return $newValues;
