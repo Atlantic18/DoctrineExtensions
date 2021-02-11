@@ -449,6 +449,12 @@ class SluggableListener extends MappedEventSubscriber
                 if ($base !== false && $meta->getReflectionProperty($config['unique_base'])->getValue($obj) !== $base) {
                     continue; // if unique_base field is not the same, do not take slug as similar
                 }
+
+                // Check if similar persisted slugs are from class parents, childs, or brother, if not : continue
+                if (!is_subclass_of($obj, $meta->name) && !is_subclass_of($object, get_class($obj)) && $meta->name !== get_class($obj)) {
+                    continue;
+                }
+
                 $slug = $meta->getReflectionProperty($config['slug'])->getValue($obj);
                 $quotedPreferredSlug = preg_quote($preferredSlug);
                 if (preg_match("@^{$quotedPreferredSlug}.*@smi", $slug)) {

@@ -6,3 +6,4 @@ tests/temp/*.log
 /composer.lock
 /composer.phar
 .idea
+.zcache
