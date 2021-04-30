@@ -20,7 +20,7 @@ class MaterializedPathORMRepositoryTest extends BaseTestCaseORM
     const CATEGORY = 'Tree\\Fixture\\MPCategory';
     const CATEGORY_WITH_TRIMMED_SEPARATOR = 'Tree\\Fixture\\MPCategoryWithTrimmedSeparator';
 
-    /** @var $this->repo \Gedmo\Tree\Entity\Repository\MaterializedPathRepository */
+    /** @var \Gedmo\Tree\Entity\Repository\MaterializedPathRepository */
     protected $repo;
 
     protected function setUp(): void
