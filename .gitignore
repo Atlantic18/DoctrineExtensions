@@ -2,7 +2,7 @@
 bin
 vendor
 
-.php_cs.cache
+.php-cs-fixer.cache
 composer.lock
 tests/phpunit.xml
 tests/temp/*.php
