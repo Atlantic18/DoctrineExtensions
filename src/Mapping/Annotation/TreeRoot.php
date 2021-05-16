@@ -15,6 +15,6 @@ use Doctrine\Common\Annotations\Annotation;
  */
 final class TreeRoot extends Annotation
 {
-    /** @var string $identifierMethod */
+    /** @var string */
     public $identifierMethod;
 }

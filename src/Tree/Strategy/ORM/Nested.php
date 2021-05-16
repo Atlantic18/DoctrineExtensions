@@ -26,22 +26,22 @@ class Nested implements Strategy
     /**
      * Previous sibling position
      */
-    const PREV_SIBLING = 'PrevSibling';
+    public const PREV_SIBLING = 'PrevSibling';
 
     /**
      * Next sibling position
      */
-    const NEXT_SIBLING = 'NextSibling';
+    public const NEXT_SIBLING = 'NextSibling';
 
     /**
      * Last child position
      */
-    const LAST_CHILD = 'LastChild';
+    public const LAST_CHILD = 'LastChild';
 
     /**
      * First child position
      */
-    const FIRST_CHILD = 'FirstChild';
+    public const FIRST_CHILD = 'FirstChild';
 
     /**
      * TreeListener

@@ -17,7 +17,7 @@ use Tree\Fixture\RootAssociationCategory;
  */
 class NestedTreeRootAssociationTest extends BaseTestCaseORM
 {
-    const CATEGORY = 'Tree\\Fixture\\RootAssociationCategory';
+    public const CATEGORY = 'Tree\\Fixture\\RootAssociationCategory';
 
     protected function setUp(): void
     {

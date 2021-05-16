@@ -16,13 +16,13 @@ use Gedmo\Exception\UploadableInvalidPathException;
  */
 class Validator
 {
-    const UPLOADABLE_FILE_MIME_TYPE = 'UploadableFileMimeType';
-    const UPLOADABLE_FILE_NAME = 'UploadableFileName';
-    const UPLOADABLE_FILE_PATH = 'UploadableFilePath';
-    const UPLOADABLE_FILE_SIZE = 'UploadableFileSize';
-    const FILENAME_GENERATOR_SHA1 = 'SHA1';
-    const FILENAME_GENERATOR_ALPHANUMERIC = 'ALPHANUMERIC';
-    const FILENAME_GENERATOR_NONE = 'NONE';
+    public const UPLOADABLE_FILE_MIME_TYPE = 'UploadableFileMimeType';
+    public const UPLOADABLE_FILE_NAME = 'UploadableFileName';
+    public const UPLOADABLE_FILE_PATH = 'UploadableFilePath';
+    public const UPLOADABLE_FILE_SIZE = 'UploadableFileSize';
+    public const FILENAME_GENERATOR_SHA1 = 'SHA1';
+    public const FILENAME_GENERATOR_ALPHANUMERIC = 'ALPHANUMERIC';
+    public const FILENAME_GENERATOR_NONE = 'NONE';
 
     /**
      * Determines if we should throw an exception in the case the "allowedTypes" and

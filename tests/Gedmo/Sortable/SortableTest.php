@@ -26,16 +26,16 @@ use Tool\BaseTestCaseORM;
  */
 class SortableTest extends BaseTestCaseORM
 {
-    const NODE = 'Sortable\\Fixture\\Node';
-    const NOTIFY_NODE = 'Sortable\\Fixture\\NotifyNode';
-    const ITEM = 'Sortable\\Fixture\\Item';
-    const CATEGORY = 'Sortable\\Fixture\\Category';
-    const SIMPLE_LIST_ITEM = 'Sortable\\Fixture\\SimpleListItem';
-    const AUTHOR = 'Sortable\\Fixture\\Author';
-    const PAPER = 'Sortable\\Fixture\\Paper';
-    const EVENT = 'Sortable\\Fixture\\Event';
-    const CUSTOMER = 'Sortable\\Fixture\\Customer';
-    const CUSTOMER_TYPE = 'Sortable\\Fixture\\CustomerType';
+    public const NODE = 'Sortable\\Fixture\\Node';
+    public const NOTIFY_NODE = 'Sortable\\Fixture\\NotifyNode';
+    public const ITEM = 'Sortable\\Fixture\\Item';
+    public const CATEGORY = 'Sortable\\Fixture\\Category';
+    public const SIMPLE_LIST_ITEM = 'Sortable\\Fixture\\SimpleListItem';
+    public const AUTHOR = 'Sortable\\Fixture\\Author';
+    public const PAPER = 'Sortable\\Fixture\\Paper';
+    public const EVENT = 'Sortable\\Fixture\\Event';
+    public const CUSTOMER = 'Sortable\\Fixture\\Customer';
+    public const CUSTOMER_TYPE = 'Sortable\\Fixture\\CustomerType';
 
     private $nodeId;
 

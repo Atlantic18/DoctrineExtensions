@@ -18,9 +18,9 @@ use Tree\Fixture\Genealogy\Woman;
  */
 class InMemoryUpdatesWithInheritanceTest extends BaseTestCaseORM
 {
-    const PERSON = 'Tree\\Fixture\\Genealogy\\Person';
-    const MAN = 'Tree\\Fixture\\Genealogy\\Man';
-    const WOMAN = 'Tree\\Fixture\\Genealogy\\Woman';
+    public const PERSON = 'Tree\\Fixture\\Genealogy\\Person';
+    public const MAN = 'Tree\\Fixture\\Genealogy\\Man';
+    public const WOMAN = 'Tree\\Fixture\\Genealogy\\Woman';
 
     protected function setUp(): void
     {

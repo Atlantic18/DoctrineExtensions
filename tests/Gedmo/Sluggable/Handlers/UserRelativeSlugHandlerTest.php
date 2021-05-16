@@ -18,8 +18,8 @@ use Tool\BaseTestCaseORM;
  */
 class UserRelativeSlugHandlerTest extends BaseTestCaseORM
 {
-    const USER = 'Sluggable\\Fixture\\Handler\\User';
-    const COMPANY = 'Sluggable\\Fixture\\Handler\\Company';
+    public const USER = 'Sluggable\\Fixture\\Handler\\User';
+    public const COMPANY = 'Sluggable\\Fixture\\Handler\\Company';
 
     protected function setUp(): void
     {

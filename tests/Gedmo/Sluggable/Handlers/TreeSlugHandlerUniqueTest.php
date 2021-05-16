@@ -9,7 +9,7 @@ use Tool\BaseTestCaseORM;
 
 class TreeSlugHandlerUniqueTest extends BaseTestCaseORM
 {
-    const TARGET = 'Sluggable\\Fixture\\Handler\\TreeSlug';
+    public const TARGET = 'Sluggable\\Fixture\\Handler\\TreeSlug';
 
     protected function setUp(): void
     {

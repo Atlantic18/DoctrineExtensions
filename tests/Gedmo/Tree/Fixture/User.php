@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends Role
 {
-    const PASSWORD_SALT = 'dfJko$~346958rg!DFT]AEtzserf9giq)3/TAeg;aDFa43';
+    public const PASSWORD_SALT = 'dfJko$~346958rg!DFT]AEtzserf9giq)3/TAeg;aDFa43';
 
     /**
      * @ORM\Column(name="email", type="string", unique=true)

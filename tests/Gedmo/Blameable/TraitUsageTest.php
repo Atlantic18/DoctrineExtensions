@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class TraitUsageTest extends BaseTestCaseORM
 {
-    const TARGET = 'Blameable\\Fixture\\Entity\\UsingTrait';
+    public const TARGET = 'Blameable\\Fixture\\Entity\\UsingTrait';
 
     protected function setUp(): void
     {

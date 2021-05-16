@@ -19,7 +19,7 @@ class Annotation extends AbstractAnnotationDriver
     /**
      * Annotation field is ipTraceable
      */
-    const IP_TRACEABLE = 'Gedmo\\Mapping\\Annotation\\IpTraceable';
+    public const IP_TRACEABLE = 'Gedmo\\Mapping\\Annotation\\IpTraceable';
 
     /**
      * List of types which are valid for IP

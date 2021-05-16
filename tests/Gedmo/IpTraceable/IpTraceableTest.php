@@ -19,11 +19,11 @@ use Tool\BaseTestCaseORM;
  */
 class IpTraceableTest extends BaseTestCaseORM
 {
-    const TEST_IP = '34.234.1.10';
+    public const TEST_IP = '34.234.1.10';
 
-    const ARTICLE = 'IpTraceable\\Fixture\\Article';
-    const COMMENT = 'IpTraceable\\Fixture\\Comment';
-    const TYPE = 'IpTraceable\\Fixture\\Type';
+    public const ARTICLE = 'IpTraceable\\Fixture\\Article';
+    public const COMMENT = 'IpTraceable\\Fixture\\Comment';
+    public const TYPE = 'IpTraceable\\Fixture\\Type';
 
     protected function setUp(): void
     {

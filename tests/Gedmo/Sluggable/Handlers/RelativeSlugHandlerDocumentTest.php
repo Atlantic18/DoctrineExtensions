@@ -18,8 +18,8 @@ use Tool\BaseTestCaseMongoODM;
  */
 class RelativeSlugHandlerDocumentTest extends BaseTestCaseMongoODM
 {
-    const ARTICLE = 'Sluggable\\Fixture\\Document\\Handler\\Article';
-    const SLUG = 'Sluggable\\Fixture\\Document\\Handler\\RelativeSlug';
+    public const ARTICLE = 'Sluggable\\Fixture\\Document\\Handler\\Article';
+    public const SLUG = 'Sluggable\\Fixture\\Document\\Handler\\RelativeSlug';
 
     protected function setUp(): void
     {

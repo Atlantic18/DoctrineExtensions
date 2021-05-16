@@ -35,21 +35,21 @@ class TranslationWalker extends SqlWalker
      *
      * @internal
      */
-    const HINT_TRANSLATION_FALLBACKS = '__gedmo.translatable.stored.fallbacks';
+    public const HINT_TRANSLATION_FALLBACKS = '__gedmo.translatable.stored.fallbacks';
 
     /**
      * Customized object hydrator name
      *
      * @internal
      */
-    const HYDRATE_OBJECT_TRANSLATION = '__gedmo.translatable.object.hydrator';
+    public const HYDRATE_OBJECT_TRANSLATION = '__gedmo.translatable.object.hydrator';
 
     /**
      * Customized object hydrator name
      *
      * @internal
      */
-    const HYDRATE_SIMPLE_OBJECT_TRANSLATION = '__gedmo.translatable.simple_object.hydrator';
+    public const HYDRATE_SIMPLE_OBJECT_TRANSLATION = '__gedmo.translatable.simple_object.hydrator';
 
     /**
      * Stores all component references from select clause

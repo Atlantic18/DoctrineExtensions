@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class TraitUsageTest extends BaseTestCaseORM
 {
-    const TARGET = 'Timestampable\\Fixture\\UsingTrait';
+    public const TARGET = 'Timestampable\\Fixture\\UsingTrait';
 
     protected function setUp(): void
     {

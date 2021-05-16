@@ -16,11 +16,11 @@ use Tool\BaseTestCaseMongoODM;
  */
 class SortableDocumentGroupTest extends BaseTestCaseMongoODM
 {
-    const POST = 'Sortable\\Fixture\\Document\\Post';
-    const CATEGORY = 'Sortable\\Fixture\\Document\\Category';
-    const KID = 'Sortable\\Fixture\\Document\\Kid';
-    const KID_DATE1 = '1999-12-31';
-    const KID_DATE2 = '2000-01-01';
+    public const POST = 'Sortable\\Fixture\\Document\\Post';
+    public const CATEGORY = 'Sortable\\Fixture\\Document\\Category';
+    public const KID = 'Sortable\\Fixture\\Document\\Kid';
+    public const KID_DATE1 = '1999-12-31';
+    public const KID_DATE2 = '2000-01-01';
 
     protected function setUp(): void
     {

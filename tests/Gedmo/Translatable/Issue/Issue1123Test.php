@@ -8,9 +8,9 @@ use Translatable\Fixture\Issue1123\ChildEntity;
 
 class Issue1123Test extends BaseTestCaseORM
 {
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
-    const BASE_ENTITY = 'Translatable\\Fixture\\Issue1123\\BaseEntity';
-    const CHILD_ENTITY = 'Translatable\\Fixture\\Issue1123\\ChildEntity';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const BASE_ENTITY = 'Translatable\\Fixture\\Issue1123\\BaseEntity';
+    public const CHILD_ENTITY = 'Translatable\\Fixture\\Issue1123\\ChildEntity';
 
     protected function setUp(): void
     {

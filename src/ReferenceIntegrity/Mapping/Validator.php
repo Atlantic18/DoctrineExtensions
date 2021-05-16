@@ -10,9 +10,9 @@ namespace Gedmo\ReferenceIntegrity\Mapping;
  */
 class Validator
 {
-    const NULLIFY = 'nullify';
-    const PULL = 'pull';
-    const RESTRICT = 'restrict';
+    public const NULLIFY = 'nullify';
+    public const PULL = 'pull';
+    public const RESTRICT = 'restrict';
 
     /**
      * List of actions which are valid as integrity check

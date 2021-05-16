@@ -17,8 +17,8 @@ use Tool\BaseTestCaseORM;
  */
 class ChangeTest extends BaseTestCaseORM
 {
-    const TEST_IP = '34.234.1.10';
-    const FIXTURE = 'IpTraceable\\Fixture\\TitledArticle';
+    public const TEST_IP = '34.234.1.10';
+    public const FIXTURE = 'IpTraceable\\Fixture\\TitledArticle';
 
     protected $listener;
 

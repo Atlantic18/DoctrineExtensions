@@ -18,7 +18,7 @@ use Wrapper\Fixture\Entity\Article;
  */
 class EntityWrapperTest extends BaseTestCaseORM
 {
-    const ARTICLE = 'Wrapper\\Fixture\\Entity\\Article';
+    public const ARTICLE = 'Wrapper\\Fixture\\Entity\\Article';
 
     protected function setUp(): void
     {

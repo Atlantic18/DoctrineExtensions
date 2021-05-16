@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class NoInterfaceTest extends BaseTestCaseORM
 {
-    const FIXTURE = 'Timestampable\\Fixture\\WithoutInterface';
+    public const FIXTURE = 'Timestampable\\Fixture\\WithoutInterface';
 
     protected function setUp(): void
     {

@@ -17,7 +17,7 @@ use Gedmo\Mapping\ExtensionMetadataFactory;
  */
 class TranslatableMappingTest extends \PHPUnit\Framework\TestCase
 {
-    const TEST_YAML_ENTITY_CLASS = 'Mapping\Fixture\Yaml\User';
+    public const TEST_YAML_ENTITY_CLASS = 'Mapping\Fixture\Yaml\User';
     private $em;
 
     public function setUp(): void

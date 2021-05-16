@@ -21,12 +21,12 @@ class Annotation extends AbstractAnnotationDriver
     /**
      * Annotation to define that this object is loggable
      */
-    const LOGGABLE = 'Gedmo\\Mapping\\Annotation\\Loggable';
+    public const LOGGABLE = 'Gedmo\\Mapping\\Annotation\\Loggable';
 
     /**
      * Annotation to define that this property is versioned
      */
-    const VERSIONED = 'Gedmo\\Mapping\\Annotation\\Versioned';
+    public const VERSIONED = 'Gedmo\\Mapping\\Annotation\\Versioned';
 
     /**
      * {@inheritdoc}

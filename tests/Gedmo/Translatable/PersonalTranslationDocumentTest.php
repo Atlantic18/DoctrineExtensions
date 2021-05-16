@@ -18,8 +18,8 @@ use Translatable\Fixture\Document\Personal\ArticleTranslation;
  */
 class PersonalTranslationDocumentTest extends BaseTestCaseMongoODM
 {
-    const ARTICLE = 'Translatable\Fixture\Document\Personal\Article';
-    const TRANSLATION = 'Translatable\Fixture\Document\Personal\ArticleTranslation';
+    public const ARTICLE = 'Translatable\Fixture\Document\Personal\Article';
+    public const TRANSLATION = 'Translatable\Fixture\Document\Personal\ArticleTranslation';
 
     private $translatableListener;
     private $id;

@@ -20,7 +20,7 @@ use Tool\BaseTestCaseORM;
  */
 class ChangeTest extends BaseTestCaseORM
 {
-    const FIXTURE = 'Timestampable\\Fixture\\TitledArticle';
+    public const FIXTURE = 'Timestampable\\Fixture\\TitledArticle';
 
     protected $listener;
 

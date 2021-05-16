@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class ChangeTest extends BaseTestCaseORM
 {
-    const FIXTURE = 'Blameable\\Fixture\\Entity\\TitledArticle';
+    public const FIXTURE = 'Blameable\\Fixture\\Entity\\TitledArticle';
 
     private $listener;
 

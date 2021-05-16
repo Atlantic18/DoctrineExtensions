@@ -20,7 +20,7 @@ use Gedmo\Tree\Strategy;
 class ClosureTreeRepository extends AbstractTreeRepository
 {
     /** Alias for the level value used in the subquery of the getNodesHierarchy method */
-    const SUBQUERY_LEVEL = 'level';
+    public const SUBQUERY_LEVEL = 'level';
 
     /**
      * {@inheritdoc}

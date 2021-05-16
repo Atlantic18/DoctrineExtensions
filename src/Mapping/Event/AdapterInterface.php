@@ -93,9 +93,9 @@ interface AdapterInterface
     /**
      * Recompute the single object changeset from a UnitOfWork
      *
-     * @param UnitOfWork                                         $uow
+     * @param UnitOfWork                                  $uow
      * @param \Doctrine\Persistence\Mapping\ClassMetadata $meta
-     * @param object                                             $object
+     * @param object                                      $object
      *
      * @return void
      */

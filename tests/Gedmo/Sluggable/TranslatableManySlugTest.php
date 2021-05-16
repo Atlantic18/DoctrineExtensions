@@ -22,8 +22,8 @@ class TranslatableManySlugTest extends BaseTestCaseORM
     private $articleId;
     private $translatableListener;
 
-    const ARTICLE = 'Sluggable\\Fixture\\TransArticleManySlug';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const ARTICLE = 'Sluggable\\Fixture\\TransArticleManySlug';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
     protected function setUp(): void
     {

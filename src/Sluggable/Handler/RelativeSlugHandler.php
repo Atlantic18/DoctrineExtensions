@@ -20,7 +20,7 @@ use Gedmo\Tool\Wrapper\AbstractWrapper;
  */
 class RelativeSlugHandler implements SlugHandlerInterface
 {
-    const SEPARATOR = '/';
+    public const SEPARATOR = '/';
 
     /**
      * @var ObjectManager

@@ -19,24 +19,24 @@ class Annotation extends AbstractAnnotationDriver
     /**
      * Annotation to identity translation entity to be used for translation storage
      */
-    const ENTITY_CLASS = 'Gedmo\\Mapping\\Annotation\\TranslationEntity';
+    public const ENTITY_CLASS = 'Gedmo\\Mapping\\Annotation\\TranslationEntity';
 
     /**
      * Annotation to identify field as translatable
      */
-    const TRANSLATABLE = 'Gedmo\\Mapping\\Annotation\\Translatable';
+    public const TRANSLATABLE = 'Gedmo\\Mapping\\Annotation\\Translatable';
 
     /**
      * Annotation to identify field which can store used locale or language
      * alias is LANGUAGE
      */
-    const LOCALE = 'Gedmo\\Mapping\\Annotation\\Locale';
+    public const LOCALE = 'Gedmo\\Mapping\\Annotation\\Locale';
 
     /**
      * Annotation to identify field which can store used locale or language
      * alias is LOCALE
      */
-    const LANGUAGE = 'Gedmo\\Mapping\\Annotation\\Language';
+    public const LANGUAGE = 'Gedmo\\Mapping\\Annotation\\Language';
 
     /**
      * {@inheritdoc}

@@ -288,19 +288,19 @@ class MaterializedPathODMMongoDBRepositoryTest extends BaseTestCaseMongoODM
         $this->assertEquals(2, $count);
     }
 
-    public function testChildCount_ifAnObjectIsPassedWhichIsNotAnInstanceOfTheEntityClassThrowException()
+    public function testChildCountIfAnObjectIsPassedWhichIsNotAnInstanceOfTheEntityClassThrowException()
     {
         $this->expectException('Gedmo\Exception\InvalidArgumentException');
         $this->repo->childCount(new \DateTime());
     }
 
-    public function testChildCount_ifAnObjectIsPassedIsAnInstanceOfTheEntityClassButIsNotHandledByUnitOfWorkThrowException()
+    public function testChildCountIfAnObjectIsPassedIsAnInstanceOfTheEntityClassButIsNotHandledByUnitOfWorkThrowException()
     {
         $this->expectException('Gedmo\Exception\InvalidArgumentException');
         $this->repo->childCount($this->createCategory());
     }
 
-    public function test_changeChildrenIndex()
+    public function testChangeChildrenIndex()
     {
         $childrenIndex = 'myChildren';
         $this->repo->setChildrenIndex($childrenIndex);

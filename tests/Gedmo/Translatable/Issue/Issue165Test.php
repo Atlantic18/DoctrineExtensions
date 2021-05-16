@@ -17,8 +17,8 @@ use Translatable\Fixture\Issue165\SimpleArticle;
  */
 class Issue165Test extends BaseTestCaseMongoODM
 {
-    const ARTICLE = 'Translatable\Fixture\Issue165\SimpleArticle';
-    const TRANSLATION = 'Gedmo\\Translatable\\Document\\Translation';
+    public const ARTICLE = 'Translatable\Fixture\Issue165\SimpleArticle';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Document\\Translation';
 
     private $translatableListener;
     private $articleId;

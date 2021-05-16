@@ -20,14 +20,14 @@ class SoftDeleteableListener extends MappedEventSubscriber
      *
      * @var string
      */
-    const PRE_SOFT_DELETE = 'preSoftDelete';
+    public const PRE_SOFT_DELETE = 'preSoftDelete';
 
     /**
      * Post soft-delete event
      *
      * @var string
      */
-    const POST_SOFT_DELETE = 'postSoftDelete';
+    public const POST_SOFT_DELETE = 'postSoftDelete';
 
     /**
      * {@inheritdoc}

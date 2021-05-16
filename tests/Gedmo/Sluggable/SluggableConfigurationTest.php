@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class SluggableConfigurationTest extends BaseTestCaseORM
 {
-    const ARTICLE = 'Sluggable\\Fixture\\ConfigurationArticle';
+    public const ARTICLE = 'Sluggable\\Fixture\\ConfigurationArticle';
 
     private $articleId;
 

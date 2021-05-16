@@ -18,7 +18,7 @@ use Wrapper\Fixture\Document\Article;
  */
 class MongoDocumentWrapperTest extends BaseTestCaseMongoODM
 {
-    const ARTICLE = 'Wrapper\\Fixture\\Document\\Article';
+    public const ARTICLE = 'Wrapper\\Fixture\\Document\\Article';
     private $articleId;
 
     protected function setUp(): void

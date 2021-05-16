@@ -19,17 +19,17 @@ class LoggableListener extends MappedEventSubscriber
     /**
      * Create action
      */
-    const ACTION_CREATE = 'create';
+    public const ACTION_CREATE = 'create';
 
     /**
      * Update action
      */
-    const ACTION_UPDATE = 'update';
+    public const ACTION_UPDATE = 'update';
 
     /**
      * Remove action
      */
-    const ACTION_REMOVE = 'remove';
+    public const ACTION_REMOVE = 'remove';
 
     /**
      * Username for identification

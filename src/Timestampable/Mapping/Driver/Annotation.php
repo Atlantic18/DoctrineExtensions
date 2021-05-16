@@ -19,7 +19,7 @@ class Annotation extends AbstractAnnotationDriver
     /**
      * Annotation field is timestampable
      */
-    const TIMESTAMPABLE = 'Gedmo\\Mapping\\Annotation\\Timestampable';
+    public const TIMESTAMPABLE = 'Gedmo\\Mapping\\Annotation\\Timestampable';
 
     /**
      * List of types which are valid for timestamp

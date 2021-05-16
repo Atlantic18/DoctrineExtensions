@@ -17,7 +17,7 @@ use Gedmo\Mapping\ExtensionMetadataFactory;
  */
 class TimestampableMappingTest extends \PHPUnit\Framework\TestCase
 {
-    const TEST_YAML_ENTITY_CLASS = 'Mapping\Fixture\Yaml\Category';
+    public const TEST_YAML_ENTITY_CLASS = 'Mapping\Fixture\Yaml\Category';
     private $em;
 
     public function setUp(): void

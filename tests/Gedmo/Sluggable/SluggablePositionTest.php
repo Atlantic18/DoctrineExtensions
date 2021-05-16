@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class SluggablePositionTest extends BaseTestCaseORM
 {
-    const POSITION = 'Sluggable\\Fixture\\Position';
+    public const POSITION = 'Sluggable\\Fixture\\Position';
 
     protected function setUp(): void
     {

@@ -15,8 +15,8 @@ use Tree\Fixture\BehavioralCategory;
  */
 class MappingTest extends \PHPUnit\Framework\TestCase
 {
-    const TEST_ENTITY_CATEGORY = "Tree\Fixture\BehavioralCategory";
-    const TEST_ENTITY_TRANSLATION = "Gedmo\Translatable\Entity\Translation";
+    public const TEST_ENTITY_CATEGORY = "Tree\Fixture\BehavioralCategory";
+    public const TEST_ENTITY_TRANSLATION = "Gedmo\Translatable\Entity\Translation";
 
     private $em;
     private $timestampable;

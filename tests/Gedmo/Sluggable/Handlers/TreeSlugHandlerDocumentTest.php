@@ -17,7 +17,7 @@ use Tool\BaseTestCaseMongoODM;
  */
 class TreeSlugHandlerDocumentTest extends BaseTestCaseMongoODM
 {
-    const SLUG = 'Sluggable\\Fixture\\Document\\Handler\\TreeSlug';
+    public const SLUG = 'Sluggable\\Fixture\\Document\\Handler\\TreeSlug';
 
     protected function setUp(): void
     {

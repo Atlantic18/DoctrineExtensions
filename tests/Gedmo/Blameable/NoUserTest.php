@@ -14,7 +14,7 @@ use Tool\BaseTestCaseMongoODM;
  */
 class NoUserTest extends BaseTestCaseMongoODM
 {
-    const ARTICLE = 'Blameable\Fixture\Document\Article';
+    public const ARTICLE = 'Blameable\Fixture\Document\Article';
 
     protected function setUp(): void
     {

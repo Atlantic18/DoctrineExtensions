@@ -10,7 +10,7 @@ use Tool\BaseTestCaseORM;
 
 class ExtensionORMTest extends BaseTestCaseORM
 {
-    const USER = 'Mapping\\Fixture\\User';
+    public const USER = 'Mapping\\Fixture\\User';
 
     private $encoderListener;
 

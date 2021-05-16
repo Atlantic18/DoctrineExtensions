@@ -17,7 +17,7 @@ use Tool\BaseTestCaseMongoODM;
  */
 class SluggableDocumentTest extends BaseTestCaseMongoODM
 {
-    const ARTICLE = 'Sluggable\\Fixture\\Document\\Article';
+    public const ARTICLE = 'Sluggable\\Fixture\\Document\\Article';
 
     protected function setUp(): void
     {

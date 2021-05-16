@@ -17,7 +17,7 @@ use Gedmo\Mapping\ExtensionMetadataFactory;
  */
 class LoggableMappingTest extends \PHPUnit\Framework\TestCase
 {
-    const YAML_CATEGORY = 'Mapping\Fixture\Yaml\Category';
+    public const YAML_CATEGORY = 'Mapping\Fixture\Yaml\Category';
     private $em;
 
     public function setUp(): void

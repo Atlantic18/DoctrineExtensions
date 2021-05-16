@@ -19,9 +19,9 @@ use Translatable\Fixture\Personal\PersonalArticleTranslation;
  */
 class PersonalTranslationTest extends BaseTestCaseORM
 {
-    const ARTICLE = 'Translatable\Fixture\Personal\Article';
-    const TRANSLATION = 'Translatable\Fixture\Personal\PersonalArticleTranslation';
-    const TREE_WALKER_TRANSLATION = 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker';
+    public const ARTICLE = 'Translatable\Fixture\Personal\Article';
+    public const TRANSLATION = 'Translatable\Fixture\Personal\PersonalArticleTranslation';
+    public const TREE_WALKER_TRANSLATION = 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker';
 
     private $translatableListener;
 

@@ -21,7 +21,7 @@ class Annotation extends AbstractAnnotationDriver
     /**
      * Annotation to define that this object is loggable
      */
-    const SOFT_DELETEABLE = 'Gedmo\\Mapping\\Annotation\\SoftDeleteable';
+    public const SOFT_DELETEABLE = 'Gedmo\\Mapping\\Annotation\\SoftDeleteable';
 
     /**
      * {@inheritdoc}

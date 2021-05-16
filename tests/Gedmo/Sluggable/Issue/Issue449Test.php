@@ -18,8 +18,8 @@ use Tool\BaseTestCaseORM;
  */
 class Issue449Test extends BaseTestCaseORM
 {
-    const TARGET = 'Sluggable\\Fixture\\Issue449\\Article';
-    const SOFT_DELETEABLE_FILTER_NAME = 'soft-deleteable';
+    public const TARGET = 'Sluggable\\Fixture\\Issue449\\Article';
+    public const SOFT_DELETEABLE_FILTER_NAME = 'soft-deleteable';
 
     private $softDeleteableListener;
 

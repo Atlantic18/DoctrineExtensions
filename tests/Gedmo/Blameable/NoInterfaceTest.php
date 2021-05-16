@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class NoInterfaceTest extends BaseTestCaseORM
 {
-    const FIXTURE = 'Blameable\\Fixture\\Entity\\WithoutInterface';
+    public const FIXTURE = 'Blameable\\Fixture\\Entity\\WithoutInterface';
 
     protected function setUp(): void
     {

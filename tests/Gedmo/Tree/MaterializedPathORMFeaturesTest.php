@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class MaterializedPathORMFeaturesTest extends BaseTestCaseORM
 {
-    const CATEGORY = 'Tree\\Fixture\\MPFeaturesCategory';
+    public const CATEGORY = 'Tree\\Fixture\\MPFeaturesCategory';
 
     protected $config;
     protected $listener;

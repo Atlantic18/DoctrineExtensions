@@ -18,7 +18,7 @@ use Tree\Fixture\Mock\TreeListenerMock;
  */
 class MaterializedPathODMMongoDBTreeLockingTest extends BaseTestCaseMongoODM
 {
-    const ARTICLE = 'Tree\\Fixture\\Document\\Article';
+    public const ARTICLE = 'Tree\\Fixture\\Document\\Article';
 
     protected $config;
     protected $listener;

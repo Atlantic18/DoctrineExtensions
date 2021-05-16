@@ -14,7 +14,7 @@ use Tool\BaseTestCaseMongoODM;
  */
 class SortableDocumentTest extends BaseTestCaseMongoODM
 {
-    const ARTICLE = 'Sortable\\Fixture\\Document\\Article';
+    public const ARTICLE = 'Sortable\\Fixture\\Document\\Article';
 
     protected function setUp(): void
     {

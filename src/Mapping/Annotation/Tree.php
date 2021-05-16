@@ -24,6 +24,6 @@ final class Tree extends Annotation
     /** @var int */
     public $lockingTimeout = 3;
 
-    /** @var string $identifierMethod */
+    /** @var string */
     public $identifierMethod;
 }
