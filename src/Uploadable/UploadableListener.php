@@ -449,11 +449,12 @@ class UploadableListener extends MappedEventSubscriber
     /**
      * Moves the file to the specified path
      *
-     * @param string $path
-     * @param bool   $filenameGeneratorClass
-     * @param bool   $overwrite
-     * @param bool   $appendNumber
-     * @param object $object
+     * @param FileInfoInterface $fileInfo
+     * @param string            $path
+     * @param bool              $filenameGeneratorClass
+     * @param bool              $overwrite
+     * @param bool              $appendNumber
+     * @param object            $object
      *
      * @return array
      *
@@ -516,39 +517,20 @@ class UploadableListener extends MappedEventSubscriber
 
         $info['fileName'] = basename($fileInfo->getName());
         $info['filePath'] = $path.'/'.$info['fileName'];
-
-        $hasExtension = strrpos($info['fileName'], '.');
-
-        if ($hasExtension) {
-            $info['fileExtension'] = substr($info['filePath'], strrpos($info['filePath'], '.'));
-            $info['fileWithoutExt'] = substr($info['filePath'], 0, strrpos($info['filePath'], '.'));
-        } else {
-            $info['fileWithoutExt'] = $info['fileName'];
-        }
+        $this->detectFileExtension($info);
 
         // Save the original filename for later use
         $info['origFileName'] = $info['fileName'];
 
         // Now we generate the filename using the configured class
         if ($filenameGeneratorClass) {
-            $filename = $filenameGeneratorClass::generate(
+            $info['fileName'] = $filenameGeneratorClass::generate(
                 str_replace($path.'/', '', $info['fileWithoutExt']),
                 $info['fileExtension'],
                 $object
             );
-            $info['filePath'] = str_replace(
-                '/'.$info['fileName'],
-                '/'.$filename,
-                $info['filePath']
-            );
-            $info['fileName'] = $filename;
-
-            if ($pos = strrpos($info['filePath'], '.')) {
-                // ignores positions like "./file" at 0 see #915
-                $info['fileWithoutExt'] = substr($info['filePath'], 0, $pos);
-            } else {
-                $info['fileWithoutExt'] = $info['filePath'];
-            }
+            $info['filePath'] = $path.'/'.$info['fileName'];
+            $this->detectFileExtension($info);
         }
 
         if (is_file($info['filePath'])) {
@@ -572,6 +554,29 @@ class UploadableListener extends MappedEventSubscriber
         }
 
         return $info;
+    }
+
+    /**
+     * Detects fileExtension and fileWithoutExt.
+     * And embeds that info in the file info array.
+     *
+     * @param array $info
+     *
+     * @return void
+     */
+    protected function detectFileExtension(array &$info)
+    {
+        $hasExtension = strrpos($info['fileName'], '.');
+        $extensionPos = strrpos($info['filePath'], '.');
+
+        if ($hasExtension) {
+            // ignores positions like "./file" at 0 see #915
+            $info['fileExtension'] = substr($info['filePath'], $extensionPos);
+            $info['fileWithoutExt'] = substr($info['filePath'], 0, $extensionPos);
+        } else {
+            $info['fileExtension'] = '';
+            $info['fileWithoutExt'] = $info['filePath'];
+        }
     }
 
     /**

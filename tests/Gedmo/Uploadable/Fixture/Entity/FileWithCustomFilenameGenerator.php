@@ -7,7 +7,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
- * @Gedmo\Uploadable(pathMethod="getPath", filenameGenerator="Gedmo\Uploadable\FakeFilenameGenerator")
+ * @Gedmo\Uploadable(
+ *     pathMethod="getPath",
+ *     filenameGenerator="Gedmo\Uploadable\FakeFilenameGenerator",
+ *     appendNumber=true
+ * )
  */
 class FileWithCustomFilenameGenerator
 {

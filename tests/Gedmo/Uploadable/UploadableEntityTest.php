@@ -377,19 +377,24 @@ class UploadableEntityTest extends BaseTestCaseORM
 
     public function testFileWithCustomFilenameGenerator()
     {
-        $file = new FileWithCustomFilenameGenerator();
-        $fileInfo = $this->generateUploadedFile();
+        $uploadFile = function($expected) {
+            $file = new FileWithCustomFilenameGenerator();
+            $fileInfo = $this->generateUploadedFile();
 
-        $this->listener->addEntityFileInfo($file, $fileInfo);
+            $this->listener->addEntityFileInfo($file, $fileInfo);
 
-        $this->em->persist($file);
-        $this->em->flush();
+            $this->em->persist($file);
+            $this->em->flush();
 
-        $this->em->refresh($file);
+            $this->em->refresh($file);
 
-        $filename = substr($file->getFilePath(), strrpos($file->getFilePath(), '/') + 1);
+            $filename = substr($file->getFilePath(), strrpos($file->getFilePath(), '/') + 1);
 
-        $this->assertEquals('123.txt', $filename);
+            $this->assertEquals($expected, $filename);
+        };
+
+        $uploadFile('123.text');
+        $uploadFile('123-2.text');
     }
 
     public function testUploadFileWithoutExtension()
@@ -731,6 +736,6 @@ class FakeFilenameGenerator implements \Gedmo\Uploadable\FilenameGenerator\Filen
 {
     public static function generate($filename, $extension, $object = null)
     {
-        return '123.txt';
+        return '123.text';
     }
 }
