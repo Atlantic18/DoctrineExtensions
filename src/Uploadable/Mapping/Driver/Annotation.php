@@ -2,6 +2,7 @@
 
 namespace Gedmo\Uploadable\Mapping\Driver;
 
+use Gedmo\Mapping\Annotation\Uploadable;
 use Gedmo\Mapping\Driver\AbstractAnnotationDriver;
 use Gedmo\Uploadable\Mapping\Validator;
 
@@ -18,8 +19,9 @@ use Gedmo\Uploadable\Mapping\Validator;
 class Annotation extends AbstractAnnotationDriver
 {
     /**
-     * Annotation to define that this object is loggable
+     * Annotation to define that this object is uploadable
      */
+    const UPLOADABLES = 'Gedmo\\Mapping\\Annotation\\Uploadables';
     const UPLOADABLE = 'Gedmo\\Mapping\\Annotation\\Uploadable';
     const UPLOADABLE_FILE_MIME_TYPE = 'Gedmo\\Mapping\\Annotation\\UploadableFileMimeType';
     const UPLOADABLE_FILE_NAME = 'Gedmo\\Mapping\\Annotation\\UploadableFileName';
@@ -34,41 +36,13 @@ class Annotation extends AbstractAnnotationDriver
         $class = $this->getMetaReflectionClass($meta);
 
         // class annotations
-        if ($annot = $this->reader->getClassAnnotation($class, self::UPLOADABLE)) {
-            $config['uploadable'] = true;
-            $config['allowOverwrite'] = $annot->allowOverwrite;
-            $config['appendNumber'] = $annot->appendNumber;
-            $config['path'] = $annot->path;
-            $config['pathMethod'] = $annot->pathMethod;
-            $config['fileMimeTypeField'] = false;
-            $config['fileNameField'] = false;
-            $config['filePathField'] = false;
-            $config['fileSizeField'] = false;
-            $config['callback'] = $annot->callback;
-            $config['filenameGenerator'] = $annot->filenameGenerator;
-            $config['maxSize'] = (float) $annot->maxSize;
-            $config['allowedTypes'] = $annot->allowedTypes;
-            $config['disallowedTypes'] = $annot->disallowedTypes;
-
-            foreach ($class->getProperties() as $prop) {
-                if ($this->reader->getPropertyAnnotation($prop, self::UPLOADABLE_FILE_MIME_TYPE)) {
-                    $config['fileMimeTypeField'] = $prop->getName();
-                }
-
-                if ($this->reader->getPropertyAnnotation($prop, self::UPLOADABLE_FILE_NAME)) {
-                    $config['fileNameField'] = $prop->getName();
-                }
-
-                if ($this->reader->getPropertyAnnotation($prop, self::UPLOADABLE_FILE_PATH)) {
-                    $config['filePathField'] = $prop->getName();
-                }
-
-                if ($this->reader->getPropertyAnnotation($prop, self::UPLOADABLE_FILE_SIZE)) {
-                    $config['fileSizeField'] = $prop->getName();
-                }
+        if ($annot = $this->reader->getClassAnnotation($class, self::UPLOADABLES)) {
+            foreach ($annot->configurations as $uploadable) {
+                /* @var $uploadable \Gedmo\Mapping\Annotation\Uploadable */
+                $config[$uploadable->identifier] = $this->readUploadableMetadata($class, $uploadable, $meta);
             }
-
-            Validator::validateConfiguration($meta, $config);
+        } else if ($annot = $this->reader->getClassAnnotation($class, self::UPLOADABLE)) {
+            $config[$annot->identifier] = $this->readUploadableMetadata($class, $annot, $meta);
         }
 
         /*
@@ -98,5 +72,56 @@ class Annotation extends AbstractAnnotationDriver
         }*/
 
         $this->validateFullMetadata($meta, $config);
+    }
+
+    protected function readUploadableMetadata(
+        \ReflectionClass $class,
+        Uploadable $annot,
+        $meta)
+    {
+        $config = array();
+        $config['uploadable'] = true;
+        $config['allowOverwrite'] = $annot->allowOverwrite;
+        $config['appendNumber'] = $annot->appendNumber;
+        $config['path'] = $annot->path;
+        $config['pathMethod'] = $annot->pathMethod;
+        $config['fileMimeTypeField'] = false;
+        $config['fileNameField'] = false;
+        $config['filePathField'] = false;
+        $config['fileSizeField'] = false;
+        $config['callback'] = $annot->callback;
+        $config['filenameGenerator'] = $annot->filenameGenerator;
+        $config['maxSize'] = (float) $annot->maxSize;
+        $config['allowedTypes'] = $annot->allowedTypes;
+        $config['disallowedTypes'] = $annot->disallowedTypes;
+
+        foreach ($class->getProperties() as $prop) {
+            if ($propAnnot = $this->reader->getPropertyAnnotation($prop, self::UPLOADABLE_FILE_MIME_TYPE)) {
+                if ($propAnnot->identifier == $annot->identifier) {
+                    $config['fileMimeTypeField'] = $prop->getName();
+                }
+            }
+
+            if ($propAnnot = $this->reader->getPropertyAnnotation($prop, self::UPLOADABLE_FILE_NAME)) {
+                if ($propAnnot->identifier == $annot->identifier) {
+                    $config['fileNameField'] = $prop->getName();
+                }
+            }
+
+            if ($propAnnot = $this->reader->getPropertyAnnotation($prop, self::UPLOADABLE_FILE_PATH)) {
+                if ($propAnnot->identifier == $annot->identifier) {
+                    $config['filePathField'] = $prop->getName();
+                }
+            }
+
+            if ($propAnnot = $this->reader->getPropertyAnnotation($prop, self::UPLOADABLE_FILE_SIZE)) {
+                if ($propAnnot->identifier == $annot->identifier) {
+                    $config['fileSizeField'] = $prop->getName();
+                }
+            }
+        }
+
+        Validator::validateConfiguration($meta, $config);
+        return $config;
     }
 }

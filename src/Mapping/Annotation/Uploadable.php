@@ -9,7 +9,7 @@ use Gedmo\Uploadable\Mapping\Validator;
  * Uploadable annotation for Uploadable behavioral extension
  *
  * @Annotation
- * @Target("CLASS")
+ * @Target({"CLASS","ANNOTATION"})
  *
  * @author Gustavo Falco <comfortablynumb84@gmail.com>
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
@@ -17,6 +17,8 @@ use Gedmo\Uploadable\Mapping\Validator;
  */
 final class Uploadable extends Annotation
 {
+    public $identifier = '_default';
+
     /** @var bool */
     public $allowOverwrite = false;
 

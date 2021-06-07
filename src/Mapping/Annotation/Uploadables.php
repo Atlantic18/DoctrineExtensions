@@ -3,18 +3,20 @@
 namespace Gedmo\Mapping\Annotation;
 
 use Doctrine\Common\Annotations\Annotation;
+use Gedmo\Uploadable\Mapping\Validator;
 
 /**
- * UploadableFilePath Annotation for Uploadable behavioral extension
+ * Uploadables annotation for multiple Uploadable definitions
  *
  * @Annotation
- * @Target("PROPERTY")
+ * @Target("CLASS")
  *
  * @author Gustavo Falco <comfortablynumb84@gmail.com>
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-final class UploadableFilePath extends Annotation
+final class Uploadables extends Annotation
 {
-    public $identifier = '_default';
+    /** @var array<Uploadable> @Required */
+    public $configurations = array();
 }

@@ -111,26 +111,30 @@ class UploadableListener extends MappedEventSubscriber
         $ea = $this->getEventAdapter($args);
         $om = $ea->getObjectManager();
         $uow = $om->getUnitOfWork();
-        $first = reset($this->fileInfoObjects);
-        $meta = $om->getClassMetadata(get_class($first['entity']));
-        $config = $this->getConfiguration($om, $meta->name);
 
-        foreach ($this->fileInfoObjects as $info) {
-            $entity = $info['entity'];
+        foreach ($this->fileInfoObjects as $items) {
+            $tmp = $items;
+            $tmp = reset($tmp);
+            $meta = $om->getClassMetadata(get_class($tmp['entity']));
+            $configs = $this->getConfiguration($om, $meta->name);
+            foreach ($items as $info) {
+                $config = $configs[$info['identifier']];
+                $entity = $info['entity'];
 
-            // If the entity is in the identity map, it means it will be updated. We need to force the
-            // "dirty check" here by "modifying" the path. We are actually setting the same value, but
-            // this will mark the entity as dirty, and the "onFlush" event will be fired, even if there's
-            // no other change in the entity's fields apart from the file itself.
-            if ($uow->isInIdentityMap($entity)) {
-                if ($config['filePathField']) {
-                    $path = $this->getFilePathFieldValue($meta, $config, $entity);
-                    $uow->propertyChanged($entity, $config['filePathField'], $path, $path);
-                } else {
-                    $fileName = $this->getFileNameFieldValue($meta, $config, $entity);
-                    $uow->propertyChanged($entity, $config['fileNameField'], $fileName, $fileName);
+                // If the entity is in the identity map, it means it will be updated. We need to force the
+                // "dirty check" here by "modifying" the path. We are actually setting the same value, but
+                // this will mark the entity as dirty, and the "onFlush" event will be fired, even if there's
+                // no other change in the entity's fields apart from the file itself.
+                if ($uow->isInIdentityMap($entity)) {
+                    if ($config['filePathField']) {
+                        $path = $this->getFilePathFieldValue($meta, $config, $entity);
+                        $uow->propertyChanged($entity, $config['filePathField'], $path, $path);
+                    } else {
+                        $fileName = $this->getFileNameFieldValue($meta, $config, $entity);
+                        $uow->propertyChanged($entity, $config['fileNameField'], $fileName, $fileName);
+                    }
+                    $uow->scheduleForUpdate($entity);
                 }
-                $uow->scheduleForUpdate($entity);
             }
         }
     }
@@ -146,16 +150,18 @@ class UploadableListener extends MappedEventSubscriber
         $uow = $om->getUnitOfWork();
 
         // Do we need to upload files?
-        foreach ($this->fileInfoObjects as $info) {
-            $entity = $info['entity'];
-            $scheduledForInsert = $uow->isScheduledForInsert($entity);
-            $scheduledForUpdate = $uow->isScheduledForUpdate($entity);
-            $action = ($scheduledForInsert || $scheduledForUpdate) ?
-                ($scheduledForInsert ? self::ACTION_INSERT : self::ACTION_UPDATE) :
-                false;
+        foreach ($this->fileInfoObjects as $items) {
+            foreach ($items as $info) {
+                $entity = $info['entity'];
+                $scheduledForInsert = $uow->isScheduledForInsert($entity);
+                $scheduledForUpdate = $uow->isScheduledForUpdate($entity);
+                $action = ($scheduledForInsert || $scheduledForUpdate) ?
+                    ($scheduledForInsert ? self::ACTION_INSERT : self::ACTION_UPDATE) :
+                    false;
 
-            if ($action) {
-                $this->processFile($ea, $entity, $action);
+                if ($action) {
+                    $this->processFile($ea, $entity, $info['fileInfo'], $info['identifier'], $action);
+                }
             }
         }
 
@@ -163,9 +169,11 @@ class UploadableListener extends MappedEventSubscriber
         foreach ($ea->getScheduledObjectDeletions($uow) as $object) {
             $meta = $om->getClassMetadata(get_class($object));
 
-            if ($config = $this->getConfiguration($om, $meta->name)) {
-                if (isset($config['uploadable']) && $config['uploadable']) {
-                    $this->addFileRemoval($meta, $config, $object);
+            if ($configs = $this->getConfiguration($om, $meta->name)) {
+                foreach ($configs as $config) {
+                    if (isset($config['uploadable']) && $config['uploadable']) {
+                        $this->addFileRemoval($meta, $config, $object);
+                    }
                 }
             }
         }
@@ -193,19 +201,21 @@ class UploadableListener extends MappedEventSubscriber
      *
      * @param object $object
      * @param string $action
+     * @param FileInfoInterface $fileInfo
      *
      * @throws \Gedmo\Exception\UploadableNoPathDefinedException
      * @throws \Gedmo\Exception\UploadableCouldntGuessMimeTypeException
      * @throws \Gedmo\Exception\UploadableMaxSizeException
      * @throws \Gedmo\Exception\UploadableInvalidMimeTypeException
      */
-    public function processFile(AdapterInterface $ea, $object, $action)
+    protected function processFile(AdapterInterface $ea, $object, $fileInfo, $identifier, $action)
     {
         $oid = spl_object_hash($object);
         $om = $ea->getObjectManager();
         $uow = $om->getUnitOfWork();
         $meta = $om->getClassMetadata(get_class($object));
-        $config = $this->getConfiguration($om, $meta->name);
+        $configs = $this->getConfiguration($om, $meta->name);
+        $config = $configs[$identifier];
 
         if (!$config || !isset($config['uploadable']) || !$config['uploadable']) {
             // Nothing to do
@@ -213,7 +223,7 @@ class UploadableListener extends MappedEventSubscriber
         }
 
         $refl = $meta->getReflectionClass();
-        $fileInfo = $this->fileInfoObjects[$oid]['fileInfo'];
+        // $fileInfo = $this->fileInfoObjects[$oid]['fileInfo'];
         $evm = $om->getEventManager();
 
         if ($evm->hasListeners(Events::uploadablePreFileProcess)) {
@@ -223,7 +233,8 @@ class UploadableListener extends MappedEventSubscriber
                 $config,
                 $fileInfo,
                 $object,
-                $action
+                $action,
+                $identifier
             ));
         }
 
@@ -284,7 +295,7 @@ class UploadableListener extends MappedEventSubscriber
                 $generatorClass = $config['filenameGenerator'];
         }
 
-        $info = $this->moveFile($fileInfo, $path, $generatorClass, $config['allowOverwrite'], $config['appendNumber'], $object);
+        $info = $this->moveFile($fileInfo, $path, $generatorClass, $config['allowOverwrite'], $config['appendNumber'], $object, $identifier);
 
         // We override the mime type with the guessed one
         $info['fileMimeType'] = $mime;
@@ -467,7 +478,7 @@ class UploadableListener extends MappedEventSubscriber
      * @throws \Gedmo\Exception\UploadableNoTmpDirException
      * @throws \Gedmo\Exception\UploadableCantWriteException
      */
-    public function moveFile(FileInfoInterface $fileInfo, $path, $filenameGeneratorClass = false, $overwrite = false, $appendNumber = false, $object = null)
+    protected function moveFile(FileInfoInterface $fileInfo, $path, $filenameGeneratorClass = false, $overwrite = false, $appendNumber = false, $object = null, $identifier = '_default')
     {
         if ($fileInfo->getError() > 0) {
             switch ($fileInfo->getError()) {
@@ -534,7 +545,8 @@ class UploadableListener extends MappedEventSubscriber
             $filename = $filenameGeneratorClass::generate(
                 str_replace($path.'/', '', $info['fileWithoutExt']),
                 $info['fileExtension'],
-                $object
+                $object,
+                $identifier
             );
             $info['filePath'] = str_replace(
                 '/'.$info['fileName'],
@@ -566,6 +578,8 @@ class UploadableListener extends MappedEventSubscriber
                 throw new UploadableFileAlreadyExistsException(sprintf('File "%s" already exists!', $info['filePath']));
             }
         }
+
+        $info['fileName'] = basename($info['filePath']);
 
         if (!$this->doMoveFile($fileInfo->getTmpName(), $info['filePath'], $fileInfo->isUploadedFile())) {
             throw new UploadableUploadException(sprintf('File "%s" was not uploaded, or there was a problem moving it to the location "%s".', $fileInfo->getName(), $path));
@@ -661,10 +675,11 @@ class UploadableListener extends MappedEventSubscriber
      *
      * @param object                  $entity
      * @param array|FileInfoInterface $fileInfo
+     * @param string                  $identifier
      *
      * @throws \RuntimeException
      */
-    public function addEntityFileInfo($entity, $fileInfo)
+    public function addEntityFileInfo($entity, $fileInfo, $identifier = '_default')
     {
         $fileInfoClass = $this->getDefaultFileInfoClass();
         $fileInfo = is_array($fileInfo) ? new $fileInfoClass($fileInfo) : $fileInfo;
@@ -675,26 +690,28 @@ class UploadableListener extends MappedEventSubscriber
             throw new \RuntimeException(sprintf($msg, get_class($entity)));
         }
 
-        $this->fileInfoObjects[spl_object_hash($entity)] = [
+        $this->fileInfoObjects[spl_object_hash($entity)][$identifier] = [
             'entity' => $entity,
             'fileInfo' => $fileInfo,
+            'identifier' => $identifier,
         ];
     }
 
     /**
      * @param object $entity
+     * @param string $identifier
      *
      * @return FileInfoInterface
      */
-    public function getEntityFileInfo($entity)
+    public function getEntityFileInfo($entity, $identifier = '_default')
     {
         $oid = spl_object_hash($entity);
 
-        if (!isset($this->fileInfoObjects[$oid])) {
+        if (!isset($this->fileInfoObjects[$oid][$identifier])) {
             throw new \RuntimeException(sprintf('There\'s no FileInfoInterface object for entity of class "%s".', get_class($entity)));
         }
 
-        return $this->fileInfoObjects[$oid]['fileInfo'];
+        return $this->fileInfoObjects[$oid][$identifier]['fileInfo'];
     }
 
     /**

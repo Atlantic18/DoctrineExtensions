@@ -17,8 +17,9 @@ interface FilenameGeneratorInterface
      * @param string - Filename without extension
      * @param string - Extension with dot: .jpg, .gif, etc
      * @param $object
+     * @param string|null The identifier of the upload file property
      *
      * @return string
      */
-    public static function generate($filename, $extension, $object = null);
+    public static function generate($filename, $extension, $object = null, $identifier = null);
 }

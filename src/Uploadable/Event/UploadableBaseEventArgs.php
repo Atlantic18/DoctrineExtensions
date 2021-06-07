@@ -54,10 +54,15 @@ abstract class UploadableBaseEventArgs extends EventArgs
     private $action;
 
     /**
+     * @var string $identifier - The identifier this upload belongs to.
+     */
+    private $identifier;
+
+    /**
      * @param object $entity
      * @param string $action
      */
-    public function __construct(UploadableListener $listener, EntityManagerInterface $em, array $config, FileInfoInterface $fileInfo, $entity, $action)
+    public function __construct(UploadableListener $listener, EntityManagerInterface $em, array $config, FileInfoInterface $fileInfo, $entity, $action, $identifier = '_default')
     {
         $this->uploadableListener = $listener;
         $this->em = $em;
@@ -65,6 +70,7 @@ abstract class UploadableBaseEventArgs extends EventArgs
         $this->fileInfo = $fileInfo;
         $this->entity = $entity;
         $this->action = $action;
+        $this->identifier = $identifier;
     }
 
     /**
@@ -126,4 +132,15 @@ abstract class UploadableBaseEventArgs extends EventArgs
     {
         return $this->action;
     }
+
+    /**
+     * Retrieve the identifier this upload belongs to
+     *
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
 }

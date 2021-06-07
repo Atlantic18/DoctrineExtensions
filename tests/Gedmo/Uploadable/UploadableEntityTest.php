@@ -7,6 +7,7 @@ use Gedmo\Uploadable\FileInfo\FileInfoArray;
 use Gedmo\Uploadable\Stub\MimeTypeGuesserStub;
 use Gedmo\Uploadable\Stub\UploadableListenerStub;
 use Tool\BaseTestCaseORM;
+use Uploadable\Fixture\Entity\EntityWithMultipleFiles;
 use Uploadable\Fixture\Entity\Article;
 use Uploadable\Fixture\Entity\File;
 use Uploadable\Fixture\Entity\FileAppendNumber;
@@ -35,6 +36,7 @@ class UploadableEntityTest extends BaseTestCaseORM
     const IMAGE_CLASS = 'Uploadable\Fixture\Entity\Image';
     const ARTICLE_CLASS = 'Uploadable\Fixture\Entity\Article';
     const FILE_CLASS = 'Uploadable\Fixture\Entity\File';
+    const MULTIPLE_FILE_CLASS = 'Uploadable\Fixture\Entity\EntityWithMultipleFiles';
     const FILE_APPEND_NUMBER_CLASS = 'Uploadable\Fixture\Entity\FileAppendNumber';
     const FILE_APPEND_NUMBER__RELATIVE_PATH_CLASS = 'Uploadable\Fixture\Entity\FileAppendNumberRelative';
     const FILE_WITHOUT_PATH_CLASS = 'Uploadable\Fixture\Entity\FileWithoutPath';
@@ -426,6 +428,31 @@ class UploadableEntityTest extends BaseTestCaseORM
         $this->em->flush();
     }
 
+    public function testEntityWithMultipleUploadableFields()
+    {
+        $file = new EntityWithMultipleFiles();
+
+        $fileInfo1 = $this->generateUploadedFile('file', $this->testFile, 'test1.txt');
+        $fileInfo2 = $this->generateUploadedFile('file', $this->testFile2, 'test2.txt');
+
+        $this->listener->addEntityFileInfo($file, new FileInfoArray($fileInfo1), 'first');
+        $this->listener->addEntityFileInfo($file, new FileInfoArray($fileInfo2), 'second');
+
+        $this->em->persist($file);
+
+        $this->em->flush();
+
+        $file1Path = $file->getPath().'/'.$fileInfo1['name'];
+        $file2Path = $file->getPath().'/'.$fileInfo2['name'];
+
+        $this->assertPathEquals($file1Path, $file->getFilePath1());
+        $this->assertPathEquals($file2Path, $file->getFilePath2());
+        $this->assertPathEquals($fileInfo1['name'], $file->getFileName1());
+        $this->assertPathEquals($fileInfo2['name'], $file->getFileName2());
+        $this->assertFalse($file->isCallback1WasCalled());
+        $this->assertTrue($file->isCallback2WasCalled());
+    }
+
     public function test_removeFile_ifItsNotAFileThenReturnFalse()
     {
         $this->assertFalse($this->listener->removeFile('non_existent_file'));
@@ -692,6 +719,7 @@ class UploadableEntityTest extends BaseTestCaseORM
             self::IMAGE_CLASS,
             self::ARTICLE_CLASS,
             self::FILE_CLASS,
+            self::MULTIPLE_FILE_CLASS,
             self::FILE_WITHOUT_PATH_CLASS,
             self::FILE_APPEND_NUMBER_CLASS,
             self::FILE_APPEND_NUMBER__RELATIVE_PATH_CLASS,
@@ -729,7 +757,7 @@ class FakeFileInfo
 
 class FakeFilenameGenerator implements \Gedmo\Uploadable\FilenameGenerator\FilenameGeneratorInterface
 {
-    public static function generate($filename, $extension, $object = null)
+    public static function generate($filename, $extension, $object = null, $identifier = '_default')
     {
         return '123.txt';
     }

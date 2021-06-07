@@ -15,4 +15,5 @@ use Doctrine\Common\Annotations\Annotation;
  */
 final class UploadableFileName extends Annotation
 {
+    public $identifier = '_default';
 }
