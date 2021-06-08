@@ -14,8 +14,12 @@ class SluggableListener extends BaseSluggableListener
         $this->originalTransliterator = $this->getTransliterator();
         $this->originalUrlizer = $this->getUrlizer();
 
-        $this->setTransliterator([$this, 'transliterator']);
-        $this->setUrlizer([$this, 'urlizer']);
+        $this->setTransliterator(function ($slug, $separator, $object) {
+            return $this->transliterator($slug, $separator, $object);
+        });
+        $this->setUrlizer(function ($slug, $separator, $object) {
+            return $this->urlizer($slug, $separator, $object);
+        });
     }
 
     public function transliterator($slug, $separator = '-', $object = null)

@@ -11,6 +11,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class SoftDeleteable
 {
+    public $title;
+    public $code;
+    public $slug;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

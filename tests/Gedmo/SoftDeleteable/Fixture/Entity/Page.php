@@ -16,6 +16,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Page
 {
     /**
+     * @var \SoftDeleteable\Fixture\Entity\Module[]
+     */
+    public $module;
+    /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")

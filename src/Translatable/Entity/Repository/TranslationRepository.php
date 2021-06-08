@@ -82,7 +82,7 @@ class TranslationRepository extends EntityRepository
                 $transMeta->getReflectionProperty('field')->setValue($trans, $field);
                 $transMeta->getReflectionProperty('locale')->setValue($trans, $locale);
             }
-            if ($listener->getDefaultLocale() != $listener->getTranslatableLocale($entity, $meta, $this->getEntityManager()) &&
+            if ($listener->getDefaultLocale() !== $listener->getTranslatableLocale($entity, $meta, $this->getEntityManager()) &&
                 $locale === $listener->getDefaultLocale()) {
                 $listener->setTranslationInDefaultLocale(spl_object_hash($entity), $field, $trans);
                 $needsPersist = $listener->getPersistDefaultLocaleTranslation();
@@ -128,9 +128,7 @@ class TranslationRepository extends EntityRepository
             $entityClass = $config['useObjectClass'];
             $translationMeta = $this->getClassMetadata(); // table inheritance support
 
-            $translationClass = isset($config['translationClass']) ?
-                $config['translationClass'] :
-                $translationMeta->rootEntityName;
+            $translationClass = $config['translationClass'] ?? $translationMeta->rootEntityName;
 
             $qb = $this->_em->createQueryBuilder();
             $qb->select('trans.content, trans.field, trans.locale')

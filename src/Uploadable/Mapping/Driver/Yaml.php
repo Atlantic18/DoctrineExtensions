@@ -43,25 +43,19 @@ class Yaml extends File implements Driver
                     (bool) $uploadable['allowOverwrite'] : false;
                 $config['appendNumber'] = isset($uploadable['appendNumber']) ?
                     (bool) $uploadable['appendNumber'] : false;
-                $config['path'] = isset($uploadable['path']) ? $uploadable['path'] : '';
-                $config['pathMethod'] = isset($uploadable['pathMethod']) ? $uploadable['pathMethod'] : '';
-                $config['callback'] = isset($uploadable['callback']) ? $uploadable['callback'] : '';
+                $config['path'] = $uploadable['path'] ?? '';
+                $config['pathMethod'] = $uploadable['pathMethod'] ?? '';
+                $config['callback'] = $uploadable['callback'] ?? '';
                 $config['fileMimeTypeField'] = false;
                 $config['fileNameField'] = false;
                 $config['filePathField'] = false;
                 $config['fileSizeField'] = false;
-                $config['filenameGenerator'] = isset($uploadable['filenameGenerator']) ?
-                    $uploadable['filenameGenerator'] :
-                    Validator::FILENAME_GENERATOR_NONE;
+                $config['filenameGenerator'] = $uploadable['filenameGenerator'] ?? Validator::FILENAME_GENERATOR_NONE;
                 $config['maxSize'] = isset($uploadable['maxSize']) ?
                     (float) $uploadable['maxSize'] :
                     (float) 0;
-                $config['allowedTypes'] = isset($uploadable['allowedTypes']) ?
-                    $uploadable['allowedTypes'] :
-                    '';
-                $config['disallowedTypes'] = isset($uploadable['disallowedTypes']) ?
-                    $uploadable['disallowedTypes'] :
-                    '';
+                $config['allowedTypes'] = $uploadable['allowedTypes'] ?? '';
+                $config['disallowedTypes'] = $uploadable['disallowedTypes'] ?? '';
 
                 if (isset($mapping['fields'])) {
                     foreach ($mapping['fields'] as $field => $info) {

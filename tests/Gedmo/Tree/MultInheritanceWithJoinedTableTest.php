@@ -18,6 +18,10 @@ use Tool\BaseTestCaseORM;
  */
 class MultInheritanceWithJoinedTableTest extends BaseTestCaseORM
 {
+    /**
+     * @var \Gedmo\Tree\TreeListener|mixed
+     */
+    public $tree;
     const USER = 'Tree\\Fixture\\User';
     const GROUP = 'Tree\\Fixture\\UserGroup';
     const ROLE = 'Tree\\Fixture\\Role';

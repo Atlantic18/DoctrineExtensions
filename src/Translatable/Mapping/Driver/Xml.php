@@ -30,24 +30,22 @@ class Xml extends BaseXml
 
         $xml = $xml->children(self::GEDMO_NAMESPACE_URI);
 
-        if (('entity' == $xmlDoctrine->getName() || 'mapped-superclass' == $xmlDoctrine->getName())) {
-            if ($xml->count() && isset($xml->translation)) {
-                /**
-                 * @var \SimpleXmlElement
-                 */
-                $data = $xml->translation;
-                if ($this->_isAttributeSet($data, 'locale')) {
-                    $config['locale'] = $this->_getAttribute($data, 'locale');
-                } elseif ($this->_isAttributeSet($data, 'language')) {
-                    $config['locale'] = $this->_getAttribute($data, 'language');
+        if (('entity' == $xmlDoctrine->getName() || 'mapped-superclass' == $xmlDoctrine->getName()) && ($xml->count() && isset($xml->translation))) {
+            /**
+             * @var \SimpleXmlElement
+             */
+            $data = $xml->translation;
+            if ($this->_isAttributeSet($data, 'locale')) {
+                $config['locale'] = $this->_getAttribute($data, 'locale');
+            } elseif ($this->_isAttributeSet($data, 'language')) {
+                $config['locale'] = $this->_getAttribute($data, 'language');
+            }
+            if ($this->_isAttributeSet($data, 'entity')) {
+                $entity = $this->_getAttribute($data, 'entity');
+                if (!$cl = $this->getRelatedClassName($meta, $entity)) {
+                    throw new InvalidMappingException("Translation entity class: {$entity} does not exist.");
                 }
-                if ($this->_isAttributeSet($data, 'entity')) {
-                    $entity = $this->_getAttribute($data, 'entity');
-                    if (!$cl = $this->getRelatedClassName($meta, $entity)) {
-                        throw new InvalidMappingException("Translation entity class: {$entity} does not exist.");
-                    }
-                    $config['translationClass'] = $cl;
-                }
+                $config['translationClass'] = $cl;
             }
         }
 
@@ -69,10 +67,8 @@ class Xml extends BaseXml
 
         $this->inspectElementsForTranslatableFields($xmlDoctrine, $config);
 
-        if (!$meta->isMappedSuperclass && $config) {
-            if (is_array($meta->identifier) && count($meta->identifier) > 1) {
-                throw new InvalidMappingException("Translatable does not support composite identifiers in class - {$meta->name}");
-            }
+        if (!$meta->isMappedSuperclass && $config && (is_array($meta->identifier) && count($meta->identifier) > 1)) {
+            throw new InvalidMappingException("Translatable does not support composite identifiers in class - {$meta->name}");
         }
     }
 
@@ -101,7 +97,7 @@ class Xml extends BaseXml
             /** @var \SimpleXmlElement $data */
             $data = $mapping->translatable;
             if ($this->_isAttributeSet($data, 'fallback')) {
-                $config['fallback'][$fieldName] = 'true' == $this->_getAttribute($data, 'fallback') ? true : false;
+                $config['fallback'][$fieldName] = 'true' == $this->_getAttribute($data, 'fallback');
             }
         }
     }

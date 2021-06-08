@@ -112,7 +112,7 @@ class RepositoryUtils implements RepositoryUtilsInterface
             foreach ($tree as $node) {
                 $output .= is_string($options['childOpen']) ? $options['childOpen'] : $options['childOpen']($node);
                 $output .= $options['nodeDecorator']($node);
-                if (count($node[$childrenIndex]) > 0) {
+                if ((is_array($node[$childrenIndex]) || $node[$childrenIndex] instanceof \Countable ? count($node[$childrenIndex]) : 0) > 0) {
                     $output .= $build($node[$childrenIndex]);
                 }
                 $output .= is_string($options['childClose']) ? $options['childClose'] : $options['childClose']($node);
@@ -155,7 +155,7 @@ class RepositoryUtils implements RepositoryUtilsInterface
                     $stack[] = &$nestedTree[$i];
                 } else {
                     // Add child to parent
-                    $i = count($stack[$l - 1][$this->childrenIndex]);
+                    $i = is_array($stack[$l - 1][$this->childrenIndex]) || $stack[$l - 1][$this->childrenIndex] instanceof \Countable ? count($stack[$l - 1][$this->childrenIndex]) : 0;
                     $stack[$l - 1][$this->childrenIndex][$i] = $item;
                     $stack[] = &$stack[$l - 1][$this->childrenIndex][$i];
                 }

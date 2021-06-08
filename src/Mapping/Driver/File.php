@@ -19,6 +19,10 @@ use Gedmo\Mapping\Driver;
 abstract class File implements Driver
 {
     /**
+     * @var mixed[]
+     */
+    public $_paths;
+    /**
      * @var FileLocator
      */
     protected $locator;
@@ -85,10 +89,8 @@ abstract class File implements Driver
     {
         //try loading mapping from original driver first
         $mapping = null;
-        if (!is_null($this->_originalDriver)) {
-            if ($this->_originalDriver instanceof FileDriver || $this->_originalDriver instanceof AbstractFileDriver) {
-                $mapping = $this->_originalDriver->getElement($className);
-            }
+        if (!is_null($this->_originalDriver) && ($this->_originalDriver instanceof FileDriver || $this->_originalDriver instanceof AbstractFileDriver)) {
+            $mapping = $this->_originalDriver->getElement($className);
         }
 
         //if no mapping found try to load mapping file again

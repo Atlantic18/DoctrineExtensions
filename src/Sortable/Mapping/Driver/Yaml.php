@@ -45,13 +45,11 @@ class Yaml extends File implements Driver
 
         if (isset($mapping['fields'])) {
             foreach ($mapping['fields'] as $field => $fieldMapping) {
-                if (isset($fieldMapping['gedmo'])) {
-                    if (in_array('sortablePosition', $fieldMapping['gedmo'])) {
-                        if (!$this->isValidField($meta, $field)) {
-                            throw new InvalidMappingException("Sortable position field - [{$field}] type is not valid and must be 'integer' in class - {$meta->name}");
-                        }
-                        $config['position'] = $field;
+                if (isset($fieldMapping['gedmo']) && in_array('sortablePosition', $fieldMapping['gedmo'])) {
+                    if (!$this->isValidField($meta, $field)) {
+                        throw new InvalidMappingException("Sortable position field - [{$field}] type is not valid and must be 'integer' in class - {$meta->name}");
                     }
+                    $config['position'] = $field;
                 }
             }
             $this->readSortableGroups($mapping['fields'], $config);
@@ -63,23 +61,19 @@ class Yaml extends File implements Driver
             $this->readSortableGroups($mapping['manyToMany'], $config);
         }
 
-        if (!$meta->isMappedSuperclass && $config) {
-            if (!isset($config['position'])) {
-                throw new InvalidMappingException("Missing property: 'position' in class - {$meta->name}");
-            }
+        if (!$meta->isMappedSuperclass && $config && !isset($config['position'])) {
+            throw new InvalidMappingException("Missing property: 'position' in class - {$meta->name}");
         }
     }
 
     private function readSortableGroups($mapping, array &$config)
     {
         foreach ($mapping as $field => $fieldMapping) {
-            if (isset($fieldMapping['gedmo'])) {
-                if (in_array('sortableGroup', $fieldMapping['gedmo'])) {
-                    if (!isset($config['groups'])) {
-                        $config['groups'] = [];
-                    }
-                    $config['groups'][] = $field;
+            if (isset($fieldMapping['gedmo']) && in_array('sortableGroup', $fieldMapping['gedmo'])) {
+                if (!isset($config['groups'])) {
+                    $config['groups'] = [];
                 }
+                $config['groups'][] = $field;
             }
         }
     }

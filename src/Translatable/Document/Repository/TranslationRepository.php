@@ -124,9 +124,7 @@ class TranslationRepository extends DocumentRepository
 
             $documentClass = $config['useObjectClass'];
 
-            $translationClass = isset($config['translationClass']) ?
-                $config['translationClass'] :
-                $translationMeta->rootDocumentName;
+            $translationClass = $config['translationClass'] ?? $translationMeta->rootDocumentName;
 
             $qb = $this->dm->createQueryBuilder($translationClass);
             $q = $qb->field('foreignKey')->equals($documentId)

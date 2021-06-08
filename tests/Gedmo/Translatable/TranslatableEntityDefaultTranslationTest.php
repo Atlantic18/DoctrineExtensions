@@ -17,6 +17,10 @@ use Translatable\Fixture\Article;
  */
 class TranslatableEntityDefaultTranslationTest extends BaseTestCaseORM
 {
+    /**
+     * @var \Doctrine\ORM\EntityRepository<\Gedmo\Translatable\Entity\Translation>|mixed
+     */
+    public $repo;
     const ARTICLE = 'Translatable\\Fixture\\Article';
     const COMMENT = 'Translatable\\Fixture\\Comment';
     const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';

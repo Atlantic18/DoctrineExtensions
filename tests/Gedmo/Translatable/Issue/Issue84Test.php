@@ -49,7 +49,7 @@ class Issue84Test extends BaseTestCaseORM
         $this->assertInstanceOf('Doctrine\ORM\Proxy\Proxy', $article);
 
         $trans = $repo->findTranslations($article);
-        $this->assertEquals(1, count($trans));
+        $this->assertEquals(1, is_array($trans) || $trans instanceof \Countable ? count($trans) : 0);
     }
 
     protected function getUsedEntityFixtures()

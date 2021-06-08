@@ -31,20 +31,18 @@ class Xml extends BaseXml
 
         $xml = $xml->children(self::GEDMO_NAMESPACE_URI);
 
-        if ('entity' == $xmlDoctrine->getName() || 'document' == $xmlDoctrine->getName() || 'mapped-superclass' == $xmlDoctrine->getName()) {
-            if (isset($xml->loggable)) {
-                /**
-                 * @var \SimpleXMLElement;
-                 */
-                $data = $xml->loggable;
-                $config['loggable'] = true;
-                if ($this->_isAttributeSet($data, 'log-entry-class')) {
-                    $class = $this->_getAttribute($data, 'log-entry-class');
-                    if (!$cl = $this->getRelatedClassName($meta, $class)) {
-                        throw new InvalidMappingException("LogEntry class: {$class} does not exist.");
-                    }
-                    $config['logEntryClass'] = $cl;
+        if (('entity' == $xmlDoctrine->getName() || 'document' == $xmlDoctrine->getName() || 'mapped-superclass' == $xmlDoctrine->getName()) && isset($xml->loggable)) {
+            /**
+             * @var \SimpleXMLElement;
+             */
+            $data = $xml->loggable;
+            $config['loggable'] = true;
+            if ($this->_isAttributeSet($data, 'log-entry-class')) {
+                $class = $this->_getAttribute($data, 'log-entry-class');
+                if (!$cl = $this->getRelatedClassName($meta, $class)) {
+                    throw new InvalidMappingException("LogEntry class: {$class} does not exist.");
                 }
+                $config['logEntryClass'] = $cl;
             }
         }
 

@@ -99,13 +99,13 @@ class Issue114Test extends BaseTestCaseORM
         $this->em->flush();
 
         $trans = $repo->findTranslations($article2);
-        $this->assertEquals(1, count($trans));
+        $this->assertEquals(1, is_array($trans) || $trans instanceof \Countable ? count($trans) : 0);
 
         $trans = $repo->findTranslations($article3);
-        $this->assertEquals(1, count($trans));
+        $this->assertEquals(1, is_array($trans) || $trans instanceof \Countable ? count($trans) : 0);
 
         $trans = $repo->findTranslations($article1);
-        $this->assertEquals(1, count($trans));
+        $this->assertEquals(1, is_array($trans) || $trans instanceof \Countable ? count($trans) : 0);
     }
 
     protected function getUsedEntityFixtures()

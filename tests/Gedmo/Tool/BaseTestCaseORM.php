@@ -61,7 +61,7 @@ abstract class BaseTestCaseORM extends \PHPUnit\Framework\TestCase
             'memory' => true,
         ];
 
-        $config = null === $config ? $this->getMockAnnotatedConfig() : $config;
+        $config = $config ?? $this->getMockAnnotatedConfig();
         $em = EntityManager::create($conn, $config, $evm ?: $this->getEventManager());
 
         $schema = array_map(function ($class) use ($em) {

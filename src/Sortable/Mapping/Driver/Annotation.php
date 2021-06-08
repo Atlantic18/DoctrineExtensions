@@ -79,10 +79,8 @@ class Annotation extends AbstractAnnotationDriver
             }
         }
 
-        if (!$meta->isMappedSuperclass && $config) {
-            if (!isset($config['position'])) {
-                throw new InvalidMappingException("Missing property: 'position' in class - {$meta->name}");
-            }
+        if (!$meta->isMappedSuperclass && $config && !isset($config['position'])) {
+            throw new InvalidMappingException("Missing property: 'position' in class - {$meta->name}");
         }
     }
 }

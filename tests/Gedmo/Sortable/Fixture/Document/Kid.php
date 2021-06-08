@@ -55,7 +55,10 @@ class Kid
         return $this->position;
     }
 
-    public function setBirthdate(\DateTime $birthdate)
+    /**
+     * @param \DateTime|\DateTimeImmutable $birthdate
+     */
+    public function setBirthdate(\DateTimeInterface $birthdate)
     {
         $this->birthdate = $birthdate;
     }

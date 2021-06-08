@@ -111,9 +111,8 @@ class QueryAnalyzer implements SQLLogger
             }
             $output .= $sql.';'.PHP_EOL;
         }
-        $output .= PHP_EOL;
 
-        return $output;
+        return $output . PHP_EOL;
     }
 
     /**
@@ -224,14 +223,11 @@ class QueryAnalyzer implements SQLLogger
                 if ($type instanceof Type) {
                     $value = $type->convertToDatabaseValue($value, $this->platform);
                 }
-            } else {
-                // Remove `$value instanceof \DateTime` check when PHP version is bumped to >=5.5
-                if (is_object($value) && ($value instanceof \DateTime || $value instanceof \DateTimeInterface)) {
-                    $value = $value->format($this->platform->getDateTimeFormatString());
-                } elseif (!is_null($value)) {
-                    $type = Type::getType(gettype($value));
-                    $value = $type->convertToDatabaseValue($value, $this->platform);
-                }
+            } elseif (is_object($value) && ($value instanceof \DateTime || $value instanceof \DateTimeInterface)) {
+                $value = $value->format($this->platform->getDateTimeFormatString());
+            } elseif (!is_null($value)) {
+                $type = Type::getType(gettype($value));
+                $value = $type->convertToDatabaseValue($value, $this->platform);
             }
             if (is_string($value)) {
                 $value = "'{$value}'";

@@ -179,7 +179,7 @@ class SluggableListener extends MappedEventSubscriber
         $meta = $om->getClassMetadata(get_class($object));
 
         if ($config = $this->getConfiguration($om, $meta->name)) {
-            foreach ($config['slugs'] as $slugField => $options) {
+            foreach (array_keys($config['slugs']) as $slugField) {
                 if ($meta->isIdentifier($slugField)) {
                     $meta->getReflectionProperty($slugField)->setValue($object, '__id__');
                 }
@@ -269,7 +269,7 @@ class SluggableListener extends MappedEventSubscriber
         $config = $this->getConfiguration($om, $meta->name);
 
         foreach ($config['slugs'] as $slugField => $options) {
-            $hasHandlers = count($options['handlers']);
+            $hasHandlers = is_array($options['handlers']) || $options['handlers'] instanceof \Countable ? count($options['handlers']) : 0;
             $options['useObjectClass'] = $config['useObjectClass'];
             // collect the slug from fields
             $slug = $meta->getReflectionProperty($slugField)->getValue($object);
@@ -303,7 +303,7 @@ class SluggableListener extends MappedEventSubscriber
             }
             // notify slug handlers --> onChangeDecision
             if ($hasHandlers) {
-                foreach ($options['handlers'] as $class => $handlerOptions) {
+                foreach (array_keys($options['handlers']) as $class) {
                     $this->getHandler($class)->onChangeDecision($ea, $options, $object, $slug, $needToChangeSlug);
                 }
             }
@@ -314,7 +314,7 @@ class SluggableListener extends MappedEventSubscriber
                 $urlized = false;
 
                 if ($hasHandlers) {
-                    foreach ($options['handlers'] as $class => $handlerOptions) {
+                    foreach (array_keys($options['handlers']) as $class) {
                         $this->getHandler($class)->postSlugBuild($ea, $options, $object, $slug);
                         if ($this->getHandler($class)->handlesUrlization()) {
                             $urlized = true;
@@ -350,19 +350,11 @@ class SluggableListener extends MappedEventSubscriber
                         break;
 
                     case 'lower':
-                        if (function_exists('mb_strtolower')) {
-                            $slug = mb_strtolower($slug);
-                        } else {
-                            $slug = strtolower($slug);
-                        }
+                        $slug = function_exists('mb_strtolower') ? mb_strtolower($slug) : strtolower($slug);
                         break;
 
                     case 'upper':
-                        if (function_exists('mb_strtoupper')) {
-                            $slug = mb_strtoupper($slug);
-                        } else {
-                            $slug = strtoupper($slug);
-                        }
+                        $slug = function_exists('mb_strtoupper') ? mb_strtoupper($slug) : strtoupper($slug);
                         break;
 
                     default:
@@ -375,13 +367,13 @@ class SluggableListener extends MappedEventSubscriber
                     $slug = substr($slug, 0, $mapping['length']);
                 }
 
-                if (isset($mapping['nullable']) && $mapping['nullable'] && 0 === strlen($slug)) {
+                if (isset($mapping['nullable']) && $mapping['nullable'] && $slug === '') {
                     $slug = null;
                 }
 
                 // notify slug handlers --> beforeMakingUnique
                 if ($hasHandlers) {
-                    foreach ($options['handlers'] as $class => $handlerOptions) {
+                    foreach (array_keys($options['handlers']) as $class) {
                         $handler = $this->getHandler($class);
                         if ($handler instanceof SlugHandlerWithUniqueCallbackInterface) {
                             $handler->beforeMakingUnique($ea, $options, $object, $slug);
@@ -397,7 +389,7 @@ class SluggableListener extends MappedEventSubscriber
 
                 // notify slug handlers --> onSlugCompletion
                 if ($hasHandlers) {
-                    foreach ($options['handlers'] as $class => $handlerOptions) {
+                    foreach (array_keys($options['handlers']) as $class) {
                         $this->getHandler($class)->onSlugCompletion($ea, $options, $object, $slug);
                     }
                 }

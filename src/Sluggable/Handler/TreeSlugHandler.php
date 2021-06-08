@@ -79,9 +79,9 @@ class TreeSlugHandler implements SlugHandlerWithUniqueCallbackInterface
         $this->isInsert = $this->om->getUnitOfWork()->isScheduledForInsert($object);
         $options = $config['handlers'][get_called_class()];
 
-        $this->usedPathSeparator = isset($options['separator']) ? $options['separator'] : self::SEPARATOR;
-        $this->prefix = isset($options['prefix']) ? $options['prefix'] : '';
-        $this->suffix = isset($options['suffix']) ? $options['suffix'] : '';
+        $this->usedPathSeparator = $options['separator'] ?? self::SEPARATOR;
+        $this->prefix = $options['prefix'] ?? '';
+        $this->suffix = $options['suffix'] ?? '';
 
         if (!$this->isInsert && !$needToChangeSlug) {
             $changeSet = $ea->getObjectChangeSet($this->om->getUnitOfWork(), $object);
@@ -181,14 +181,7 @@ class TreeSlugHandler implements SlugHandlerWithUniqueCallbackInterface
     {
         $slug = $text.$this->suffix;
 
-        if (strlen($this->parentSlug)) {
-            $slug = $this->parentSlug.$this->usedPathSeparator.$slug;
-        } else {
-            // if no parentSlug, apply our prefix
-            $slug = $this->prefix.$slug;
-        }
-
-        return $slug;
+        return strlen($this->parentSlug) ? $this->parentSlug.$this->usedPathSeparator.$slug : $this->prefix.$slug;
     }
 
     /**

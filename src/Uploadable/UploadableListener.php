@@ -163,10 +163,8 @@ class UploadableListener extends MappedEventSubscriber
         foreach ($ea->getScheduledObjectDeletions($uow) as $object) {
             $meta = $om->getClassMetadata(get_class($object));
 
-            if ($config = $this->getConfiguration($om, $meta->name)) {
-                if (isset($config['uploadable']) && $config['uploadable']) {
-                    $this->addFileRemoval($meta, $config, $object);
-                }
+            if (($config = $this->getConfiguration($om, $meta->name)) && (isset($config['uploadable']) && $config['uploadable'])) {
+                $this->addFileRemoval($meta, $config, $object);
             }
         }
     }
@@ -241,12 +239,12 @@ class UploadableListener extends MappedEventSubscriber
         }
 
         if ($config['allowedTypes'] || $config['disallowedTypes']) {
-            $ok = $config['allowedTypes'] ? false : true;
+            $ok = !(bool) $config['allowedTypes'];
             $mimes = $config['allowedTypes'] ? $config['allowedTypes'] : $config['disallowedTypes'];
 
             foreach ($mimes as $m) {
                 if ($mime === $m) {
-                    $ok = $config['allowedTypes'] ? true : false;
+                    $ok = (bool) $config['allowedTypes'];
 
                     break;
                 }
@@ -355,9 +353,8 @@ class UploadableListener extends MappedEventSubscriber
         }
 
         Validator::validatePath($path);
-        $path = rtrim($path, '\/');
 
-        return $path;
+        return rtrim($path, '\/');
     }
 
     /**
@@ -401,9 +398,8 @@ class UploadableListener extends MappedEventSubscriber
         $refl = $meta->getReflectionClass();
         $filePathField = $refl->getProperty($propertyName);
         $filePathField->setAccessible(true);
-        $filePath = $filePathField->getValue($object);
 
-        return $filePath;
+        return $filePathField->getValue($object);
     }
 
     /**

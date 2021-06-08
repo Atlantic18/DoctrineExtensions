@@ -49,7 +49,7 @@ class Xml extends BaseXml
                 throw new InvalidMappingException("Tree type: $strategy is not available.");
             }
             $config['strategy'] = $strategy;
-            $config['activate_locking'] = 'true' === $this->_getAttribute($xml->tree, 'activate-locking') ? true : false;
+            $config['activate_locking'] = 'true' === $this->_getAttribute($xml->tree, 'activate-locking');
 
             if ($lockingTimeout = $this->_getAttribute($xml->tree, 'locking-timeout')) {
                 $config['locking_timeout'] = (int) $lockingTimeout;
@@ -107,27 +107,15 @@ class Xml extends BaseXml
 
                     $appendId = $this->_getAttribute($mapping->{'tree-path'}, 'append_id');
 
-                    if (!$appendId) {
-                        $appendId = true;
-                    } else {
-                        $appendId = 'false' == strtolower($appendId) ? false : true;
-                    }
+                    $appendId = $appendId ? 'false' != strtolower($appendId) : true;
 
                     $startsWithSeparator = $this->_getAttribute($mapping->{'tree-path'}, 'starts_with_separator');
 
-                    if (!$startsWithSeparator) {
-                        $startsWithSeparator = false;
-                    } else {
-                        $startsWithSeparator = 'false' == strtolower($startsWithSeparator) ? false : true;
-                    }
+                    $startsWithSeparator = $startsWithSeparator ? 'false' != strtolower($startsWithSeparator) : false;
 
                     $endsWithSeparator = $this->_getAttribute($mapping->{'tree-path'}, 'ends_with_separator');
 
-                    if (!$endsWithSeparator) {
-                        $endsWithSeparator = true;
-                    } else {
-                        $endsWithSeparator = 'false' == strtolower($endsWithSeparator) ? false : true;
-                    }
+                    $endsWithSeparator = $endsWithSeparator ? 'false' != strtolower($endsWithSeparator) : true;
 
                     $config['path'] = $field;
                     $config['path_separator'] = $separator;

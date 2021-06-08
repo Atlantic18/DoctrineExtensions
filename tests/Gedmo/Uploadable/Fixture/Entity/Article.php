@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Article
 {
+    public $filePath;
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id

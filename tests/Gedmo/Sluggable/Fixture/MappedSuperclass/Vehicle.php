@@ -10,6 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Vehicle
 {
+    public $id;
     /**
      * @ORM\Column(length=128)
      */

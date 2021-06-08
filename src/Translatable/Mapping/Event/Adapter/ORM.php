@@ -114,7 +114,7 @@ final class ORM extends BaseAdapterORM implements TranslatableAdapter
         case Type::BIGINT:
         case Type::INTEGER:
         case Type::SMALLINT:
-            return intval($key);
+            return (int) $key;
         default:
             return (string) $key;
         }

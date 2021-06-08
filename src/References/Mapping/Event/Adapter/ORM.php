@@ -65,10 +65,8 @@ final class ORM extends BaseAdapterORM implements ReferencesAdapter
         $this->throwIfNotDocumentManager($om);
         $meta = $om->getClassMetadata($class);
 
-        if ($om instanceof MongoDocumentManager) {
-            if (!$meta->isInheritanceTypeNone()) {
-                return $om->find($class, $identifier);
-            }
+        if ($om instanceof MongoDocumentManager && !$meta->isInheritanceTypeNone()) {
+            return $om->find($class, $identifier);
         }
 
         return $om->getReference($class, $identifier);

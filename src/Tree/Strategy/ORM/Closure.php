@@ -207,7 +207,7 @@ class Closure implements Strategy
 
     protected function getJoinColumnFieldName($association)
     {
-        if (count($association['joinColumnFieldNames']) > 1) {
+        if ((is_array($association['joinColumnFieldNames']) || $association['joinColumnFieldNames'] instanceof \Countable ? count($association['joinColumnFieldNames']) : 0) > 1) {
             throw new RuntimeException('More association on field '.$association['fieldName']);
         }
 

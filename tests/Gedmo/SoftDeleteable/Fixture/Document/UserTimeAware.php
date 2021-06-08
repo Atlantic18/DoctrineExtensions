@@ -27,7 +27,7 @@ class UserTimeAware
      *
      * @return $this
      */
-    public function setDeletedAt(\DateTime $deletedAt)
+    public function setDeletedAt(\DateTimeInterface $deletedAt)
     {
         $this->deletedAt = $deletedAt;
 

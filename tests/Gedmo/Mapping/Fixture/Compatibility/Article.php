@@ -56,7 +56,10 @@ class Article
         return $this->created;
     }
 
-    public function setCreated(\DateTime $created)
+    /**
+     * @param \DateTime|\DateTimeImmutable $created
+     */
+    public function setCreated(\DateTimeInterface $created)
     {
         $this->created = $created;
     }
@@ -71,7 +74,10 @@ class Article
         return $this->updated;
     }
 
-    public function setUpdated(\DateTime $updated)
+    /**
+     * @param \DateTime|\DateTimeImmutable $updated
+     */
+    public function setUpdated(\DateTimeInterface $updated)
     {
         $this->updated = $updated;
     }

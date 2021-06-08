@@ -44,7 +44,7 @@ class ObjectHydrator extends BaseObjectHydrator
     {
         parent::cleanup();
         $listener = $this->getTranslatableListener();
-        $listener->setSkipOnLoad(null !== $this->savedSkipOnLoad ? $this->savedSkipOnLoad : false);
+        $listener->setSkipOnLoad($this->savedSkipOnLoad ?? false);
     }
 
     /**

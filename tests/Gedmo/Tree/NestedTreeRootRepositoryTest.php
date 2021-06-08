@@ -78,7 +78,7 @@ class NestedTreeRootRepositoryTest extends BaseTestCaseORM
         $roots = $repo->getRootNodes();
         $tree = $repo->childrenHierarchy();
 
-        $this->assertEquals(2, count($tree));     // Count roots
+        $this->assertEquals(2, is_array($tree) || $tree instanceof \Countable ? count($tree) : 0);     // Count roots
         $this->assertEquals('Food', $tree[0]['title']);
         $this->assertEquals('Sports', $tree[1]['title']);
         $this->assertEquals('Fruits', $tree[0]['__children'][0]['title']);
@@ -90,7 +90,7 @@ class NestedTreeRootRepositoryTest extends BaseTestCaseORM
         $roots = $repo->getRootNodes();
         $tree = $repo->childrenHierarchy($roots[0]);
 
-        $this->assertEquals(2, count($tree));     // Count roots
+        $this->assertEquals(2, is_array($tree) || $tree instanceof \Countable ? count($tree) : 0);     // Count roots
         $this->assertEquals('Fruits', $tree[0]['title']);
         $this->assertEquals('Vegitables', $tree[1]['title']);
         $this->assertEquals('Carrots', $tree[1]['__children'][0]['title']);
@@ -99,7 +99,7 @@ class NestedTreeRootRepositoryTest extends BaseTestCaseORM
         // Tree of one specific root, with the root node
         $tree = $repo->childrenHierarchy($roots[0], false, [], true);
 
-        $this->assertEquals(1, count($tree));     // Count roots
+        $this->assertEquals(1, is_array($tree) || $tree instanceof \Countable ? count($tree) : 0);     // Count roots
         $this->assertEquals('Food', $tree[0]['title']);
         $this->assertEquals('Fruits', $tree[0]['__children'][0]['title']);
         $this->assertEquals('Vegitables', $tree[0]['__children'][1]['title']);
@@ -110,14 +110,14 @@ class NestedTreeRootRepositoryTest extends BaseTestCaseORM
         $roots = $repo->getRootNodes();
         $tree = $repo->childrenHierarchy($roots[0], true);
 
-        $this->assertEquals(2, count($tree));
+        $this->assertEquals(2, is_array($tree) || $tree instanceof \Countable ? count($tree) : 0);
         $this->assertEquals('Fruits', $tree[0]['title']);
         $this->assertEquals('Vegitables', $tree[1]['title']);
 
         // Tree of one specific root only with direct children, with the root node
         $tree = $repo->childrenHierarchy($roots[0], true, [], true);
 
-        $this->assertEquals(1, count($tree));
+        $this->assertEquals(1, is_array($tree) || $tree instanceof \Countable ? count($tree) : 0);
         $this->assertEquals('Food', $tree[0]['title']);
         $this->assertEquals('Fruits', $tree[0]['__children'][0]['title']);
         $this->assertEquals('Vegitables', $tree[0]['__children'][1]['title']);
@@ -416,14 +416,14 @@ class NestedTreeRootRepositoryTest extends BaseTestCaseORM
         // Test getRootNodes without custom ordering
         $roots = $repo->getRootNodes();
 
-        $this->assertEquals(2, count($roots));
+        $this->assertEquals(2, is_array($roots) || $roots instanceof \Countable ? count($roots) : 0);
         $this->assertEquals('Food', $roots[0]->getTitle());
         $this->assertEquals('Sports', $roots[1]->getTitle());
 
         // Test getRootNodes with custom ordering
         $roots = $repo->getRootNodes('title', 'desc');
 
-        $this->assertEquals(2, count($roots));
+        $this->assertEquals(2, is_array($roots) || $roots instanceof \Countable ? count($roots) : 0);
         $this->assertEquals('Sports', $roots[0]->getTitle());
         $this->assertEquals('Food', $roots[1]->getTitle());
     }

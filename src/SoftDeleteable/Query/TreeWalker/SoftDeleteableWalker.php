@@ -72,9 +72,7 @@ class SoftDeleteableWalker extends SqlWalker
         $quotedTableName = $class->getQuotedTableName($this->platform);
         $quotedColumnName = $class->getQuotedColumnName($this->deletedAtField, $this->platform);
 
-        $sql = 'UPDATE '.$quotedTableName.' SET '.$quotedColumnName.' = '.$this->platform->getCurrentTimestampSQL();
-
-        return $sql;
+        return 'UPDATE '.$quotedTableName.' SET '.$quotedColumnName.' = '.$this->platform->getCurrentTimestampSQL();
     }
 
     /**

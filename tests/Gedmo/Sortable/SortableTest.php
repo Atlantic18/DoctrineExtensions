@@ -160,8 +160,9 @@ class SortableTest extends BaseTestCaseORM
         $this->assertEquals('Node4', $nodes[2]->getName());
         $this->assertEquals('Node2', $nodes[3]->getName());
         $this->assertEquals('Node5', $nodes[4]->getName());
+        $nodesCount = is_array($nodes) || $nodes instanceof \Countable ? count($nodes) : 0;
 
-        for ($i = 0; $i < count($nodes); ++$i) {
+        for ($i = 0; $i < (is_array($nodes) || $nodes instanceof \Countable ? $nodesCount : 0); ++$i) {
             $this->assertSame($i, $nodes[$i]->getPosition());
         }
     }
@@ -207,8 +208,9 @@ class SortableTest extends BaseTestCaseORM
         $this->assertEquals('Node2', $nodes[2]->getName());
         $this->assertEquals('Node3', $nodes[3]->getName());
         $this->assertEquals('Node5', $nodes[4]->getName());
+        $nodesCount = is_array($nodes) || $nodes instanceof \Countable ? count($nodes) : 0;
 
-        for ($i = 0; $i < count($nodes); ++$i) {
+        for ($i = 0; $i < (is_array($nodes) || $nodes instanceof \Countable ? $nodesCount : 0); ++$i) {
             $this->assertSame($i, $nodes[$i]->getPosition());
         }
     }

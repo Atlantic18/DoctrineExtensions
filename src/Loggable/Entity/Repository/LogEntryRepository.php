@@ -107,7 +107,7 @@ class LogEntryRepository extends EntityRepository
                         }
                     }
                 }
-                $filled = 0 === count($fields);
+                $filled = 0 === (is_array($fields) || $fields instanceof \Countable ? count($fields) : 0);
             }
             /*if (count($fields)) {
                 throw new \Gedmo\Exception\UnexpectedValueException('Could not fully revert the entity to version: '.$version);

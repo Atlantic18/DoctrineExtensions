@@ -105,23 +105,21 @@ class MongoDocumentWrapper extends AbstractWrapper
      */
     protected function initialize()
     {
-        if (!$this->initialized) {
-            if ($this->object instanceof Proxy) {
-                $uow = $this->om->getUnitOfWork();
-                if (!$this->object->__isInitialized__) {
-                    $persister = $uow->getDocumentPersister($this->meta->name);
-                    $identifier = null;
-                    if ($uow->isInIdentityMap($this->object)) {
-                        $identifier = $this->getIdentifier();
-                    } else {
-                        // this may not happen but in case
-                        $reflProperty = new \ReflectionProperty($this->object, 'identifier');
-                        $reflProperty->setAccessible(true);
-                        $identifier = $reflProperty->getValue($this->object);
-                    }
-                    $this->object->__isInitialized__ = true;
-                    $persister->load($identifier, $this->object);
+        if (!$this->initialized && $this->object instanceof Proxy) {
+            $uow = $this->om->getUnitOfWork();
+            if (!$this->object->__isInitialized__) {
+                $persister = $uow->getDocumentPersister($this->meta->name);
+                $identifier = null;
+                if ($uow->isInIdentityMap($this->object)) {
+                    $identifier = $this->getIdentifier();
+                } else {
+                    // this may not happen but in case
+                    $reflProperty = new \ReflectionProperty($this->object, 'identifier');
+                    $reflProperty->setAccessible(true);
+                    $identifier = $reflProperty->getValue($this->object);
                 }
+                $this->object->__isInitialized__ = true;
+                $persister->load($identifier, $this->object);
             }
         }
     }

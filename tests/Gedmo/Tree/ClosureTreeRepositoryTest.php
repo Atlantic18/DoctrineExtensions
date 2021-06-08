@@ -394,7 +394,7 @@ class ClosureTreeRepositoryTest extends BaseTestCaseORM
 
         $food = $tree[0];
         $this->assertEquals('Food', $food['title']);
-        $this->assertEquals(3, count($food['__children']));
+        $this->assertEquals(3, is_array($food['__children']) || $food['__children'] instanceof \Countable ? count($food['__children']) : 0);
         $this->assertEquals('Boring Food', $food['__children'][0]['title']);
         $this->assertEquals('Fruits', $food['__children'][1]['title']);
         $this->assertEquals('Milk', $food['__children'][2]['title']);
@@ -406,7 +406,7 @@ class ClosureTreeRepositoryTest extends BaseTestCaseORM
             $sortOption
         );
 
-        $this->assertEquals(3, count($tree));
+        $this->assertEquals(3, is_array($tree) || $tree instanceof \Countable ? count($tree) : 0);
         $this->assertEquals('Boring Food', $tree[0]['title']);
         $this->assertEquals('Fruits', $tree[1]['title']);
         $this->assertEquals('Milk', $tree[2]['title']);

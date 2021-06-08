@@ -46,7 +46,7 @@ class BaseCategory
      *
      * @param dateTime $created
      */
-    public function setCreated(\dateTime $created)
+    public function setCreated(\DateTimeInterface $created)
     {
         $this->created = $created;
     }

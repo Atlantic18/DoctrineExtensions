@@ -17,6 +17,14 @@ use Tool\BaseTestCaseORM;
  */
 class MaterializedPathORMRepositoryTest extends BaseTestCaseORM
 {
+    /**
+     * @var \Gedmo\Tree\TreeListener|mixed
+     */
+    public $listener;
+    /**
+     * @var mixed[]
+     */
+    public $config;
     const CATEGORY = 'Tree\\Fixture\\MPCategory';
     const CATEGORY_WITH_TRIMMED_SEPARATOR = 'Tree\\Fixture\\MPCategoryWithTrimmedSeparator';
 
@@ -268,15 +276,15 @@ class MaterializedPathORMRepositoryTest extends BaseTestCaseORM
         $roots = $this->repo->getRootNodes();
         $tree = $this->repo->childrenHierarchy($roots[1], true);
 
-        $this->assertEquals(2, count($tree));
+        $this->assertEquals(2, is_array($tree) || $tree instanceof \Countable ? count($tree) : 0);
         $this->assertEquals('Fruits', $tree[0]['title']);
         $this->assertEquals('Vegitables', $tree[1]['title']);
 
         // Tree of one specific root only with direct children, with the root node
         $tree = $this->repo->childrenHierarchy($roots[1], true, [], true);
 
-        $this->assertEquals(1, count($tree));
-        $this->assertEquals(2, count($tree[0]['__children']));
+        $this->assertEquals(1, is_array($tree) || $tree instanceof \Countable ? count($tree) : 0);
+        $this->assertEquals(2, is_array($tree[0]['__children']) || $tree[0]['__children'] instanceof \Countable ? count($tree[0]['__children']) : 0);
         $this->assertEquals('Food', $tree[0]['title']);
         $this->assertEquals('Fruits', $tree[0]['__children'][0]['title']);
         $this->assertEquals('Vegitables', $tree[0]['__children'][1]['title']);

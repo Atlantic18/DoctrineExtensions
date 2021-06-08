@@ -118,12 +118,8 @@ class EntityWrapper extends AbstractWrapper
      */
     protected function initialize()
     {
-        if (!$this->initialized) {
-            if ($this->object instanceof Proxy) {
-                if (!$this->object->__isInitialized__) {
-                    $this->object->__load();
-                }
-            }
+        if (!$this->initialized && $this->object instanceof Proxy && !$this->object->__isInitialized__) {
+            $this->object->__load();
         }
     }
 

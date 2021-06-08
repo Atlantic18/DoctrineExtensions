@@ -110,7 +110,10 @@ class EventAdapterORMStub extends BaseAdapterORM implements TimestampableAdapter
 {
     protected $dateTime;
 
-    public function setDateValue(\DateTime $dateTime)
+    /**
+     * @param \DateTime|\DateTimeImmutable $dateTime
+     */
+    public function setDateValue(\DateTimeInterface $dateTime)
     {
         $this->dateTime = $dateTime;
     }

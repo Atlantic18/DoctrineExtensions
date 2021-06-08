@@ -15,6 +15,14 @@ use Mapping\Fixture\Unmapped\Timestampable;
  */
 class ForcedMetadataTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @var \Gedmo\Timestampable\TimestampableListener|mixed
+     */
+    public $timestampable;
+    /**
+     * @var \Doctrine\ORM\EntityManager|mixed
+     */
+    public $em;
     public function setUp(): void
     {
         $config = new \Doctrine\ORM\Configuration();

@@ -60,7 +60,7 @@ class TitledArticle implements Timestampable
     /**
      * @param \DateTime $chtext
      */
-    public function setChtext($chtext)
+    public function setChtext(\DateTimeInterface $chtext)
     {
         $this->chtext = $chtext;
     }
@@ -76,7 +76,7 @@ class TitledArticle implements Timestampable
     /**
      * @param \DateTime $chtitle
      */
-    public function setChtitle($chtitle)
+    public function setChtitle(\DateTimeInterface $chtitle)
     {
         $this->chtitle = $chtitle;
     }
@@ -92,7 +92,7 @@ class TitledArticle implements Timestampable
     /**
      * @param \DateTime $closed
      */
-    public function setClosed($closed)
+    public function setClosed(\DateTimeInterface $closed)
     {
         $this->closed = $closed;
     }

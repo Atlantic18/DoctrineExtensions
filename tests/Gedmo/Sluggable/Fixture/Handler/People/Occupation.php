@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Occupation
 {
+    public $children;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

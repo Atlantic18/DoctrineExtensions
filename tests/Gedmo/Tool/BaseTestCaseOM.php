@@ -103,9 +103,7 @@ abstract class BaseTestCaseOM extends \PHPUnit\Framework\TestCase
         $conn = $this->getMockBuilder('Doctrine\\MongoDB\\Connection')->getMock();
         $config = $this->getMockAnnotatedODMMongoDBConfig($dbName, $mappingDriver);
 
-        $dm = DocumentManager::create($conn, $config, $this->getEventManager());
-
-        return $dm;
+        return DocumentManager::create($conn, $config, $this->getEventManager());
     }
 
     /**

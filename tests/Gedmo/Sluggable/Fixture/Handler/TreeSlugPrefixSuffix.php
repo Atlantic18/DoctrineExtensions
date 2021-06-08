@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class TreeSlugPrefixSuffix
 {
+    public $children;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

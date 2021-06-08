@@ -98,7 +98,7 @@ class MaterializedPathORMFeaturesTest extends BaseTestCaseORM
     public function generatePath(array $sources)
     {
         $path = '';
-        foreach ($sources as $p => $id) {
+        foreach (array_keys($sources) as $p) {
             $path .= $this->config['path_separator'].$p;
         }
 

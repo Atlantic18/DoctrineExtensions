@@ -72,7 +72,10 @@ class Reservation
         return $this->destination;
     }
 
-    public function setTravelDate(\DateTime $date)
+    /**
+     * @param \DateTime|\DateTimeImmutable $date
+     */
+    public function setTravelDate(\DateTimeInterface $date)
     {
         $this->travelDate = $date;
     }

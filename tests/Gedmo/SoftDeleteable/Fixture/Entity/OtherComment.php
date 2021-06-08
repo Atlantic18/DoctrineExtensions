@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OtherComment
 {
+    public $deletedAt;
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id

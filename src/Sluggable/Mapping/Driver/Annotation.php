@@ -143,7 +143,7 @@ class Annotation extends AbstractAnnotationDriver
             if (!empty($meta->identifier) && $meta->isIdentifier($fieldName) && !(bool) $slug->unique) {
                 throw new InvalidMappingException("Identifier field - [{$fieldName}] slug must be unique in order to maintain primary key in class - {$meta->name}");
             }
-            if (false === $slug->unique && $slug->unique_base) {
+            if (!$slug->unique && $slug->unique_base) {
                 throw new InvalidMappingException("Slug annotation [unique_base] can not be set if unique is unset or 'false'");
             }
             if ($slug->unique_base && !$meta->hasField($slug->unique_base) && !$meta->hasAssociation($slug->unique_base)) {

@@ -139,7 +139,10 @@ class Article implements Timestampable
         return $this->created;
     }
 
-    public function setCreated(\DateTime $created)
+    /**
+     * @param \DateTime|\DateTimeImmutable $created
+     */
+    public function setCreated(\DateTimeInterface $created)
     {
         $this->created = $created;
     }
@@ -149,7 +152,10 @@ class Article implements Timestampable
         return $this->published;
     }
 
-    public function setPublished(\DateTime $published)
+    /**
+     * @param \DateTime|\DateTimeImmutable $published
+     */
+    public function setPublished(\DateTimeInterface $published)
     {
         $this->published = $published;
     }
@@ -164,12 +170,18 @@ class Article implements Timestampable
         return $this->updated;
     }
 
-    public function setUpdated(\DateTime $updated)
+    /**
+     * @param \DateTime|\DateTimeImmutable $updated
+     */
+    public function setUpdated(\DateTimeInterface $updated)
     {
         $this->updated = $updated;
     }
 
-    public function setContentChanged(\DateTime $contentChanged)
+    /**
+     * @param \DateTime|\DateTimeImmutable $contentChanged
+     */
+    public function setContentChanged(\DateTimeInterface $contentChanged)
     {
         $this->contentChanged = $contentChanged;
     }

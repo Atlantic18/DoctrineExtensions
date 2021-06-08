@@ -554,7 +554,7 @@ class Nested implements Strategy
         $query = $qb->getQuery();
         $right = $query->getSingleScalarResult();
 
-        return intval($right);
+        return (int) $right;
     }
 
     /**
@@ -607,7 +607,7 @@ class Nested implements Strategy
                     continue;
                 }
 
-                $nodeMeta = $em->getClassMetadata(get_class($node));
+                $nodeMeta = $em->getClassMetadata($node !== null ? get_class($node) : self::class);
 
                 if (!array_key_exists($config['left'], $nodeMeta->getReflectionProperties())) {
                     continue;
@@ -678,7 +678,7 @@ class Nested implements Strategy
                     continue;
                 }
 
-                $nodeMeta = $em->getClassMetadata(get_class($node));
+                $nodeMeta = $em->getClassMetadata($node !== null ? get_class($node) : self::class);
 
                 if (!array_key_exists($config['left'], $nodeMeta->getReflectionProperties())) {
                     continue;

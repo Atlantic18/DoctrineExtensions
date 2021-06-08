@@ -17,6 +17,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 abstract class Person
 {
+    public $name;
+    /**
+     * @var \Tree\Fixture\Closure\CategoryClosure[]
+     */
+    public $closures;
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id

@@ -33,7 +33,7 @@ class Annotation implements Driver
                 continue;
             }
             // now lets check if property has our annotation
-            if ($encode = $reader->getPropertyAnnotation($property, 'Gedmo\Mapping\Mock\Extension\Encoder\Mapping\Encode')) {
+            if (($encode = $reader->getPropertyAnnotation($property, 'Gedmo\Mapping\Mock\Extension\Encoder\Mapping\Encode')) !== null) {
                 $field = $property->getName();
                 // check if field is mapped
                 if (!$meta->hasField($field)) {

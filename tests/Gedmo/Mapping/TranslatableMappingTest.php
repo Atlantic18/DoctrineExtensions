@@ -17,6 +17,10 @@ use Gedmo\Mapping\ExtensionMetadataFactory;
  */
 class TranslatableMappingTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @var \Gedmo\Translatable\TranslatableListener|mixed
+     */
+    public $translatableListener;
     const TEST_YAML_ENTITY_CLASS = 'Mapping\Fixture\Yaml\User';
     private $em;
 

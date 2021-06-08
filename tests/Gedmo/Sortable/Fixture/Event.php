@@ -47,7 +47,10 @@ class Event
         return $this->id;
     }
 
-    public function setDateTime(\DateTime $date)
+    /**
+     * @param \DateTime|\DateTimeImmutable $date
+     */
+    public function setDateTime(\DateTimeInterface $date)
     {
         $this->dateTime = $date;
     }

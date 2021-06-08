@@ -25,8 +25,9 @@ trait SoftDeleteableEntity
      * Set or clear the deleted at timestamp.
      *
      * @return self
+     * @param \DateTime|\DateTimeImmutable $deletedAt
      */
-    public function setDeletedAt(DateTime $deletedAt = null)
+    public function setDeletedAt(\DateTimeInterface $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
 

@@ -121,7 +121,7 @@ class Xml extends BaseXml
                 throw new InvalidMappingException("Identifier field - [{$field}] slug must be unique in order to maintain primary key in class - {$meta->name}");
             }
             $ubase = $config['slugs'][$field]['unique_base'];
-            if (false === $config['slugs'][$field]['unique'] && $ubase) {
+            if (!$config['slugs'][$field]['unique'] && $ubase) {
                 throw new InvalidMappingException("Slug annotation [unique_base] can not be set if unique is unset or 'false'");
             }
             if ($ubase && !$meta->hasField($ubase) && !$meta->hasAssociation($ubase)) {

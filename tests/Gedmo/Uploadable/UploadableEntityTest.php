@@ -674,16 +674,14 @@ class UploadableEntityTest extends BaseTestCaseORM
     private function generateUploadedFile($index = 'image', $filePath = false, $filename = false, array $info = [])
     {
         $defaultInfo = [
-            'tmp_name' => !$filePath ? $this->testFile : $filePath,
-            'name' => !$filename ? $this->testFilename : $filename,
+            'tmp_name' => $filePath ? $filePath : $this->testFile,
+            'name' => $filename ? $filename : $this->testFilename,
             'size' => $this->testFileSize,
             'type' => $this->testFileMimeType,
             'error' => 0,
         ];
 
-        $info = array_merge($defaultInfo, $info);
-
-        return $info;
+        return array_merge($defaultInfo, $info);
     }
 
     protected function getUsedEntityFixtures()

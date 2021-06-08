@@ -120,7 +120,7 @@ class ReferenceIntegrityDocumentTest extends BaseTestCaseMongoODM
             ->findOneBy(['title' => 'One Pull Article']);
 
         $types = $article->getTypes();
-        $this->assertTrue(1 === count($types));
+        $this->assertTrue(1 === (is_array($types) || $types instanceof \Countable ? count($types) : 0));
         $this->assertEquals('One Pull Type 1', $types[0]->getTitle());
 
         $this->dm->clear();
@@ -150,7 +150,7 @@ class ReferenceIntegrityDocumentTest extends BaseTestCaseMongoODM
             ->findOneBy(['title' => 'Many Pull Article']);
 
         $types = $article->getTypes();
-        $this->assertTrue(1 === count($types));
+        $this->assertTrue(1 === (is_array($types) || $types instanceof \Countable ? count($types) : 0));
         $this->assertEquals('Many Pull Type 1', $types[0]->getTitle());
 
         $this->dm->clear();

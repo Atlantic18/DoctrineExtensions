@@ -11,6 +11,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Article
 {
+    public $code;
+    public $slug;
     /** @MongoODM\Id */
     private $id;
 

@@ -51,35 +51,35 @@ class TreeObjectHydratorTest extends BaseTestCaseORM
             ->setHint(Query::HINT_INCLUDE_META_COLUMNS, true)
             ->getResult('tree');
 
-        $this->assertEquals(count($result), 1);
+        $this->assertEquals(is_array($result) || $result instanceof \Countable ? count($result) : 0, 1);
 
         $food = $result[0];
         $this->assertEquals($food->getTitle(), 'Food');
-        $this->assertEquals(count($food->getChildren()), 4);
+        $this->assertEquals(is_array($food->getChildren()) || $food->getChildren() instanceof \Countable ? count($food->getChildren()) : 0, 4);
 
         $fruits = $food->getChildren()->get(0);
         $this->assertEquals($fruits->getTitle(), 'Fruits');
-        $this->assertEquals(count($fruits->getChildren()), 2);
+        $this->assertEquals(is_array($fruits->getChildren()) || $fruits->getChildren() instanceof \Countable ? count($fruits->getChildren()) : 0, 2);
 
         $vegetables = $food->getChildren()->get(1);
         $this->assertEquals($vegetables->getTitle(), 'Vegetables');
-        $this->assertEquals(count($vegetables->getChildren()), 0);
+        $this->assertEquals(is_array($vegetables->getChildren()) || $vegetables->getChildren() instanceof \Countable ? count($vegetables->getChildren()) : 0, 0);
 
         $milk = $food->getChildren()->get(2);
         $this->assertEquals($milk->getTitle(), 'Milk');
-        $this->assertEquals(count($milk->getChildren()), 0);
+        $this->assertEquals(is_array($milk->getChildren()) || $milk->getChildren() instanceof \Countable ? count($milk->getChildren()) : 0, 0);
 
         $meat = $food->getChildren()->get(3);
         $this->assertEquals($meat->getTitle(), 'Meat');
-        $this->assertEquals(count($meat->getChildren()), 0);
+        $this->assertEquals(is_array($meat->getChildren()) || $meat->getChildren() instanceof \Countable ? count($meat->getChildren()) : 0, 0);
 
         $oranges = $fruits->getChildren()->get(0);
         $this->assertEquals($oranges->getTitle(), 'Oranges');
-        $this->assertEquals(count($oranges->getChildren()), 0);
+        $this->assertEquals(is_array($oranges->getChildren()) || $oranges->getChildren() instanceof \Countable ? count($oranges->getChildren()) : 0, 0);
 
         $citrons = $fruits->getChildren()->get(1);
         $this->assertEquals($citrons->getTitle(), 'Citrons');
-        $this->assertEquals(count($citrons->getChildren()), 0);
+        $this->assertEquals(is_array($citrons->getChildren()) || $citrons->getChildren() instanceof \Countable ? count($citrons->getChildren()) : 0, 0);
 
         // Make sure only one query was executed
         $this->assertEquals(count($stack->queries), 1);
@@ -102,19 +102,19 @@ class TreeObjectHydratorTest extends BaseTestCaseORM
             ->setHint(Query::HINT_INCLUDE_META_COLUMNS, true)
             ->getResult('tree');
 
-        $this->assertEquals(count($result), 1);
+        $this->assertEquals(is_array($result) || $result instanceof \Countable ? count($result) : 0, 1);
 
         $fruits = $result[0];
         $this->assertEquals($fruits->getTitle(), 'Fruits');
-        $this->assertEquals(count($fruits->getChildren()), 2);
+        $this->assertEquals(is_array($fruits->getChildren()) || $fruits->getChildren() instanceof \Countable ? count($fruits->getChildren()) : 0, 2);
 
         $oranges = $fruits->getChildren()->get(0);
         $this->assertEquals($oranges->getTitle(), 'Oranges');
-        $this->assertEquals(count($oranges->getChildren()), 0);
+        $this->assertEquals(is_array($oranges->getChildren()) || $oranges->getChildren() instanceof \Countable ? count($oranges->getChildren()) : 0, 0);
 
         $citrons = $fruits->getChildren()->get(1);
         $this->assertEquals($citrons->getTitle(), 'Citrons');
-        $this->assertEquals(count($citrons->getChildren()), 0);
+        $this->assertEquals(is_array($citrons->getChildren()) || $citrons->getChildren() instanceof \Countable ? count($citrons->getChildren()) : 0, 0);
 
         $this->assertEquals(count($stack->queries), 2);
     }
@@ -136,31 +136,31 @@ class TreeObjectHydratorTest extends BaseTestCaseORM
             ->setHint(Query::HINT_INCLUDE_META_COLUMNS, true)
             ->getResult('tree');
 
-        $this->assertEquals(count($result), 4);
+        $this->assertEquals(is_array($result) || $result instanceof \Countable ? count($result) : 0, 4);
 
         $fruits = $result[0];
         $this->assertEquals($fruits->getTitle(), 'Fruits');
-        $this->assertEquals(count($fruits->getChildren()), 2);
+        $this->assertEquals(is_array($fruits->getChildren()) || $fruits->getChildren() instanceof \Countable ? count($fruits->getChildren()) : 0, 2);
 
         $vegetables = $result[1];
         $this->assertEquals($vegetables->getTitle(), 'Vegetables');
-        $this->assertEquals(count($vegetables->getChildren()), 0);
+        $this->assertEquals(is_array($vegetables->getChildren()) || $vegetables->getChildren() instanceof \Countable ? count($vegetables->getChildren()) : 0, 0);
 
         $milk = $result[2];
         $this->assertEquals($milk->getTitle(), 'Milk');
-        $this->assertEquals(count($milk->getChildren()), 0);
+        $this->assertEquals(is_array($milk->getChildren()) || $milk->getChildren() instanceof \Countable ? count($milk->getChildren()) : 0, 0);
 
         $meat = $result[3];
         $this->assertEquals($meat->getTitle(), 'Meat');
-        $this->assertEquals(count($meat->getChildren()), 0);
+        $this->assertEquals(is_array($meat->getChildren()) || $meat->getChildren() instanceof \Countable ? count($meat->getChildren()) : 0, 0);
 
         $oranges = $fruits->getChildren()->get(0);
         $this->assertEquals($oranges->getTitle(), 'Oranges');
-        $this->assertEquals(count($oranges->getChildren()), 0);
+        $this->assertEquals(is_array($oranges->getChildren()) || $oranges->getChildren() instanceof \Countable ? count($oranges->getChildren()) : 0, 0);
 
         $citrons = $fruits->getChildren()->get(1);
         $this->assertEquals($citrons->getTitle(), 'Citrons');
-        $this->assertEquals(count($citrons->getChildren()), 0);
+        $this->assertEquals(is_array($citrons->getChildren()) || $citrons->getChildren() instanceof \Countable ? count($citrons->getChildren()) : 0, 0);
 
         $this->assertEquals(count($stack->queries), 2);
     }

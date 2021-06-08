@@ -8,6 +8,10 @@ use Translatable\Fixture\Issue1123\ChildEntity;
 
 class Issue1123Test extends BaseTestCaseORM
 {
+    /**
+     * @var \Gedmo\Translatable\TranslatableListener|mixed
+     */
+    public $translatableListener;
     const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
     const BASE_ENTITY = 'Translatable\\Fixture\\Issue1123\\BaseEntity';
     const CHILD_ENTITY = 'Translatable\\Fixture\\Issue1123\\ChildEntity';

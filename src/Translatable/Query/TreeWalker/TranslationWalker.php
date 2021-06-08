@@ -31,6 +31,10 @@ use Gedmo\Translatable\TranslatableListener;
 class TranslationWalker extends SqlWalker
 {
     /**
+     * @var \Gedmo\Translatable\TranslatableListener|mixed
+     */
+    public $listener;
+    /**
      * Name for translation fallback hint
      *
      * @internal
@@ -150,9 +154,8 @@ class TranslationWalker extends SqlWalker
     public function walkSelectClause($selectClause)
     {
         $result = parent::walkSelectClause($selectClause);
-        $result = $this->replace($this->replacements, $result);
 
-        return $result;
+        return $this->replace($this->replacements, $result);
     }
 
     /**
@@ -161,9 +164,8 @@ class TranslationWalker extends SqlWalker
     public function walkFromClause($fromClause)
     {
         $result = parent::walkFromClause($fromClause);
-        $result .= $this->joinTranslations($fromClause);
 
-        return $result;
+        return $result . $this->joinTranslations($fromClause);
     }
 
     /**
@@ -201,9 +203,7 @@ class TranslationWalker extends SqlWalker
      */
     public function walkSubselect($subselect)
     {
-        $result = parent::walkSubselect($subselect);
-
-        return $result;
+        return parent::walkSubselect($subselect);
     }
 
     /**
@@ -212,9 +212,8 @@ class TranslationWalker extends SqlWalker
     public function walkSubselectFromClause($subselectFromClause)
     {
         $result = parent::walkSubselectFromClause($subselectFromClause);
-        $result .= $this->joinTranslations($subselectFromClause);
 
-        return $result;
+        return $result . $this->joinTranslations($subselectFromClause);
     }
 
     /**
@@ -249,26 +248,20 @@ class TranslationWalker extends SqlWalker
     {
         $result = '';
         foreach ($from->identificationVariableDeclarations as $decl) {
-            if ($decl->rangeVariableDeclaration instanceof RangeVariableDeclaration) {
-                if (isset($this->components[$decl->rangeVariableDeclaration->aliasIdentificationVariable])) {
-                    $result .= $this->components[$decl->rangeVariableDeclaration->aliasIdentificationVariable];
-                }
+            if ($decl->rangeVariableDeclaration instanceof RangeVariableDeclaration && isset($this->components[$decl->rangeVariableDeclaration->aliasIdentificationVariable])) {
+                $result .= $this->components[$decl->rangeVariableDeclaration->aliasIdentificationVariable];
             }
             if (isset($decl->joinVariableDeclarations)) {
                 foreach ($decl->joinVariableDeclarations as $joinDecl) {
-                    if ($joinDecl->join instanceof Join) {
-                        if (isset($this->components[$joinDecl->join->aliasIdentificationVariable])) {
-                            $result .= $this->components[$joinDecl->join->aliasIdentificationVariable];
-                        }
+                    if ($joinDecl->join instanceof Join && isset($this->components[$joinDecl->join->aliasIdentificationVariable])) {
+                        $result .= $this->components[$joinDecl->join->aliasIdentificationVariable];
                     }
                 }
             } else {
                 // based on new changes
                 foreach ($decl->joins as $join) {
-                    if ($join instanceof Join) {
-                        if (isset($this->components[$join->joinAssociationDeclaration->aliasIdentificationVariable])) {
-                            $result .= $this->components[$join->joinAssociationDeclaration->aliasIdentificationVariable];
-                        }
+                    if ($join instanceof Join && isset($this->components[$join->joinAssociationDeclaration->aliasIdentificationVariable])) {
+                        $result .= $this->components[$join->joinAssociationDeclaration->aliasIdentificationVariable];
                     }
                 }
             }
@@ -342,7 +335,7 @@ class TranslationWalker extends SqlWalker
                 // Treat translation as original field type
                 $fieldMapping = $meta->getFieldMapping($field);
                 if ((($this->platform instanceof MySqlPlatform) &&
-                    in_array($fieldMapping['type'], ['decimal'])) ||
+                    $fieldMapping['type'] == 'decimal') ||
                     (!($this->platform instanceof MySqlPlatform) &&
                     !in_array($fieldMapping['type'], ['datetime', 'datetimetz', 'date', 'time']))) {
                     $type = Type::getType($fieldMapping['type']);
@@ -461,7 +454,7 @@ class TranslationWalker extends SqlWalker
             case 'string':
             case 'guid':
                 // need to cast to VARCHAR
-                $component = $component.'::VARCHAR';
+                $component .= '::VARCHAR';
                 break;
             }
         }

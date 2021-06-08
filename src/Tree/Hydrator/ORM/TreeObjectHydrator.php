@@ -146,7 +146,7 @@ class TreeObjectHydrator extends ObjectHydrator
                 $parentId = $this->getPropertyValue($parentProxy, $this->idField);
             }
 
-            if (null === $parentId || !key_exists($parentId, $idHashmap)) {
+            if (null === $parentId || !array_key_exists($parentId, $idHashmap)) {
                 $rootNodes[] = $node;
             }
         }

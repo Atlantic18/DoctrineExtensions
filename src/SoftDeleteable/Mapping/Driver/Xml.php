@@ -31,28 +31,21 @@ class Xml extends BaseXml
         $xmlDoctrine = $xml;
         $xml = $xml->children(self::GEDMO_NAMESPACE_URI);
 
-        if (in_array($xmlDoctrine->getName(), ['mapped-superclass', 'entity', 'document', 'embedded-document'])) {
-            if (isset($xml->{'soft-deleteable'})) {
-                $field = $this->_getAttribute($xml->{'soft-deleteable'}, 'field-name');
-
-                if (!$field) {
-                    throw new InvalidMappingException('Field name for SoftDeleteable class is mandatory.');
-                }
-
-                Validator::validateField($meta, $field);
-
-                $config['softDeleteable'] = true;
-                $config['fieldName'] = $field;
-
-                $config['timeAware'] = false;
-                if ($this->_isAttributeSet($xml->{'soft-deleteable'}, 'time-aware')) {
-                    $config['timeAware'] = $this->_getBooleanAttribute($xml->{'soft-deleteable'}, 'time-aware');
-                }
-
-                $config['hardDelete'] = true;
-                if ($this->_isAttributeSet($xml->{'soft-deleteable'}, 'hard-delete')) {
-                    $config['hardDelete'] = $this->_getBooleanAttribute($xml->{'soft-deleteable'}, 'hard-delete');
-                }
+        if (in_array($xmlDoctrine->getName(), ['mapped-superclass', 'entity', 'document', 'embedded-document']) && isset($xml->{'soft-deleteable'})) {
+            $field = $this->_getAttribute($xml->{'soft-deleteable'}, 'field-name');
+            if (!$field) {
+                throw new InvalidMappingException('Field name for SoftDeleteable class is mandatory.');
+            }
+            Validator::validateField($meta, $field);
+            $config['softDeleteable'] = true;
+            $config['fieldName'] = $field;
+            $config['timeAware'] = false;
+            if ($this->_isAttributeSet($xml->{'soft-deleteable'}, 'time-aware')) {
+                $config['timeAware'] = $this->_getBooleanAttribute($xml->{'soft-deleteable'}, 'time-aware');
+            }
+            $config['hardDelete'] = true;
+            if ($this->_isAttributeSet($xml->{'soft-deleteable'}, 'hard-delete')) {
+                $config['hardDelete'] = $this->_getBooleanAttribute($xml->{'soft-deleteable'}, 'hard-delete');
             }
         }
     }

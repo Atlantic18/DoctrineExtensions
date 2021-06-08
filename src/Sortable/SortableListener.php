@@ -289,11 +289,7 @@ class SortableListener extends MappedEventSubscriber
                 $newPosition = 0;
             }
         } elseif ($newPosition > $this->maxPositions[$hash]) {
-            if ($groupHasChanged) {
-                $newPosition = $this->maxPositions[$hash] + 1;
-            } else {
-                $newPosition = $this->maxPositions[$hash];
-            }
+            $newPosition = $groupHasChanged ? $this->maxPositions[$hash] + 1 : $this->maxPositions[$hash];
         } else {
             $newPosition = min([$this->maxPositions[$hash], $newPosition]);
         }
@@ -451,11 +447,7 @@ class SortableListener extends MappedEventSubscriber
                                 // Special case for equal objects but different instances.
                                 // If the object implements Comparable interface we can use its compareTo method
                                 // Otherwise we fallback to normal object comparison
-                                if ($gr instanceof Comparable) {
-                                    $matches = $gr->compareTo($value);
-                                } else {
-                                    $matches = $gr == $value;
-                                }
+                                $matches = $gr instanceof Comparable ? $gr->compareTo($value) : $gr == $value;
                             } else {
                                 $matches = $gr === $value;
                             }
@@ -512,7 +504,7 @@ class SortableListener extends MappedEventSubscriber
         $maxPos = null;
 
         // Get groups
-        if (!sizeof($groups)) {
+        if (!count($groups)) {
             $groups = $this->getGroups($meta, $config, $object);
         }
 
@@ -538,7 +530,7 @@ class SortableListener extends MappedEventSubscriber
             $maxPos = -1;
         }
 
-        return intval($maxPos);
+        return (int) $maxPos;
     }
 
     /**

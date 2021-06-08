@@ -13,6 +13,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Category
 {
     /**
+     * @var \Tree\Fixture\Closure\CategoryClosure[]
+     */
+    public $closures;
+    /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue

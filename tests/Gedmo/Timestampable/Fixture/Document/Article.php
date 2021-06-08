@@ -107,12 +107,18 @@ class Article
         $this->created = $created;
     }
 
-    public function setPublished(\DateTime $published)
+    /**
+     * @param \DateTime|\DateTimeImmutable $published
+     */
+    public function setPublished(\DateTimeInterface $published)
     {
         $this->published = $published;
     }
 
-    public function setUpdated(\DateTime $updated)
+    /**
+     * @param \DateTime|\DateTimeImmutable $updated
+     */
+    public function setUpdated(\DateTimeInterface $updated)
     {
         $this->updated = $updated;
     }

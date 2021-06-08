@@ -235,10 +235,8 @@ class NestedTreeRepository extends AbstractTreeRepository
             } else {
                 throw new \InvalidArgumentException('Node is not related to this repository');
             }
-        } else {
-            if ($direct) {
-                $qb->where($qb->expr()->isNull('node.'.$config['parent']));
-            }
+        } elseif ($direct) {
+            $qb->where($qb->expr()->isNull('node.'.$config['parent']));
         }
         if (!$sortByField) {
             $qb->orderBy('node.'.$config['left'], 'ASC');
@@ -249,12 +247,10 @@ class NestedTreeRepository extends AbstractTreeRepository
             }
             $fields = rtrim($fields, ',');
             $qb->orderBy($fields, $direction);
+        } elseif ($meta->hasField($sortByField) && in_array(strtolower($direction), ['asc', 'desc'])) {
+            $qb->orderBy('node.'.$sortByField, $direction);
         } else {
-            if ($meta->hasField($sortByField) && in_array(strtolower($direction), ['asc', 'desc'])) {
-                $qb->orderBy('node.'.$sortByField, $direction);
-            } else {
-                throw new InvalidArgumentException("Invalid sort options specified: field - {$sortByField}, direction - {$direction}");
-            }
+            throw new InvalidArgumentException("Invalid sort options specified: field - {$sortByField}, direction - {$direction}");
         }
 
         return $qb;
@@ -318,10 +314,8 @@ class NestedTreeRepository extends AbstractTreeRepository
         $meta = $this->getClassMetadata();
         $config = $this->listener->getConfiguration($this->_em, $meta->name);
 
-        if (isset($config['root']) && is_null($root)) {
-            if (is_null($root)) {
-                throw new InvalidArgumentException('If tree has root, getLeafs method requires any node of this tree');
-            }
+        if (isset($config['root']) && is_null($root) && is_null($root)) {
+            throw new InvalidArgumentException('If tree has root, getLeafs method requires any node of this tree');
         }
 
         $qb = $this->getQueryBuilder();
@@ -347,12 +341,10 @@ class NestedTreeRepository extends AbstractTreeRepository
                 $qb->addOrderBy('node.'.$config['root'], 'ASC');
             }
             $qb->addOrderBy('node.'.$config['left'], 'ASC', true);
+        } elseif ($meta->hasField($sortByField) && in_array(strtolower($direction), ['asc', 'desc'])) {
+            $qb->orderBy('node.'.$sortByField, $direction);
         } else {
-            if ($meta->hasField($sortByField) && in_array(strtolower($direction), ['asc', 'desc'])) {
-                $qb->orderBy('node.'.$sortByField, $direction);
-            } else {
-                throw new InvalidArgumentException("Invalid sort options specified: field - {$sortByField}, direction - {$direction}");
-            }
+            throw new InvalidArgumentException("Invalid sort options specified: field - {$sortByField}, direction - {$direction}");
         }
 
         return $qb;
@@ -754,7 +746,7 @@ class NestedTreeRepository extends AbstractTreeRepository
                 $right = $wrapped->getPropertyValue($config['right']);
                 $left = $wrapped->getPropertyValue($config['left']);
                 $this->moveDown($node, true);
-                if ($left != ($right - 1)) {
+                if ($left != $right - 1) {
                     $this->reorder($node, $sortByField, $direction, false);
                 }
             }
@@ -925,7 +917,7 @@ class NestedTreeRepository extends AbstractTreeRepository
             $qb->where($qb->expr()->eq('node.'.$config['root'], ':rid'));
             $qb->setParameter('rid', $rootId);
         }
-        $min = intval($qb->getQuery()->getSingleScalarResult());
+        $min = (int) $qb->getQuery()->getSingleScalarResult();
         $edge = $this->listener->getStrategy($this->_em, $meta->name)->max($this->_em, $config['useObjectClass'], $rootId);
         // check duplicate right and left values
         for ($i = $min; $i <= $edge; ++$i) {
@@ -941,7 +933,7 @@ class NestedTreeRepository extends AbstractTreeRepository
                 $qb->andWhere($qb->expr()->eq('node.'.$config['root'], ':rid'));
                 $qb->setParameter('rid', $rootId);
             }
-            $count = intval($qb->getQuery()->getSingleScalarResult());
+            $count = (int) $qb->getQuery()->getSingleScalarResult();
             if (1 !== $count) {
                 if (0 === $count) {
                     $errors[] = "index [{$i}], missing".($root ? ' on tree root: '.$rootId : '');
@@ -1032,7 +1024,7 @@ class NestedTreeRepository extends AbstractTreeRepository
                     $qb->andWhere($qb->expr()->eq('node.'.$config['root'], ':rid'));
                     $qb->setParameter('rid', $rootId);
                 }
-                if ($count = intval($qb->getQuery()->getSingleScalarResult())) {
+                if ($count = (int) $qb->getQuery()->getSingleScalarResult()) {
                     $errors[] = "node [{$id}] parent field is blank, but it has a parent";
                 }
             }

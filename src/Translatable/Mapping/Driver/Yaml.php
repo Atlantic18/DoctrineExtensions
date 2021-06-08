@@ -59,10 +59,8 @@ class Yaml extends File implements Driver
             }
         }
 
-        if (!$meta->isMappedSuperclass && $config) {
-            if (is_array($meta->identifier) && count($meta->identifier) > 1) {
-                throw new InvalidMappingException("Translatable does not support composite identifiers in class - {$meta->name}");
-            }
+        if (!$meta->isMappedSuperclass && $config && (is_array($meta->identifier) && count($meta->identifier) > 1)) {
+            throw new InvalidMappingException("Translatable does not support composite identifiers in class - {$meta->name}");
         }
     }
 
@@ -76,13 +74,11 @@ class Yaml extends File implements Driver
 
     private function buildFieldConfiguration($field, $fieldMapping, array &$config)
     {
-        if (is_array($fieldMapping) && isset($fieldMapping['gedmo'])) {
-            if (in_array('translatable', $fieldMapping['gedmo']) || isset($fieldMapping['gedmo']['translatable'])) {
-                // fields cannot be overrided and throws mapping exception
-                $config['fields'][] = $field;
-                if (isset($fieldMapping['gedmo']['translatable']['fallback'])) {
-                    $config['fallback'][$field] = $fieldMapping['gedmo']['translatable']['fallback'];
-                }
+        if (is_array($fieldMapping) && isset($fieldMapping['gedmo']) && (in_array('translatable', $fieldMapping['gedmo']) || isset($fieldMapping['gedmo']['translatable']))) {
+            // fields cannot be overrided and throws mapping exception
+            $config['fields'][] = $field;
+            if (isset($fieldMapping['gedmo']['translatable']['fallback'])) {
+                $config['fallback'][$field] = $fieldMapping['gedmo']['translatable']['fallback'];
             }
         }
     }

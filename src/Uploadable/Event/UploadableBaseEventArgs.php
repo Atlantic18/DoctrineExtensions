@@ -17,6 +17,10 @@ use Gedmo\Uploadable\UploadableListener;
 abstract class UploadableBaseEventArgs extends EventArgs
 {
     /**
+     * @var mixed[]
+     */
+    public $config;
+    /**
      * The instance of the Uploadable listener that fired this event
      *
      * @var \Gedmo\Uploadable\UploadableListener

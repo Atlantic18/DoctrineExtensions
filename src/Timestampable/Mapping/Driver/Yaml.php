@@ -66,7 +66,7 @@ class Yaml extends File implements Driver
                             throw new InvalidMappingException("Missing parameters on property - {$field}, field must be set on [change] trigger in class - {$meta->name}");
                         }
                         $trackedFieldAttribute = $mappingProperty['field'];
-                        $valueAttribute = isset($mappingProperty['value']) ? $mappingProperty['value'] : null;
+                        $valueAttribute = $mappingProperty['value'] ?? null;
                         if (is_array($trackedFieldAttribute) && null !== $valueAttribute) {
                             throw new InvalidMappingException('Timestampable extension does not support multiple value changeset detection yet.');
                         }

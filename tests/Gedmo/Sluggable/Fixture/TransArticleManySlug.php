@@ -13,6 +13,11 @@ use Gedmo\Translatable\Translatable;
 class TransArticleManySlug implements Sluggable, Translatable
 {
     /**
+     * @var \Sluggable\Fixture\Comment[]|mixed
+     */
+    public $comments;
+    public $page;
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")

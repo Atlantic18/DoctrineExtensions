@@ -84,19 +84,19 @@ class SluggableMappingTest extends \PHPUnit\Framework\TestCase
 
         $this->assertArrayHasKey('handlers', $config['slugs']['slug']);
         $handlers = $config['slugs']['slug']['handlers'];
-        $this->assertEquals(2, count($handlers));
+        $this->assertEquals(2, is_array($handlers) || $handlers instanceof \Countable ? count($handlers) : 0);
         $this->assertArrayHasKey('Gedmo\Sluggable\Handler\TreeSlugHandler', $handlers);
         $this->assertArrayHasKey('Gedmo\Sluggable\Handler\RelativeSlugHandler', $handlers);
 
         $first = $handlers['Gedmo\Sluggable\Handler\TreeSlugHandler'];
-        $this->assertEquals(2, count($first));
+        $this->assertEquals(2, is_array($first) || $first instanceof \Countable ? count($first) : 0);
         $this->assertArrayHasKey('parentRelationField', $first);
         $this->assertArrayHasKey('separator', $first);
         $this->assertEquals('parent', $first['parentRelationField']);
         $this->assertEquals('/', $first['separator']);
 
         $second = $handlers['Gedmo\Sluggable\Handler\RelativeSlugHandler'];
-        $this->assertEquals(3, count($second));
+        $this->assertEquals(3, is_array($second) || $second instanceof \Countable ? count($second) : 0);
         $this->assertArrayHasKey('relationField', $second);
         $this->assertArrayHasKey('relationSlugField', $second);
         $this->assertArrayHasKey('separator', $second);
@@ -119,19 +119,19 @@ class SluggableMappingTest extends \PHPUnit\Framework\TestCase
 
         $this->assertArrayHasKey('handlers', $config['slugs']['slug']);
         $handlers = $config['slugs']['slug']['handlers'];
-        $this->assertEquals(2, count($handlers));
+        $this->assertEquals(2, is_array($handlers) || $handlers instanceof \Countable ? count($handlers) : 0);
         $this->assertArrayHasKey('Gedmo\Sluggable\Handler\TreeSlugHandler', $handlers);
         $this->assertArrayHasKey('Gedmo\Sluggable\Handler\RelativeSlugHandler', $handlers);
 
         $first = $handlers['Gedmo\Sluggable\Handler\TreeSlugHandler'];
-        $this->assertEquals(2, count($first));
+        $this->assertEquals(2, is_array($first) || $first instanceof \Countable ? count($first) : 0);
         $this->assertArrayHasKey('parentRelationField', $first);
         $this->assertArrayHasKey('separator', $first);
         $this->assertEquals('parent', $first['parentRelationField']);
         $this->assertEquals('/', $first['separator']);
 
         $second = $handlers['Gedmo\Sluggable\Handler\RelativeSlugHandler'];
-        $this->assertEquals(3, count($second));
+        $this->assertEquals(3, is_array($second) || $second instanceof \Countable ? count($second) : 0);
         $this->assertArrayHasKey('relationField', $second);
         $this->assertArrayHasKey('relationSlugField', $second);
         $this->assertArrayHasKey('separator', $second);
