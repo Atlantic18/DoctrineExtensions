@@ -21,10 +21,10 @@ use Tool\BaseTestCaseMongoODM;
  */
 class LoggableDocumentTest extends BaseTestCaseMongoODM
 {
-    const ARTICLE = 'Loggable\\Fixture\\Document\\Article';
-    const COMMENT = 'Loggable\\Fixture\\Document\\Comment';
-    const RELATED_ARTICLE = 'Loggable\\Fixture\\Document\\RelatedArticle';
-    const COMMENT_LOG = 'Loggable\\Fixture\\Document\\Log\\Comment';
+    public const ARTICLE = 'Loggable\\Fixture\\Document\\Article';
+    public const COMMENT = 'Loggable\\Fixture\\Document\\Comment';
+    public const RELATED_ARTICLE = 'Loggable\\Fixture\\Document\\RelatedArticle';
+    public const COMMENT_LOG = 'Loggable\\Fixture\\Document\\Log\\Comment';
 
     protected function setUp(): void
     {

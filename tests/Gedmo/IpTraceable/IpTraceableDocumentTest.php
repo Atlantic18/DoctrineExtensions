@@ -18,10 +18,10 @@ use Tool\BaseTestCaseMongoODM;
  */
 class IpTraceableDocumentTest extends BaseTestCaseMongoODM
 {
-    const TEST_IP = '34.234.1.10';
+    public const TEST_IP = '34.234.1.10';
 
-    const ARTICLE = 'IpTraceable\Fixture\Document\Article';
-    const TYPE = 'IpTraceable\Fixture\Document\Type';
+    public const ARTICLE = 'IpTraceable\Fixture\Document\Article';
+    public const TYPE = 'IpTraceable\Fixture\Document\Type';
 
     protected function setUp(): void
     {

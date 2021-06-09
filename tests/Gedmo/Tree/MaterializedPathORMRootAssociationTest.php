@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class MaterializedPathORMRootAssociationTest extends BaseTestCaseORM
 {
-    const CATEGORY = 'Tree\\Fixture\\MPCategoryWithRootAssociation';
+    public const CATEGORY = 'Tree\\Fixture\\MPCategoryWithRootAssociation';
 
     protected $config;
     protected $listener;

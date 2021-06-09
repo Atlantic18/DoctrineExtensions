@@ -18,17 +18,17 @@ class Annotation implements AnnotationDriverInterface
     /**
      * Annotation to mark field as reference to one
      */
-    const REFERENCE_ONE = 'Gedmo\\Mapping\\Annotation\\ReferenceOne';
+    public const REFERENCE_ONE = 'Gedmo\\Mapping\\Annotation\\ReferenceOne';
 
     /**
      * Annotation to mark field as reference to many
      */
-    const REFERENCE_MANY = 'Gedmo\\Mapping\\Annotation\\ReferenceMany';
+    public const REFERENCE_MANY = 'Gedmo\\Mapping\\Annotation\\ReferenceMany';
 
     /**
      * Annotation to mark field as reference to many
      */
-    const REFERENCE_MANY_EMBED = 'Gedmo\\Mapping\\Annotation\\ReferenceManyEmbed';
+    public const REFERENCE_MANY_EMBED = 'Gedmo\\Mapping\\Annotation\\ReferenceManyEmbed';
 
     private $annotations = [
         'referenceOne' => self::REFERENCE_ONE,

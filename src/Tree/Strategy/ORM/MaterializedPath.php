@@ -25,7 +25,7 @@ class MaterializedPath extends AbstractMaterializedPath
         $path = addcslashes($wrapped->getPropertyValue($config['path']), '%');
 
         $separator = $config['path_ends_with_separator'] ? null : $config['path_separator'];
-        
+
         // Remove node's children
         $qb = $om->createQueryBuilder();
         $qb->select('e')

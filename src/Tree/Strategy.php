@@ -10,17 +10,17 @@ interface Strategy
     /**
      * NestedSet strategy
      */
-    const NESTED = 'nested';
+    public const NESTED = 'nested';
 
     /**
      * Closure strategy
      */
-    const CLOSURE = 'closure';
+    public const CLOSURE = 'closure';
 
     /**
      * Materialized Path strategy
      */
-    const MATERIALIZED_PATH = 'materializedPath';
+    public const MATERIALIZED_PATH = 'materializedPath';
 
     /**
      * Get the name of strategy

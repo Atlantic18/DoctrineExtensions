@@ -20,14 +20,14 @@ use Tree\Fixture\Closure\News;
  */
 class ClosureTreeTest extends BaseTestCaseORM
 {
-    const CATEGORY = 'Tree\\Fixture\\Closure\\Category';
-    const CLOSURE = 'Tree\\Fixture\\Closure\\CategoryClosure';
-    const PERSON = 'Tree\\Fixture\\Closure\\Person';
-    const USER = 'Tree\\Fixture\\Closure\\User';
-    const PERSON_CLOSURE = 'Tree\\Fixture\\Closure\\PersonClosure';
-    const NEWS = 'Tree\\Fixture\\Closure\\News';
-    const CATEGORY_WITHOUT_LEVEL = 'Tree\\Fixture\\Closure\\CategoryWithoutLevel';
-    const CATEGORY_WITHOUT_LEVEL_CLOSURE = 'Tree\\Fixture\\Closure\\CategoryWithoutLevelClosure';
+    public const CATEGORY = 'Tree\\Fixture\\Closure\\Category';
+    public const CLOSURE = 'Tree\\Fixture\\Closure\\CategoryClosure';
+    public const PERSON = 'Tree\\Fixture\\Closure\\Person';
+    public const USER = 'Tree\\Fixture\\Closure\\User';
+    public const PERSON_CLOSURE = 'Tree\\Fixture\\Closure\\PersonClosure';
+    public const NEWS = 'Tree\\Fixture\\Closure\\News';
+    public const CATEGORY_WITHOUT_LEVEL = 'Tree\\Fixture\\Closure\\CategoryWithoutLevel';
+    public const CATEGORY_WITHOUT_LEVEL_CLOSURE = 'Tree\\Fixture\\Closure\\CategoryWithoutLevelClosure';
 
     protected $listener;
 

@@ -13,23 +13,23 @@ use Tool\BaseTestCaseMongoODM;
  */
 class ReferenceIntegrityDocumentTest extends BaseTestCaseMongoODM
 {
-    const TYPE_ONE_NULLIFY_CLASS = 'ReferenceIntegrity\Fixture\Document\OneNullify\Type';
-    const ARTICLE_ONE_NULLIFY_CLASS = 'ReferenceIntegrity\Fixture\Document\OneNullify\Article';
+    public const TYPE_ONE_NULLIFY_CLASS = 'ReferenceIntegrity\Fixture\Document\OneNullify\Type';
+    public const ARTICLE_ONE_NULLIFY_CLASS = 'ReferenceIntegrity\Fixture\Document\OneNullify\Article';
 
-    const TYPE_MANY_NULLIFY_CLASS = 'ReferenceIntegrity\Fixture\Document\ManyNullify\Type';
-    const ARTICLE_MANY_NULLIFY_CLASS = 'ReferenceIntegrity\Fixture\Document\ManyNullify\Article';
+    public const TYPE_MANY_NULLIFY_CLASS = 'ReferenceIntegrity\Fixture\Document\ManyNullify\Type';
+    public const ARTICLE_MANY_NULLIFY_CLASS = 'ReferenceIntegrity\Fixture\Document\ManyNullify\Article';
 
-    const TYPE_ONE_PULL_CLASS = 'ReferenceIntegrity\Fixture\Document\OnePull\Type';
-    const ARTICLE_ONE_PULL_CLASS = 'ReferenceIntegrity\Fixture\Document\OnePull\Article';
+    public const TYPE_ONE_PULL_CLASS = 'ReferenceIntegrity\Fixture\Document\OnePull\Type';
+    public const ARTICLE_ONE_PULL_CLASS = 'ReferenceIntegrity\Fixture\Document\OnePull\Article';
 
-    const TYPE_MANY_PULL_CLASS = 'ReferenceIntegrity\Fixture\Document\ManyPull\Type';
-    const ARTICLE_MANY_PULL_CLASS = 'ReferenceIntegrity\Fixture\Document\ManyPull\Article';
+    public const TYPE_MANY_PULL_CLASS = 'ReferenceIntegrity\Fixture\Document\ManyPull\Type';
+    public const ARTICLE_MANY_PULL_CLASS = 'ReferenceIntegrity\Fixture\Document\ManyPull\Article';
 
-    const TYPE_ONE_RESTRICT_CLASS = 'ReferenceIntegrity\Fixture\Document\OneRestrict\Type';
-    const ARTICLE_ONE_RESTRICT_CLASS = 'ReferenceIntegrity\Fixture\Document\OneRestrict\Article';
+    public const TYPE_ONE_RESTRICT_CLASS = 'ReferenceIntegrity\Fixture\Document\OneRestrict\Type';
+    public const ARTICLE_ONE_RESTRICT_CLASS = 'ReferenceIntegrity\Fixture\Document\OneRestrict\Article';
 
-    const TYPE_MANY_RESTRICT_CLASS = 'ReferenceIntegrity\Fixture\Document\ManyRestrict\Type';
-    const ARTICLE_MANY_RESTRICT_CLASS = 'ReferenceIntegrity\Fixture\Document\ManyRestrict\Article';
+    public const TYPE_MANY_RESTRICT_CLASS = 'ReferenceIntegrity\Fixture\Document\ManyRestrict\Type';
+    public const ARTICLE_MANY_RESTRICT_CLASS = 'ReferenceIntegrity\Fixture\Document\ManyRestrict\Article';
 
     protected function setUp(): void
     {

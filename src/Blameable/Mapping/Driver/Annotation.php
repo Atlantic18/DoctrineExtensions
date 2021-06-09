@@ -19,7 +19,7 @@ class Annotation extends AbstractAnnotationDriver
     /**
      * Annotation field is blameable
      */
-    const BLAMEABLE = 'Gedmo\\Mapping\\Annotation\\Blameable';
+    public const BLAMEABLE = 'Gedmo\\Mapping\\Annotation\\Blameable';
 
     /**
      * List of types which are valid for blame

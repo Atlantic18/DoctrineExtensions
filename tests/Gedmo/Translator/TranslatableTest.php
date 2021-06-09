@@ -19,8 +19,8 @@ use Translator\Fixture\PersonCustom;
  */
 class TranslatableTest extends BaseTestCaseORM
 {
-    const PERSON = 'Translator\\Fixture\\Person';
-    const PERSON_CUSTOM_PROXY = 'Translator\\Fixture\\PersonCustom';
+    public const PERSON = 'Translator\\Fixture\\Person';
+    public const PERSON_CUSTOM_PROXY = 'Translator\\Fixture\\PersonCustom';
 
     protected function setUp(): void
     {

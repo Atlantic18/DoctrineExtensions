@@ -21,10 +21,10 @@ use Tree\Fixture\BehavioralCategory;
  */
 class TranslatableSluggableTreeTest extends BaseTestCaseORM
 {
-    const CATEGORY = 'Tree\\Fixture\\BehavioralCategory';
-    const ARTICLE = 'Tree\\Fixture\\Article';
-    const COMMENT = 'Tree\\Fixture\\Comment';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const CATEGORY = 'Tree\\Fixture\\BehavioralCategory';
+    public const ARTICLE = 'Tree\\Fixture\\Article';
+    public const COMMENT = 'Tree\\Fixture\\Comment';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
     private $translatableListener;
 

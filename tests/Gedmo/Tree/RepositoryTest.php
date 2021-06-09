@@ -18,8 +18,8 @@ use Tree\Fixture\CategoryUuid;
  */
 class RepositoryTest extends BaseTestCaseORM
 {
-    const CATEGORY = 'Tree\\Fixture\\Category';
-    const CATEGORY_UUID = 'Tree\\Fixture\\CategoryUuid';
+    public const CATEGORY = 'Tree\\Fixture\\Category';
+    public const CATEGORY_UUID = 'Tree\\Fixture\\CategoryUuid';
 
     protected function setUp(): void
     {

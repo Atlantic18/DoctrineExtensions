@@ -17,9 +17,9 @@ use Gedmo\Mapping\ExtensionMetadataFactory;
  */
 class TreeMappingTest extends \PHPUnit\Framework\TestCase
 {
-    const TEST_YAML_ENTITY_CLASS = 'Mapping\Fixture\Yaml\Category';
-    const YAML_CLOSURE_CATEGORY = 'Mapping\Fixture\Yaml\ClosureCategory';
-    const YAML_MATERIALIZED_PATH_CATEGORY = 'Mapping\Fixture\Yaml\MaterializedPathCategory';
+    public const TEST_YAML_ENTITY_CLASS = 'Mapping\Fixture\Yaml\Category';
+    public const YAML_CLOSURE_CATEGORY = 'Mapping\Fixture\Yaml\ClosureCategory';
+    public const YAML_MATERIALIZED_PATH_CATEGORY = 'Mapping\Fixture\Yaml\MaterializedPathCategory';
 
     /**
      * @var \Doctrine\ORM\EntityManager

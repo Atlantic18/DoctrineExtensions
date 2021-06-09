@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class SluggableIdentifierTest extends BaseTestCaseORM
 {
-    const TARGET = 'Sluggable\\Fixture\\Identifier';
+    public const TARGET = 'Sluggable\\Fixture\\Identifier';
 
     protected function setUp(): void
     {

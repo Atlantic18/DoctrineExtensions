@@ -17,9 +17,9 @@ use Translatable\Fixture\Article;
  */
 class TranslatableEntityCollectionTest extends BaseTestCaseORM
 {
-    const ARTICLE = 'Translatable\\Fixture\\Article';
-    const COMMENT = 'Translatable\\Fixture\\Comment';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const ARTICLE = 'Translatable\\Fixture\\Article';
+    public const COMMENT = 'Translatable\\Fixture\\Comment';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
     private $translatableListener;
 

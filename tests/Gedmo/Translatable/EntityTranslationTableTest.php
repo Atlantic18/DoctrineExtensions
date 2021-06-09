@@ -17,8 +17,8 @@ use Translatable\Fixture\Person;
  */
 class EntityTranslationTableTest extends BaseTestCaseORM
 {
-    const PERSON = 'Translatable\\Fixture\\Person';
-    const TRANSLATION = 'Translatable\\Fixture\\PersonTranslation';
+    public const PERSON = 'Translatable\\Fixture\\Person';
+    public const TRANSLATION = 'Translatable\\Fixture\\PersonTranslation';
 
     private $translatableListener;
 

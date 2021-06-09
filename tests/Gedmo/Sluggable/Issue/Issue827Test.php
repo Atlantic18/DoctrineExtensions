@@ -20,10 +20,10 @@ use Tool\BaseTestCaseORM;
  */
 class Issue827Test extends BaseTestCaseORM
 {
-    const ARTICLE = 'Sluggable\\Fixture\\Issue827\\Article';
-    const CATEGORY = 'Sluggable\\Fixture\\Issue827\\Category';
-    const COMMENT = 'Sluggable\\Fixture\\Issue827\\Comment';
-    const POST = 'Sluggable\\Fixture\\Issue827\\Post';
+    public const ARTICLE = 'Sluggable\\Fixture\\Issue827\\Article';
+    public const CATEGORY = 'Sluggable\\Fixture\\Issue827\\Category';
+    public const COMMENT = 'Sluggable\\Fixture\\Issue827\\Comment';
+    public const POST = 'Sluggable\\Fixture\\Issue827\\Post';
 
     protected function setUp(): void
     {

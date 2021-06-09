@@ -18,8 +18,8 @@ use Tool\BaseTestCaseMongoODM;
  */
 class TimestampableDocumentTest extends BaseTestCaseMongoODM
 {
-    const ARTICLE = 'Timestampable\Fixture\Document\Article';
-    const TYPE = 'Timestampable\Fixture\Document\Type';
+    public const ARTICLE = 'Timestampable\Fixture\Document\Article';
+    public const TYPE = 'Timestampable\Fixture\Document\Type';
 
     protected function setUp(): void
     {

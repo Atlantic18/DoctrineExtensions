@@ -24,10 +24,10 @@ class TranslatableSlugTest extends BaseTestCaseORM
     private $articleId;
     private $translatableListener;
 
-    const ARTICLE = 'Sluggable\\Fixture\\TranslatableArticle';
-    const COMMENT = 'Sluggable\\Fixture\\Comment';
-    const PAGE = 'Sluggable\\Fixture\\Page';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const ARTICLE = 'Sluggable\\Fixture\\TranslatableArticle';
+    public const COMMENT = 'Sluggable\\Fixture\\Comment';
+    public const PAGE = 'Sluggable\\Fixture\\Page';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
     protected function setUp(): void
     {

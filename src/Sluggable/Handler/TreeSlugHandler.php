@@ -19,7 +19,7 @@ use Gedmo\Tool\Wrapper\AbstractWrapper;
  */
 class TreeSlugHandler implements SlugHandlerWithUniqueCallbackInterface
 {
-    const SEPARATOR = '/';
+    public const SEPARATOR = '/';
 
     /**
      * @var ObjectManager

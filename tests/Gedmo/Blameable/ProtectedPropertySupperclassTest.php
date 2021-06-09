@@ -18,8 +18,8 @@ use Tool\BaseTestCaseORM;
  */
 class ProtectedPropertySupperclassTest extends BaseTestCaseORM
 {
-    const SUPERCLASS = 'Blameable\\Fixture\\Entity\\SupperClassExtension';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const SUPERCLASS = 'Blameable\\Fixture\\Entity\\SupperClassExtension';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
     protected function setUp(): void
     {

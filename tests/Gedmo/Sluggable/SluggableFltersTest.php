@@ -17,10 +17,10 @@ use Tool\BaseTestCaseORM;
  */
 class SluggableFltersTest extends BaseTestCaseORM
 {
-    const TARGET = 'Sluggable\\Fixture\\Article';
+    public const TARGET = 'Sluggable\\Fixture\\Article';
 
-    const SOFT_DELETEABLE_FILTER_NAME = 'soft-deleteable';
-    const FAKE_FILTER_NAME = 'fake-filter';
+    public const SOFT_DELETEABLE_FILTER_NAME = 'soft-deleteable';
+    public const FAKE_FILTER_NAME = 'fake-filter';
 
     protected function setUp(): void
     {

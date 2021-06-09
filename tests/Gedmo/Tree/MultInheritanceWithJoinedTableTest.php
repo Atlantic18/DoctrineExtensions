@@ -18,10 +18,10 @@ use Tool\BaseTestCaseORM;
  */
 class MultInheritanceWithJoinedTableTest extends BaseTestCaseORM
 {
-    const USER = 'Tree\\Fixture\\User';
-    const GROUP = 'Tree\\Fixture\\UserGroup';
-    const ROLE = 'Tree\\Fixture\\Role';
-    const USERLDAP = 'Tree\\Fixture\\UserLDAP';
+    public const USER = 'Tree\\Fixture\\User';
+    public const GROUP = 'Tree\\Fixture\\UserGroup';
+    public const ROLE = 'Tree\\Fixture\\Role';
+    public const USERLDAP = 'Tree\\Fixture\\UserLDAP';
 
     protected function setUp(): void
     {

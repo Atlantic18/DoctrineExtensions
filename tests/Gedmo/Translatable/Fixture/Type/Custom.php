@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\Type;
 
 class Custom extends Type
 {
-    const NAME = 'custom';
+    public const NAME = 'custom';
 
     public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {

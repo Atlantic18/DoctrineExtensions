@@ -12,10 +12,10 @@ use Tool\BaseTestCaseORM;
 
 class SluggablePrefixSuffixTest extends BaseTestCaseORM
 {
-    const PREFIX = 'Sluggable\\Fixture\\Prefix';
-    const SUFFIX = 'Sluggable\\Fixture\\Suffix';
-    const SUFFIX_TREE = 'Sluggable\\Fixture\\SuffixWithTreeHandler';
-    const PREFIX_TREE = 'Sluggable\\Fixture\\PrefixWithTreeHandler';
+    public const PREFIX = 'Sluggable\\Fixture\\Prefix';
+    public const SUFFIX = 'Sluggable\\Fixture\\Suffix';
+    public const SUFFIX_TREE = 'Sluggable\\Fixture\\SuffixWithTreeHandler';
+    public const PREFIX_TREE = 'Sluggable\\Fixture\\PrefixWithTreeHandler';
 
     protected function setUp(): void
     {

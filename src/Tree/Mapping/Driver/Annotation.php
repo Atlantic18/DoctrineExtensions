@@ -21,57 +21,57 @@ class Annotation extends AbstractAnnotationDriver
     /**
      * Annotation to define the tree type
      */
-    const TREE = 'Gedmo\\Mapping\\Annotation\\Tree';
+    public const TREE = 'Gedmo\\Mapping\\Annotation\\Tree';
 
     /**
      * Annotation to mark field as one which will store left value
      */
-    const LEFT = 'Gedmo\\Mapping\\Annotation\\TreeLeft';
+    public const LEFT = 'Gedmo\\Mapping\\Annotation\\TreeLeft';
 
     /**
      * Annotation to mark field as one which will store right value
      */
-    const RIGHT = 'Gedmo\\Mapping\\Annotation\\TreeRight';
+    public const RIGHT = 'Gedmo\\Mapping\\Annotation\\TreeRight';
 
     /**
      * Annotation to mark relative parent field
      */
-    const PARENT = 'Gedmo\\Mapping\\Annotation\\TreeParent';
+    public const PARENT = 'Gedmo\\Mapping\\Annotation\\TreeParent';
 
     /**
      * Annotation to mark node level
      */
-    const LEVEL = 'Gedmo\\Mapping\\Annotation\\TreeLevel';
+    public const LEVEL = 'Gedmo\\Mapping\\Annotation\\TreeLevel';
 
     /**
      * Annotation to mark field as tree root
      */
-    const ROOT = 'Gedmo\\Mapping\\Annotation\\TreeRoot';
+    public const ROOT = 'Gedmo\\Mapping\\Annotation\\TreeRoot';
 
     /**
      * Annotation to specify closure tree class
      */
-    const CLOSURE = 'Gedmo\\Mapping\\Annotation\\TreeClosure';
+    public const CLOSURE = 'Gedmo\\Mapping\\Annotation\\TreeClosure';
 
     /**
      * Annotation to specify path class
      */
-    const PATH = 'Gedmo\\Mapping\\Annotation\\TreePath';
+    public const PATH = 'Gedmo\\Mapping\\Annotation\\TreePath';
 
     /**
      * Annotation to specify path source class
      */
-    const PATH_SOURCE = 'Gedmo\\Mapping\\Annotation\\TreePathSource';
+    public const PATH_SOURCE = 'Gedmo\\Mapping\\Annotation\\TreePathSource';
 
     /**
      * Annotation to specify path hash class
      */
-    const PATH_HASH = 'Gedmo\\Mapping\\Annotation\\TreePathHash';
+    public const PATH_HASH = 'Gedmo\\Mapping\\Annotation\\TreePathHash';
 
     /**
      * Annotation to mark the field to be used to hold the lock time
      */
-    const LOCK_TIME = 'Gedmo\\Mapping\\Annotation\\TreeLockTime';
+    public const LOCK_TIME = 'Gedmo\\Mapping\\Annotation\\TreeLockTime';
 
     /**
      * List of tree strategies available

@@ -10,7 +10,7 @@ use Tool\BaseTestCaseMongoODM;
 
 class ExtensionODMTest extends BaseTestCaseMongoODM
 {
-    const USER = 'Mapping\\Fixture\\Document\\User';
+    public const USER = 'Mapping\\Fixture\\Document\\User';
 
     private $encoderListener;
 

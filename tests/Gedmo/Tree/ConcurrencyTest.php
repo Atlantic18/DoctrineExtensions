@@ -19,9 +19,9 @@ use Tree\Fixture\Comment;
  */
 class ConcurrencyTest extends BaseTestCaseORM
 {
-    const CATEGORY = 'Tree\\Fixture\\Category';
-    const ARTICLE = 'Tree\\Fixture\\Article';
-    const COMMENT = 'Tree\\Fixture\\Comment';
+    public const CATEGORY = 'Tree\\Fixture\\Category';
+    public const ARTICLE = 'Tree\\Fixture\\Article';
+    public const COMMENT = 'Tree\\Fixture\\Comment';
 
     protected function setUp(): void
     {

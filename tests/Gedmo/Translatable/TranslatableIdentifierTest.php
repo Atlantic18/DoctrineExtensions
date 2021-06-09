@@ -17,8 +17,8 @@ use Translatable\Fixture\StringIdentifier;
  */
 class TranslatableIdentifierTest extends BaseTestCaseORM
 {
-    const FIXTURE = 'Translatable\\Fixture\\StringIdentifier';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const FIXTURE = 'Translatable\\Fixture\\StringIdentifier';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
     private $testObjectId;
     private $translatableListener;

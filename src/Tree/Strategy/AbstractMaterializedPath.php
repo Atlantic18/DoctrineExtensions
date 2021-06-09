@@ -21,9 +21,9 @@ use MongoDB\BSON\UTCDateTime;
  */
 abstract class AbstractMaterializedPath implements Strategy
 {
-    const ACTION_INSERT = 'insert';
-    const ACTION_UPDATE = 'update';
-    const ACTION_REMOVE = 'remove';
+    public const ACTION_INSERT = 'insert';
+    public const ACTION_UPDATE = 'update';
+    public const ACTION_REMOVE = 'remove';
 
     /**
      * TreeListener

@@ -14,7 +14,7 @@ $connection = [
     'driver' => 'pdo_mysql',
 ];
 if (!file_exists(__DIR__.'/../vendor/autoload.php')) {
-    die('cannot find vendors, read README.md how to use composer');
+    exit('cannot find vendors, read README.md how to use composer');
 }
 // First of all autoloading of vendors
 $loader = require __DIR__.'/../vendor/autoload.php';

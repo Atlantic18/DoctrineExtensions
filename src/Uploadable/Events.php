@@ -22,7 +22,7 @@ final class Events
      *
      * @var string
      */
-    const uploadablePreFileProcess = 'uploadablePreFileProcess';
+    public const uploadablePreFileProcess = 'uploadablePreFileProcess';
     /**
      * The uploadablePostFileProcess event occurs after a file is processed inside
      * the Uploadable listener. This means it happens after the file is validated and moved
@@ -30,5 +30,5 @@ final class Events
      *
      * @var string
      */
-    const uploadablePostFileProcess = 'uploadablePostFileProcess';
+    public const uploadablePostFileProcess = 'uploadablePostFileProcess';
 }

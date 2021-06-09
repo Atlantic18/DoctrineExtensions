@@ -22,19 +22,19 @@ use Tool\BaseTestCaseORM;
  */
 class SortableGroupTest extends BaseTestCaseORM
 {
-    const CAR = "Sortable\Fixture\Transport\Car";
-    const BUS = "Sortable\Fixture\Transport\Bus";
-    const VEHICLE = "Sortable\Fixture\Transport\Vehicle";
-    const ENGINE = "Sortable\Fixture\Transport\Engine";
-    const RESERVATION = "Sortable\Fixture\Transport\Reservation";
-    const ITEM = "Sortable\Fixture\Item";
-    const CATEGORY = "Sortable\Fixture\Category";
+    public const CAR = "Sortable\Fixture\Transport\Car";
+    public const BUS = "Sortable\Fixture\Transport\Bus";
+    public const VEHICLE = "Sortable\Fixture\Transport\Vehicle";
+    public const ENGINE = "Sortable\Fixture\Transport\Engine";
+    public const RESERVATION = "Sortable\Fixture\Transport\Reservation";
+    public const ITEM = "Sortable\Fixture\Item";
+    public const CATEGORY = "Sortable\Fixture\Category";
 
-    const SEATS = 3;
+    public const SEATS = 3;
 
-    const TRAVEL_DATE_FORMAT = 'Y-m-d H:i';
-    const TODAY = '2013-10-24 12:50';
-    const TOMORROW = '2013-10-25 12:50';
+    public const TRAVEL_DATE_FORMAT = 'Y-m-d H:i';
+    public const TODAY = '2013-10-24 12:50';
+    public const TOMORROW = '2013-10-25 12:50';
 
     protected function setUp(): void
     {

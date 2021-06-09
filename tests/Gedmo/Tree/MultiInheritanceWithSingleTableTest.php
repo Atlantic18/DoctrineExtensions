@@ -19,10 +19,10 @@ use Tree\Fixture\Transport\Engine;
  */
 class MultiInheritanceWithSingleTableTest extends BaseTestCaseORM
 {
-    const CAR = "Tree\Fixture\Transport\Car";
-    const BUS = "Tree\Fixture\Transport\Bus";
-    const VEHICLE = "Tree\Fixture\Transport\Vehicle";
-    const ENGINE = "Tree\Fixture\Transport\Engine";
+    public const CAR = "Tree\Fixture\Transport\Car";
+    public const BUS = "Tree\Fixture\Transport\Bus";
+    public const VEHICLE = "Tree\Fixture\Transport\Vehicle";
+    public const ENGINE = "Tree\Fixture\Transport\Engine";
 
     protected function setUp(): void
     {

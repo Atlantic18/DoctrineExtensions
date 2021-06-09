@@ -7,12 +7,14 @@ $finder = PhpCsFixer\Finder::create()
         __DIR__ . '/tests',
     ]);
 
-return PhpCsFixer\Config::create()
+$config = new PhpCsFixer\Config();
+return $config
     ->setRules([
         '@PSR2' => true,
         '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],
         'ordered_imports' => ['sort_algorithm' => 'alpha'],
         'phpdoc_summary' => false,
+        'phpdoc_to_comment' => false,
     ])
     ->setFinder($finder);

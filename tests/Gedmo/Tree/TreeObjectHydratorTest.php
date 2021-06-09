@@ -20,8 +20,8 @@ use Tree\Fixture\RootCategory;
  */
 class TreeObjectHydratorTest extends BaseTestCaseORM
 {
-    const CATEGORY = 'Tree\\Fixture\\Category';
-    const ROOT_CATEGORY = 'Tree\\Fixture\\RootCategory';
+    public const CATEGORY = 'Tree\\Fixture\\Category';
+    public const ROOT_CATEGORY = 'Tree\\Fixture\\RootCategory';
 
     protected function setUp(): void
     {

@@ -18,8 +18,8 @@ use Translatable\Fixture\MixedValue;
  */
 class MixedValueTranslationTest extends BaseTestCaseORM
 {
-    const MIXED = 'Translatable\\Fixture\\MixedValue';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const MIXED = 'Translatable\\Fixture\\MixedValue';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
     private $translatableListener;
 

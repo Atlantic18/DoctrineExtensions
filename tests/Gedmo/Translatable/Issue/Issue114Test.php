@@ -18,9 +18,9 @@ use Translatable\Fixture\Issue114\Category;
  */
 class Issue114Test extends BaseTestCaseORM
 {
-    const CATEGORY = 'Translatable\\Fixture\\Issue114\\Category';
-    const ARTICLE = 'Translatable\\Fixture\\Issue114\\Article';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const CATEGORY = 'Translatable\\Fixture\\Issue114\\Category';
+    public const ARTICLE = 'Translatable\\Fixture\\Issue114\\Article';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
     private $translatableListener;
 

@@ -9,7 +9,7 @@ use Tool\BaseTestCaseORM;
 
 class TreeSlugHandlerPrefixSuffixTest extends BaseTestCaseORM
 {
-    const TARGET = 'Sluggable\\Fixture\\Handler\\TreeSlugPrefixSuffix';
+    public const TARGET = 'Sluggable\\Fixture\\Handler\\TreeSlugPrefixSuffix';
 
     protected function setUp(): void
     {

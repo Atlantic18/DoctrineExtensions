@@ -17,10 +17,10 @@ use Tool\BaseTestCaseORM;
  */
 class MaterializedPathORMRepositoryTest extends BaseTestCaseORM
 {
-    const CATEGORY = 'Tree\\Fixture\\MPCategory';
-    const CATEGORY_WITH_TRIMMED_SEPARATOR = 'Tree\\Fixture\\MPCategoryWithTrimmedSeparator';
+    public const CATEGORY = 'Tree\\Fixture\\MPCategory';
+    public const CATEGORY_WITH_TRIMMED_SEPARATOR = 'Tree\\Fixture\\MPCategoryWithTrimmedSeparator';
 
-    /** @var $this->repo \Gedmo\Tree\Entity\Repository\MaterializedPathRepository */
+    /** @var \Gedmo\Tree\Entity\Repository\MaterializedPathRepository */
     protected $repo;
 
     protected function setUp(): void
@@ -318,19 +318,19 @@ class MaterializedPathORMRepositoryTest extends BaseTestCaseORM
         $this->assertEquals(2, $count);
     }
 
-    public function testChildCount_ifAnObjectIsPassedWhichIsNotAnInstanceOfTheEntityClassThrowException()
+    public function testChildCountIfAnObjectIsPassedWhichIsNotAnInstanceOfTheEntityClassThrowException()
     {
         $this->expectException('Gedmo\Exception\InvalidArgumentException');
         $this->repo->childCount(new \DateTime());
     }
 
-    public function testChildCount_ifAnObjectIsPassedIsAnInstanceOfTheEntityClassButIsNotHandledByUnitOfWorkThrowException()
+    public function testChildCountIfAnObjectIsPassedIsAnInstanceOfTheEntityClassButIsNotHandledByUnitOfWorkThrowException()
     {
         $this->expectException('Gedmo\Exception\InvalidArgumentException');
         $this->repo->childCount($this->createCategory());
     }
 
-    public function test_issue458()
+    public function testIssue458()
     {
         $this->em->clear();
 
@@ -350,7 +350,7 @@ class MaterializedPathORMRepositoryTest extends BaseTestCaseORM
         $this->assertEquals(2, $newNode->getLevel());
     }
 
-    public function test_changeChildrenIndex()
+    public function testChangeChildrenIndex()
     {
         $childrenIndex = 'myChildren';
         $this->repo->setChildrenIndex($childrenIndex);

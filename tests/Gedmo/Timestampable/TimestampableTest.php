@@ -20,9 +20,9 @@ use Tool\BaseTestCaseORM;
  */
 class TimestampableTest extends BaseTestCaseORM
 {
-    const ARTICLE = 'Timestampable\\Fixture\\Article';
-    const COMMENT = 'Timestampable\\Fixture\\Comment';
-    const TYPE = 'Timestampable\\Fixture\\Type';
+    public const ARTICLE = 'Timestampable\\Fixture\\Article';
+    public const COMMENT = 'Timestampable\\Fixture\\Comment';
+    public const TYPE = 'Timestampable\\Fixture\\Type';
 
     protected function setUp(): void
     {

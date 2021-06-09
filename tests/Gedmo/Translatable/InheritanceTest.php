@@ -20,12 +20,12 @@ use Translatable\Fixture\TemplatedArticle;
  */
 class InheritanceTest extends BaseTestCaseORM
 {
-    const ARTICLE = 'Translatable\\Fixture\\TemplatedArticle';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
-    const FILE = 'Translatable\\Fixture\\File';
-    const IMAGE = 'Translatable\\Fixture\\Image';
+    public const ARTICLE = 'Translatable\\Fixture\\TemplatedArticle';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const FILE = 'Translatable\\Fixture\\File';
+    public const IMAGE = 'Translatable\\Fixture\\Image';
 
-    const TREE_WALKER_TRANSLATION = 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker';
+    public const TREE_WALKER_TRANSLATION = 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker';
 
     private $translatableListener;
 

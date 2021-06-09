@@ -19,17 +19,17 @@ use Tool\BaseTestCaseMongoODM;
  */
 class SoftDeleteableDocumentTest extends BaseTestCaseMongoODM
 {
-    const ARTICLE_CLASS = 'SoftDeleteable\Fixture\Document\Article';
-    const COMMENT_CLASS = 'SoftDeleteable\Fixture\Document\Comment';
-    const PAGE_CLASS = 'SoftDeleteable\Fixture\Document\Page';
-    const MEGA_PAGE_CLASS = 'SoftDeleteable\Fixture\Document\MegaPage';
-    const MODULE_CLASS = 'SoftDeleteable\Fixture\Document\Module';
-    const OTHER_ARTICLE_CLASS = 'SoftDeleteable\Fixture\Document\OtherArticle';
-    const OTHER_COMMENT_CLASS = 'SoftDeleteable\Fixture\Document\OtherComment';
-    const USER_CLASS = 'SoftDeleteable\Fixture\Document\User';
-    const USER__TIME_AWARE_CLASS = 'SoftDeleteable\Fixture\Document\UserTimeAware';
-    const MAPPED_SUPERCLASS_CHILD_CLASS = 'SoftDeleteable\Fixture\Document\Child';
-    const SOFT_DELETEABLE_FILTER_NAME = 'soft-deleteable';
+    public const ARTICLE_CLASS = 'SoftDeleteable\Fixture\Document\Article';
+    public const COMMENT_CLASS = 'SoftDeleteable\Fixture\Document\Comment';
+    public const PAGE_CLASS = 'SoftDeleteable\Fixture\Document\Page';
+    public const MEGA_PAGE_CLASS = 'SoftDeleteable\Fixture\Document\MegaPage';
+    public const MODULE_CLASS = 'SoftDeleteable\Fixture\Document\Module';
+    public const OTHER_ARTICLE_CLASS = 'SoftDeleteable\Fixture\Document\OtherArticle';
+    public const OTHER_COMMENT_CLASS = 'SoftDeleteable\Fixture\Document\OtherComment';
+    public const USER_CLASS = 'SoftDeleteable\Fixture\Document\User';
+    public const USER__TIME_AWARE_CLASS = 'SoftDeleteable\Fixture\Document\UserTimeAware';
+    public const MAPPED_SUPERCLASS_CHILD_CLASS = 'SoftDeleteable\Fixture\Document\Child';
+    public const SOFT_DELETEABLE_FILTER_NAME = 'soft-deleteable';
 
     private $softDeleteableListener;
 

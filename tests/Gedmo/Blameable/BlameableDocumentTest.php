@@ -19,11 +19,11 @@ use Tool\BaseTestCaseMongoODM;
  */
 class BlameableDocumentTest extends BaseTestCaseMongoODM
 {
-    const TEST_USERNAME = 'testuser';
+    public const TEST_USERNAME = 'testuser';
 
-    const TYPE = 'Blameable\Fixture\Document\Type';
-    const USER = 'Blameable\Fixture\Document\User';
-    const ARTICLE = 'Blameable\Fixture\Document\Article';
+    public const TYPE = 'Blameable\Fixture\Document\Type';
+    public const USER = 'Blameable\Fixture\Document\User';
+    public const ARTICLE = 'Blameable\Fixture\Document\Article';
 
     protected function setUp(): void
     {

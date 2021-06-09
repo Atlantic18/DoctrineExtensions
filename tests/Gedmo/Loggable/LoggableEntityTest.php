@@ -22,10 +22,10 @@ use Tool\BaseTestCaseORM;
  */
 class LoggableEntityTest extends BaseTestCaseORM
 {
-    const ARTICLE = 'Loggable\Fixture\Entity\Article';
-    const COMMENT = 'Loggable\Fixture\Entity\Comment';
-    const RELATED_ARTICLE = 'Loggable\Fixture\Entity\RelatedArticle';
-    const COMMENT_LOG = 'Loggable\Fixture\Entity\Log\Comment';
+    public const ARTICLE = 'Loggable\Fixture\Entity\Article';
+    public const COMMENT = 'Loggable\Fixture\Entity\Comment';
+    public const RELATED_ARTICLE = 'Loggable\Fixture\Entity\RelatedArticle';
+    public const COMMENT_LOG = 'Loggable\Fixture\Entity\Log\Comment';
 
     private $articleId;
     private $LoggableListener;

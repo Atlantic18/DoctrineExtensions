@@ -18,9 +18,9 @@ use Translatable\Fixture\Issue138\Article;
  */
 class Issue138Test extends BaseTestCaseORM
 {
-    const ARTICLE = 'Translatable\\Fixture\\Issue138\\Article';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
-    const TREE_WALKER_TRANSLATION = 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker';
+    public const ARTICLE = 'Translatable\\Fixture\\Issue138\\Article';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const TREE_WALKER_TRANSLATION = 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker';
 
     private $translatableListener;
 

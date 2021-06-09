@@ -18,7 +18,7 @@ use Tool\BaseTestCaseMongoODM;
  */
 class TimestampableEmbeddedDocumentTest extends BaseTestCaseMongoODM
 {
-    const BOOK = 'Timestampable\Fixture\Document\Book';
+    public const BOOK = 'Timestampable\Fixture\Document\Book';
 
     protected function setUp(): void
     {

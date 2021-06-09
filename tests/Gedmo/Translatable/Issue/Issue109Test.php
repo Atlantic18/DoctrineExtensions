@@ -19,11 +19,11 @@ use Translatable\Fixture\Article;
  */
 class Issue109Test extends BaseTestCaseORM
 {
-    const ARTICLE = 'Translatable\\Fixture\\Article';
-    const COMMENT = 'Translatable\\Fixture\\Comment';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const ARTICLE = 'Translatable\\Fixture\\Article';
+    public const COMMENT = 'Translatable\\Fixture\\Comment';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
-    const TREE_WALKER_TRANSLATION = 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker';
+    public const TREE_WALKER_TRANSLATION = 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker';
 
     private $translatableListener;
 

@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class AnnotationValidationTest extends BaseTestCaseORM
 {
-    const TARGET = 'Sluggable\\Fixture\\Validate';
+    public const TARGET = 'Sluggable\\Fixture\\Validate';
 
     /**
      * @test

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Gedmo\Translatable\Issue;
 
 use Doctrine\Common\EventManager;
+use Gedmo\Translatable\Entity\Translation;
 use Gedmo\Translatable\TranslatableListener;
 use Tool\BaseTestCaseORM;
-use Gedmo\Translatable\Entity\Translation;
 use Translatable\Fixture\Issue2152\EntityWithTranslatableBoolean;
 
 class Issue2152Test extends BaseTestCaseORM

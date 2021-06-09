@@ -10,10 +10,10 @@ use Translatable\Fixture\Company;
 
 class TranslatableWithEmbeddedTest extends BaseTestCaseORM
 {
-    const FIXTURE = 'Translatable\\Fixture\\Company';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const FIXTURE = 'Translatable\\Fixture\\Company';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
-    const TREE_WALKER_TRANSLATION = 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker';
+    public const TREE_WALKER_TRANSLATION = 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker';
 
     /**
      * @var TranslatableListener

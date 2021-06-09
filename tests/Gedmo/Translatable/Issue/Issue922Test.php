@@ -10,10 +10,10 @@ use Translatable\Fixture\Issue922\Post;
 
 class Issue922Test extends BaseTestCaseORM
 {
-    const POST = 'Translatable\Fixture\Issue922\Post';
-    const TRANSLATION = 'Gedmo\Translatable\Entity\Translation';
+    public const POST = 'Translatable\Fixture\Issue922\Post';
+    public const TRANSLATION = 'Gedmo\Translatable\Entity\Translation';
 
-    const TREE_WALKER_TRANSLATION = 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker';
+    public const TREE_WALKER_TRANSLATION = 'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker';
 
     private $translatableListener;
 

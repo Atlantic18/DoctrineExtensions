@@ -15,10 +15,10 @@ use Tool\BaseTestCaseORM;
  */
 class MultiInheritanceTest extends BaseTestCaseORM
 {
-    const NODE = 'Tree\\Fixture\\Node';
-    const BASE_NODE = 'Tree\\Fixture\\BaseNode';
-    const ANODE = 'Tree\\Fixture\\ANode';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const NODE = 'Tree\\Fixture\\Node';
+    public const BASE_NODE = 'Tree\\Fixture\\BaseNode';
+    public const ANODE = 'Tree\\Fixture\\ANode';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
     protected function setUp(): void
     {

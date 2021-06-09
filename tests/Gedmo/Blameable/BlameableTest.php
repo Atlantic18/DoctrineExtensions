@@ -19,9 +19,9 @@ use Tool\BaseTestCaseORM;
  */
 class BlameableTest extends BaseTestCaseORM
 {
-    const ARTICLE = 'Blameable\\Fixture\\Entity\\Article';
-    const COMMENT = 'Blameable\\Fixture\\Entity\\Comment';
-    const TYPE = 'Blameable\\Fixture\\Entity\\Type';
+    public const ARTICLE = 'Blameable\\Fixture\\Entity\\Article';
+    public const COMMENT = 'Blameable\\Fixture\\Entity\\Comment';
+    public const TYPE = 'Blameable\\Fixture\\Entity\\Type';
 
     protected function setUp(): void
     {

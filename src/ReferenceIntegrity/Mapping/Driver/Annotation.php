@@ -20,12 +20,12 @@ class Annotation extends AbstractAnnotationDriver
     /**
      * Annotation to identify the fields which manages the reference integrity
      */
-    const REFERENCE_INTEGRITY = 'Gedmo\\Mapping\\Annotation\\ReferenceIntegrity';
+    public const REFERENCE_INTEGRITY = 'Gedmo\\Mapping\\Annotation\\ReferenceIntegrity';
 
     /**
      * ReferenceIntegrityAction extension annotation
      */
-    const ACTION = 'Gedmo\\Mapping\\Annotation\\ReferenceIntegrityAction';
+    public const ACTION = 'Gedmo\\Mapping\\Annotation\\ReferenceIntegrityAction';
 
     /**
      * {@inheritdoc}

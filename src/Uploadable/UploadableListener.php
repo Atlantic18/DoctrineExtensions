@@ -36,8 +36,8 @@ use Gedmo\Uploadable\MimeType\MimeTypeGuesserInterface;
  */
 class UploadableListener extends MappedEventSubscriber
 {
-    const ACTION_INSERT = 'INSERT';
-    const ACTION_UPDATE = 'UPDATE';
+    public const ACTION_INSERT = 'INSERT';
+    public const ACTION_UPDATE = 'UPDATE';
 
     /**
      * Default path to move files in

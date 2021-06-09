@@ -17,7 +17,7 @@ use Tree\Fixture\Category;
  */
 class InMemoryUpdatesTest extends BaseTestCaseORM
 {
-    const CATEGORY = 'Tree\\Fixture\\Category';
+    public const CATEGORY = 'Tree\\Fixture\\Category';
 
     protected function setUp(): void
     {

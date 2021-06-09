@@ -4,7 +4,6 @@ namespace Gedmo\SoftDeleteable\Mapping\Event\Adapter;
 
 use Gedmo\Mapping\Event\Adapter\ODM as BaseAdapterODM;
 use Gedmo\SoftDeleteable\Mapping\Event\SoftDeleteableAdapter;
-use Gedmo\Timestampable\Mapping\Event\TimestampableAdapter;
 
 /**
  * Doctrine event adapter for ORM adapted

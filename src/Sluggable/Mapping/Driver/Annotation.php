@@ -22,17 +22,17 @@ class Annotation extends AbstractAnnotationDriver
      * Annotation to identify field as one which holds the slug
      * together with slug options
      */
-    const SLUG = 'Gedmo\\Mapping\\Annotation\\Slug';
+    public const SLUG = 'Gedmo\\Mapping\\Annotation\\Slug';
 
     /**
      * SlugHandler extension annotation
      */
-    const HANDLER = 'Gedmo\\Mapping\\Annotation\\SlugHandler';
+    public const HANDLER = 'Gedmo\\Mapping\\Annotation\\SlugHandler';
 
     /**
      * SlugHandler option annotation
      */
-    const HANDLER_OPTION = 'Gedmo\\Mapping\\Annotation\\SlugHandlerOption';
+    public const HANDLER_OPTION = 'Gedmo\\Mapping\\Annotation\\SlugHandlerOption';
 
     /**
      * List of types which are valid for slug and sluggable fields

@@ -36,10 +36,10 @@ interface RepositoryInterface extends RepositoryUtilsInterface
     /**
      * Get list of children followed by given $node
      *
-     * @param object               $node - if null, all tree nodes will be taken
-     * @param bool                 $direct - true to take only direct children
-     * @param null|string|string[] $sortByField - field name(s) to sort by
-     * @param string               $direction - sort direction : "ASC" or "DESC"
+     * @param object               $node        - if null, all tree nodes will be taken
+     * @param bool                 $direct      - true to take only direct children
+     * @param string|string[]|null $sortByField - field name(s) to sort by
+     * @param string               $direction   - sort direction : "ASC" or "DESC"
      * @param bool                 $includeNode - Include the root node in results?
      *
      * @return array - list of given $node children, null on failure

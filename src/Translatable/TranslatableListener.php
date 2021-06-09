@@ -30,17 +30,17 @@ class TranslatableListener extends MappedEventSubscriber
      * Query hint to override the fallback of translations
      * integer 1 for true, 0 false
      */
-    const HINT_FALLBACK = 'gedmo.translatable.fallback';
+    public const HINT_FALLBACK = 'gedmo.translatable.fallback';
 
     /**
      * Query hint to override the fallback locale
      */
-    const HINT_TRANSLATABLE_LOCALE = 'gedmo.translatable.locale';
+    public const HINT_TRANSLATABLE_LOCALE = 'gedmo.translatable.locale';
 
     /**
      * Query hint to use inner join strategy for translations
      */
-    const HINT_INNER_JOIN = 'gedmo.translatable.inner_join.translations';
+    public const HINT_INNER_JOIN = 'gedmo.translatable.inner_join.translations';
 
     /**
      * Locale which is set on this listener.
@@ -468,7 +468,7 @@ class TranslatableListener extends MappedEventSubscriber
                     }
                 }
                 // update translation
-                if ($translated !== null
+                if (null !== $translated
                     || (!$this->translationFallback && (!isset($config['fallback'][$field]) || !$config['fallback'][$field]))
                     || ($this->translationFallback && isset($config['fallback'][$field]) && !$config['fallback'][$field])
                 ) {

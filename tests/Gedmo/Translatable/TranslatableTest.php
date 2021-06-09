@@ -19,10 +19,10 @@ use Translatable\Fixture\Sport;
  */
 class TranslatableTest extends BaseTestCaseORM
 {
-    const ARTICLE = 'Translatable\\Fixture\\Article';
-    const SPORT = 'Translatable\\Fixture\\Sport';
-    const COMMENT = 'Translatable\\Fixture\\Comment';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const ARTICLE = 'Translatable\\Fixture\\Article';
+    public const SPORT = 'Translatable\\Fixture\\Sport';
+    public const COMMENT = 'Translatable\\Fixture\\Comment';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
     private $articleId;
     private $translatableListener;

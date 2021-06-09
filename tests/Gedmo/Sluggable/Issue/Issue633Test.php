@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class Issue633Test extends BaseTestCaseORM
 {
-    const TARGET = 'Sluggable\\Fixture\\Issue633\\Article';
+    public const TARGET = 'Sluggable\\Fixture\\Issue633\\Article';
 
     protected function setUp(): void
     {

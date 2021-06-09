@@ -17,10 +17,10 @@ use Tool\BaseTestCaseORM;
  */
 class ClosureTreeRepositoryTest extends BaseTestCaseORM
 {
-    const CATEGORY = 'Tree\\Fixture\\Closure\\Category';
-    const CLOSURE = 'Tree\\Fixture\\Closure\\CategoryClosure';
-    const CATEGORY_WITHOUT_LEVEL = 'Tree\\Fixture\\Closure\\CategoryWithoutLevel';
-    const CATEGORY_WITHOUT_LEVEL_CLOSURE = 'Tree\\Fixture\\Closure\\CategoryWithoutLevelClosure';
+    public const CATEGORY = 'Tree\\Fixture\\Closure\\Category';
+    public const CLOSURE = 'Tree\\Fixture\\Closure\\CategoryClosure';
+    public const CATEGORY_WITHOUT_LEVEL = 'Tree\\Fixture\\Closure\\CategoryWithoutLevel';
+    public const CATEGORY_WITHOUT_LEVEL_CLOSURE = 'Tree\\Fixture\\Closure\\CategoryWithoutLevelClosure';
 
     protected $listener;
 
@@ -204,7 +204,7 @@ class ClosureTreeRepositoryTest extends BaseTestCaseORM
         $this->assertTrue(((bool) strpos($qb->getQuery()->getDql(), '(SELECT MAX(')));
     }
 
-    public function test_changeChildrenIndex()
+    public function testChangeChildrenIndex()
     {
         $this->populate(self::CATEGORY);
 

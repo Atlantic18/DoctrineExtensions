@@ -19,12 +19,12 @@ class Annotation extends AbstractAnnotationDriver
     /**
      * Annotation to mark field as one which will store node position
      */
-    const POSITION = 'Gedmo\\Mapping\\Annotation\\SortablePosition';
+    public const POSITION = 'Gedmo\\Mapping\\Annotation\\SortablePosition';
 
     /**
      * Annotation to mark field as sorting group
      */
-    const GROUP = 'Gedmo\\Mapping\\Annotation\\SortableGroup';
+    public const GROUP = 'Gedmo\\Mapping\\Annotation\\SortableGroup';
 
     /**
      * List of types which are valid for position fields

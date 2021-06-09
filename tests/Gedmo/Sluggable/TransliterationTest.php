@@ -17,7 +17,7 @@ use Tool\BaseTestCaseORM;
  */
 class TransliterationTest extends BaseTestCaseORM
 {
-    const ARTICLE = 'Sluggable\\Fixture\\Article';
+    public const ARTICLE = 'Sluggable\\Fixture\\Article';
 
     protected function setUp(): void
     {

@@ -17,7 +17,7 @@ use Tree\Fixture\RootCategory;
  */
 class NestedTreeRootRepositoryTest extends BaseTestCaseORM
 {
-    const CATEGORY = 'Tree\\Fixture\\RootCategory';
+    public const CATEGORY = 'Tree\\Fixture\\RootCategory';
 
     protected function setUp(): void
     {

@@ -21,10 +21,10 @@ use Translatable\Fixture\Issue173\Product;
  */
 class Issue173Test extends BaseTestCaseORM
 {
-    const CATEGORY = 'Translatable\\Fixture\\Issue173\\Category';
-    const ARTICLE = 'Translatable\\Fixture\\Issue173\\Article';
-    const PRODUCT = 'Translatable\\Fixture\\Issue173\\Product';
-    const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
+    public const CATEGORY = 'Translatable\\Fixture\\Issue173\\Category';
+    public const ARTICLE = 'Translatable\\Fixture\\Issue173\\Article';
+    public const PRODUCT = 'Translatable\\Fixture\\Issue173\\Product';
+    public const TRANSLATION = 'Gedmo\\Translatable\\Entity\\Translation';
 
     private $translatableListener;
 

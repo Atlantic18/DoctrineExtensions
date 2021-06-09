@@ -19,8 +19,8 @@ use Tool\BaseTestCaseORM;
  */
 class BothSlugHandlerTest extends BaseTestCaseORM
 {
-    const OCCUPATION = 'Sluggable\\Fixture\\Handler\\People\\Occupation';
-    const PERSON = 'Sluggable\\Fixture\\Handler\\People\\Person';
+    public const OCCUPATION = 'Sluggable\\Fixture\\Handler\\People\\Occupation';
+    public const PERSON = 'Sluggable\\Fixture\\Handler\\People\\Person';
 
     protected function setUp(): void
     {
