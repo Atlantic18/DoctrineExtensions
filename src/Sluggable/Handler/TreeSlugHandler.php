@@ -143,7 +143,7 @@ class TreeSlugHandler implements SlugHandlerWithUniqueCallbackInterface
             $meta = $wrapped->getMetadata();
             $target = $wrapped->getPropertyValue($config['slug']);
             $config['pathSeparator'] = $this->usedPathSeparator;
-            $ea->replaceRelative($object, $config, $target.$config['pathSeparator'], $slug);
+            $ea->replaceRelative($object, $config, $target.$config['pathSeparator'], $slug.$config['pathSeparator']);
             $uow = $this->om->getUnitOfWork();
             // update in memory objects
             foreach ($uow->getIdentityMap() as $className => $objects) {
