@@ -139,10 +139,11 @@ class ExtensionMetadataFactory
     protected function getDriver($omDriver)
     {
         if ($omDriver instanceof DoctrineBundleMappingDriver) {
-            $propertyReflection = (new \ReflectionClass($omDriver))
-                ->getProperty('driver');
-            $propertyReflection->setAccessible(true);
-            $omDriver = $propertyReflection->getValue($omDriver);
+            $getOmDriver = \Closure::bind(function () {
+                return $this->driver;
+            }, $omDriver, get_class($omDriver));
+
+            $omDriver = $getOmDriver();
         }
 
         $driver = null;

@@ -115,9 +115,11 @@ class MongoDocumentWrapper extends AbstractWrapper
                         $identifier = $this->getIdentifier();
                     } else {
                         // this may not happen but in case
-                        $reflProperty = new \ReflectionProperty($this->object, 'identifier');
-                        $reflProperty->setAccessible(true);
-                        $identifier = $reflProperty->getValue($this->object);
+                        $getIdentifier = \Closure::bind(function () {
+                            return $this->identifier;
+                        }, $this->object, get_class($this->object));
+
+                        $identifier = $getIdentifier();
                     }
                     $this->object->__isInitialized__ = true;
                     $persister->load($identifier, $this->object);

@@ -342,9 +342,11 @@ class UploadableListener extends MappedEventSubscriber
         if ('' === $path) {
             $defaultPath = $this->getDefaultPath();
             if ('' !== $config['pathMethod']) {
-                $pathMethod = $meta->getReflectionClass()->getMethod($config['pathMethod']);
-                $pathMethod->setAccessible(true);
-                $path = $pathMethod->invoke($object, $defaultPath);
+                $getPathMethod = \Closure::bind(function (string $pathMethod, ?string $defaultPath): string {
+                    return $this->{$pathMethod}($defaultPath);
+                }, $object, $meta->getReflectionClass()->getName());
+
+                $path = $getPathMethod($config['pathMethod'], $defaultPath);
             } elseif (null !== $defaultPath) {
                 $path = $defaultPath;
             } else {
@@ -398,12 +400,11 @@ class UploadableListener extends MappedEventSubscriber
      */
     protected function getPropertyValueFromObject(ClassMetadata $meta, $propertyName, $object)
     {
-        $refl = $meta->getReflectionClass();
-        $filePathField = $refl->getProperty($propertyName);
-        $filePathField->setAccessible(true);
-        $filePath = $filePathField->getValue($object);
+        $getFilePath = \Closure::bind(function (string $propertyName) {
+            return $this->{$propertyName};
+        }, $object, $meta->getReflectionClass()->getName());
 
-        return $filePath;
+        return $getFilePath($propertyName);
     }
 
     /**
@@ -614,7 +615,7 @@ class UploadableListener extends MappedEventSubscriber
     /**
      * Returns default path
      *
-     * @return string
+     * @return string|null
      */
     public function getDefaultPath()
     {
