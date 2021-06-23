@@ -12,7 +12,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoODM;
 abstract class AbstractPersonalTranslation
 {
     /**
-     * @var int
+     * @var string|null
      *
      * @MongoODM\Id
      */
@@ -50,7 +50,7 @@ abstract class AbstractPersonalTranslation
     /**
      * Get id
      *
-     * @return int $id
+     * @return string|null $id
      */
     public function getId()
     {
