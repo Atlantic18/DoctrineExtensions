@@ -22,6 +22,10 @@ Thanks for contributions to:
 - **[everzet](http://github.com/everzet) Kudryashov Konstantin** for TreeLevel implementation
 - **[stof](http://github.com/stof) Christophe Coevoet** for getTreeLeafs function
 
+Update **2021-03-17**
+
+- Added Tree repository traits for easier extending tree functionalities in your repositories. [Usage example here](#tree-repositories)
+
 Update **2018-02-26**
 
 - Nodes with no Parent can now be sorted based on a tree root id being an id from another table. Existing behaviour 
@@ -381,6 +385,52 @@ The result after flush will generate the food tree:
     /fruits (2-3)
     /vegetables (4-7)
         /carrots (5-6)
+```
+
+## Tree Repositories
+To add tree funtionalities and methods to your repository you can use traits `NestedTreeRepository`, `MaterializedPathRepository` or `ClosureTreeRepository` like below:
+
+```php
+namespace YourNamespace\Repository;
+
+use Gedmo\Tree\Traits\Repository\ORM\NestedTreeRepositoryTrait;
+
+class CategoryRepository extends EntityRepository
+{
+    use NestedTreeRepositoryTrait; // or MaterializedPathRepositoryTrait or ClosureTreeRepositoryTrait.
+
+    public function __construct(EntityManager $em, ClassMetadata $class)
+    {
+        parent::__construct($em, $class);
+        
+        $this->initializeTreeRepository($em, $class);
+    }
+
+    // ONLY WHEN USING NestedTreeRepository which adds persistAs*() methods
+    public function __call($method, $args)
+    {
+        $result = $this->callTreeUtilMethods($method, $args);
+
+        if (null !== $result)
+        {
+            return $result;
+        }
+
+        return parent::__call($method, $args);
+    }
+}
+```
+```php
+namespace YourNamespace\Repository;
+
+/**
+ * @Gedmo\Tree(type="nested")
+ * @Entity(repositoryClass="YourNamespace\Repository\CategoryRepository")
+ */
+class Category
+{
+    //...
+}
 ```
 
 ### Using repository functions
