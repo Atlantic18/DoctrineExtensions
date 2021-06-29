@@ -80,7 +80,7 @@ class MongoDocumentWrapper extends AbstractWrapper
     /**
      * {@inheritdoc}
      */
-    public function getIdentifier($single = true)
+    public function getIdentifier($single = true, $flatten = false)
     {
         if (!$this->identifier) {
             if ($this->object instanceof Proxy) {

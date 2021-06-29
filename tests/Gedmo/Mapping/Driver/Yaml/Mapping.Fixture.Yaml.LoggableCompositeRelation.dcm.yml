@@ -1,0 +1,21 @@
+---
+Mapping\Fixture\Yaml\LoggableCompositeRelation:
+  type: entity
+  table: loggable_with_composite_relation
+  gedmo:
+    loggable:
+      logEntryClass: Gedmo\Loggable\Entity\LogEntry
+  id:
+    one:
+      associationKey: true
+    two:
+      type: integer
+  fields:
+    title:
+      type: string
+      gedmo:
+        - versioned
+  manyToOne:
+    one:
+      targetEntity: Loggable
+

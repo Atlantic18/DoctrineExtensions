@@ -4,6 +4,7 @@ namespace Gedmo\Loggable\Mapping\Event\Adapter;
 
 use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
 use Gedmo\Mapping\Event\Adapter\ORM as BaseAdapterORM;
+use Gedmo\Tool\Wrapper\EntityWrapper;
 
 /**
  * Doctrine event adapter for ORM adapted
@@ -37,8 +38,8 @@ final class ORM extends BaseAdapterORM implements LoggableAdapter
     {
         $em = $this->getObjectManager();
         $objectMeta = $em->getClassMetadata(get_class($object));
-        $identifierField = $this->getSingleIdentifierFieldName($objectMeta);
-        $objectId = (string) $objectMeta->getReflectionProperty($identifierField)->getValue($object);
+        $wrapper = new EntityWrapper($object, $em);
+        $objectId = $wrapper->getIdentifier(false, true);
 
         $dql = "SELECT MAX(log.version) FROM {$meta->name} log";
         $dql .= ' WHERE log.objectId = :objectId';

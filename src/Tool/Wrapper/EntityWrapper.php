@@ -2,6 +2,7 @@
 
 namespace Gedmo\Tool\Wrapper;
 
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Proxy\Proxy;
 
@@ -80,33 +81,31 @@ class EntityWrapper extends AbstractWrapper
     /**
      * {@inheritdoc}
      */
-    public function getIdentifier($single = true)
+    public function getIdentifier($single = true, $flatten = false)
     {
         if (null === $this->identifier) {
-            if ($this->object instanceof Proxy) {
-                $uow = $this->om->getUnitOfWork();
-                if ($uow->isInIdentityMap($this->object)) {
-                    $this->identifier = $uow->getEntityIdentifier($this->object);
-                } else {
-                    $this->initialize();
-                }
-            }
-            if (null === $this->identifier) {
-                $this->identifier = [];
-                $incomplete = false;
-                foreach ($this->meta->identifier as $name) {
-                    $this->identifier[$name] = $this->getPropertyValue($name);
-                    if (null === $this->identifier[$name]) {
-                        $incomplete = true;
-                    }
-                }
-                if ($incomplete) {
-                    $this->identifier = null;
-                }
+            $uow = $this->om->getUnitOfWork();
+            $this->identifier = $uow->isInIdentityMap($this->object)
+                ? $uow->getEntityIdentifier($this->object)
+                : $this->meta->getIdentifierValues($this->object);
+            if ((is_array($this->identifier) && empty($this->identifier))) {
+                $this->identifier = null;
             }
         }
-        if ($single && is_array($this->identifier)) {
-            return reset($this->identifier);
+        if (is_array($this->identifier)) {
+            if ($single) {
+                return reset($this->identifier);
+            }
+            if ($flatten) {
+                $id = $this->identifier;
+                foreach ($id as $i => $value) {
+                    if (is_object($value) && $this->om->getMetadataFactory()->hasMetadataFor(ClassUtils::getClass($value))) {
+                        $id[$i] = (new EntityWrapper($value, $this->om))->getIdentifier(false, true);
+                    }
+                }
+
+                return implode(' ', $id);
+            }
         }
 
         return $this->identifier;

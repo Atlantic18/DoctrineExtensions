@@ -1,0 +1,18 @@
+---
+Mapping\Fixture\Yaml\LoggableComposite:
+  type: entity
+  table: loggable_with_composite
+  gedmo:
+    loggable:
+      logEntryClass: Gedmo\Loggable\Entity\LogEntry
+  id:
+    one:
+      type: integer
+    two:
+      type: integer
+  fields:
+    title:
+      type: string
+      gedmo:
+        - versioned
+

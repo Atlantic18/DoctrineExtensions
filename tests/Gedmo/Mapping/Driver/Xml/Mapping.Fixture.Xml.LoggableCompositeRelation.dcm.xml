@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <entity name="Mapping\Fixture\Xml\LoggableCompositeRelation" table="loggables_with_composite_relation">
+
+        <id name="one" association-key="true"/>
+        <id name="two" type="integer" column="two"/>
+
+        <field name="title" type="string" length="128">
+            <gedmo:versioned/>
+        </field>
+
+        <many-to-one field="one" target-entity="Loggable"/>
+
+        <gedmo:loggable log-entry-class="Gedmo\Loggable\Entity\LogEntry"/>
+
+    </entity>
+
+</doctrine-mapping>

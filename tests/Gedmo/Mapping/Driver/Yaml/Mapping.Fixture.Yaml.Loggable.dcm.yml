@@ -1,0 +1,18 @@
+---
+Mapping\Fixture\Yaml\Loggable:
+  type: entity
+  table: loggable
+  gedmo:
+    loggable:
+      logEntryClass: Gedmo\Loggable\Entity\LogEntry
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    title:
+      type: string
+      gedmo:
+        - versioned
+
