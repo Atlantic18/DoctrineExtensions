@@ -109,7 +109,7 @@ class MaterializedPathRepository extends AbstractTreeRepository
     public function getChildrenQueryBuilder($node = null, $direct = false, $sortByField = null, $direction = 'asc', $includeNode = false)
     {
         $meta = $this->getClassMetadata();
-        $config = $this->listener->getConfiguration($this->dm, $meta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->dm, $meta->name);
         $separator = preg_quote($config['path_separator']);
         $qb = $this->dm->createQueryBuilder()
             ->find($meta->name);
@@ -200,6 +200,6 @@ class MaterializedPathRepository extends AbstractTreeRepository
      */
     protected function validate()
     {
-        return Strategy::MATERIALIZED_PATH === $this->listener->getStrategy($this->dm, $this->getClassMetadata()->name)->getName();
+        return Strategy::MATERIALIZED_PATH === $this->getTreeListener()->getStrategy($this->dm, $this->getClassMetadata()->name)->getName();
     }
 }

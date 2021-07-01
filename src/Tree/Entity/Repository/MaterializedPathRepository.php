@@ -86,7 +86,7 @@ class MaterializedPathRepository extends AbstractTreeRepository
     public function getPathQueryBuilder($node)
     {
         $meta = $this->getClassMetadata();
-        $config = $this->listener->getConfiguration($this->_em, $meta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $meta->name);
         $alias = 'materialized_path_entity';
         $qb = $this->getQueryBuilder()
             ->select($alias)
@@ -152,7 +152,7 @@ class MaterializedPathRepository extends AbstractTreeRepository
     public function getChildrenQueryBuilder($node = null, $direct = false, $sortByField = null, $direction = 'asc', $includeNode = false)
     {
         $meta = $this->getClassMetadata();
-        $config = $this->listener->getConfiguration($this->_em, $meta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $meta->name);
         $separator = addcslashes($config['path_separator'], '%');
         $alias = 'materialized_path_entity';
         $path = $config['path'];
@@ -263,7 +263,7 @@ class MaterializedPathRepository extends AbstractTreeRepository
     public function getNodesHierarchy($node = null, $direct = false, array $options = [], $includeNode = false)
     {
         $meta = $this->getClassMetadata();
-        $config = $this->listener->getConfiguration($this->_em, $meta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $meta->name);
         $path = $config['path'];
 
         $nodes = $this->getNodesHierarchyQuery($node, $direct, $options, $includeNode)->getArrayResult();
@@ -282,6 +282,6 @@ class MaterializedPathRepository extends AbstractTreeRepository
      */
     protected function validate()
     {
-        return Strategy::MATERIALIZED_PATH === $this->listener->getStrategy($this->_em, $this->getClassMetadata()->name)->getName();
+        return Strategy::MATERIALIZED_PATH === $this->getTreeListener()->getStrategy($this->_em, $this->getClassMetadata()->name)->getName();
     }
 }

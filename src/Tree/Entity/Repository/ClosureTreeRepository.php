@@ -28,7 +28,7 @@ class ClosureTreeRepository extends AbstractTreeRepository
     public function getRootNodesQueryBuilder($sortByField = null, $direction = 'asc')
     {
         $meta = $this->getClassMetadata();
-        $config = $this->listener->getConfiguration($this->_em, $meta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $meta->name);
         $qb = $this->getQueryBuilder();
         $qb->select('node')
             ->from($config['useObjectClass'], 'node')
@@ -75,7 +75,7 @@ class ClosureTreeRepository extends AbstractTreeRepository
         if (!$this->_em->getUnitOfWork()->isInIdentityMap($node)) {
             throw new InvalidArgumentException('Node is not managed by UnitOfWork');
         }
-        $config = $this->listener->getConfiguration($this->_em, $meta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $meta->name);
         $closureMeta = $this->_em->getClassMetadata($config['closure']);
 
         $dql = "SELECT c, node FROM {$closureMeta->name} c";
@@ -108,7 +108,7 @@ class ClosureTreeRepository extends AbstractTreeRepository
     public function childrenQueryBuilder($node = null, $direct = false, $sortByField = null, $direction = 'ASC', $includeNode = false)
     {
         $meta = $this->getClassMetadata();
-        $config = $this->listener->getConfiguration($this->_em, $meta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $meta->name);
 
         $qb = $this->getQueryBuilder();
         if (null !== $node) {
@@ -227,7 +227,7 @@ class ClosureTreeRepository extends AbstractTreeRepository
         if (!$wrapped->hasValidIdentifier()) {
             throw new InvalidArgumentException('Node is not managed by UnitOfWork');
         }
-        $config = $this->listener->getConfiguration($this->_em, $meta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $meta->name);
         $pk = $meta->getSingleIdentifierFieldName();
         $nodeId = $wrapped->getIdentifier();
         $parent = $wrapped->getPropertyValue($config['parent']);
@@ -252,7 +252,7 @@ class ClosureTreeRepository extends AbstractTreeRepository
                 $q->setParameters(compact('parent', 'id'));
                 $q->getSingleScalarResult();
 
-                $this->listener
+                $this->getTreeListener()
                     ->getStrategy($this->_em, $meta->name)
                     ->updateNode($this->_em, $nodeToReparent, $node);
 
@@ -288,12 +288,12 @@ class ClosureTreeRepository extends AbstractTreeRepository
     public function buildTreeArray(array $nodes)
     {
         $meta = $this->getClassMetadata();
-        $config = $this->listener->getConfiguration($this->_em, $meta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $meta->name);
         $nestedTree = [];
         $idField = $meta->getSingleIdentifierFieldName();
         $hasLevelProp = !empty($config['level']);
         $levelProp = $hasLevelProp ? $config['level'] : self::SUBQUERY_LEVEL;
-        $childrenIndex = $this->repoUtils->getChildrenIndex();
+        $childrenIndex = $this->getRepoUtils()->getChildrenIndex();
 
         if (count($nodes) > 0) {
             $firstLevel = $hasLevelProp ? $nodes[0][0]['descendant'][$levelProp] : $nodes[0][$levelProp];
@@ -348,7 +348,7 @@ class ClosureTreeRepository extends AbstractTreeRepository
     public function getNodesHierarchyQueryBuilder($node = null, $direct = false, array $options = [], $includeNode = false)
     {
         $meta = $this->getClassMetadata();
-        $config = $this->listener->getConfiguration($this->_em, $meta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $meta->name);
         $idField = $meta->getSingleIdentifierFieldName();
         $subQuery = '';
         $hasLevelProp = isset($config['level']) && $config['level'];
@@ -395,14 +395,14 @@ class ClosureTreeRepository extends AbstractTreeRepository
      */
     protected function validate()
     {
-        return Strategy::CLOSURE === $this->listener->getStrategy($this->_em, $this->getClassMetadata()->name)->getName();
+        return Strategy::CLOSURE === $this->getTreeListener()->getStrategy($this->_em, $this->getClassMetadata()->name)->getName();
     }
 
     public function verify()
     {
         $nodeMeta = $this->getClassMetadata();
         $nodeIdField = $nodeMeta->getSingleIdentifierFieldName();
-        $config = $this->listener->getConfiguration($this->_em, $nodeMeta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $nodeMeta->name);
         $closureMeta = $this->_em->getClassMetadata($config['closure']);
         $errors = [];
 
@@ -473,7 +473,7 @@ class ClosureTreeRepository extends AbstractTreeRepository
     public function rebuildClosure()
     {
         $nodeMeta = $this->getClassMetadata();
-        $config = $this->listener->getConfiguration($this->_em, $nodeMeta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $nodeMeta->name);
         $closureMeta = $this->_em->getClassMetadata($config['closure']);
 
         $insertClosures = function ($entries) use ($closureMeta) {
@@ -529,7 +529,7 @@ class ClosureTreeRepository extends AbstractTreeRepository
         $conn = $this->_em->getConnection();
         $nodeMeta = $this->getClassMetadata();
         $nodeIdField = $nodeMeta->getSingleIdentifierFieldName();
-        $config = $this->listener->getConfiguration($this->_em, $nodeMeta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $nodeMeta->name);
         $closureMeta = $this->_em->getClassMetadata($config['closure']);
         $closureTableName = $closureMeta->getTableName();
 
@@ -562,7 +562,7 @@ class ClosureTreeRepository extends AbstractTreeRepository
     public function updateLevelValues()
     {
         $nodeMeta = $this->getClassMetadata();
-        $config = $this->listener->getConfiguration($this->_em, $nodeMeta->name);
+        $config = $this->getTreeListener()->getConfiguration($this->_em, $nodeMeta->name);
         $levelUpdatesCount = 0;
 
         if (!empty($config['level'])) {

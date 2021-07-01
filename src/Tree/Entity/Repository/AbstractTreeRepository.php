@@ -32,29 +32,37 @@ abstract class AbstractTreeRepository extends EntityRepository implements Reposi
     public function __construct(EntityManagerInterface $em, ClassMetadata $class)
     {
         parent::__construct($em, $class);
-        $treeListener = null;
-        foreach ($em->getEventManager()->getListeners() as $listeners) {
-            foreach ($listeners as $listener) {
-                if ($listener instanceof TreeListener) {
-                    $treeListener = $listener;
+    }
+
+    /**
+     * @return TreeListener
+     */
+    protected function getTreeListener()
+    {
+        if (null === $this->listener) {
+            $treeListener = null;
+
+            foreach ($this->getEntityManager()->getEventManager()->getListeners() as $listeners) {
+                foreach ($listeners as $listener) {
+                    if ($listener instanceof TreeListener) {
+                        $treeListener = $listener;
+                        break;
+                    }
+                }
+
+                if ($treeListener) {
                     break;
                 }
             }
-            if ($treeListener) {
-                break;
+
+            if (is_null($treeListener)) {
+                throw new \Gedmo\Exception\InvalidMappingException('Tree listener was not found on your entity manager, it must be hooked into the event manager');
             }
+
+            $this->listener = $treeListener;
         }
 
-        if (is_null($treeListener)) {
-            throw new \Gedmo\Exception\InvalidMappingException('Tree listener was not found on your entity manager, it must be hooked into the event manager');
-        }
-
-        $this->listener = $treeListener;
-        if (!$this->validate()) {
-            throw new \Gedmo\Exception\InvalidMappingException('This repository cannot be used for tree type: '.$treeListener->getStrategy($em, $class->name)->getName());
-        }
-
-        $this->repoUtils = new RepositoryUtils($this->_em, $this->getClassMetadata(), $this->listener, $this);
+        return $this->listener;
     }
 
     /**
@@ -84,6 +92,16 @@ abstract class AbstractTreeRepository extends EntityRepository implements Reposi
      */
     public function getRepoUtils()
     {
+        if (null === $this->repoUtils) {
+            $listener = $this->getTreeListener();
+
+            if (!$this->validate()) {
+                throw new \Gedmo\Exception\InvalidMappingException('This repository cannot be used for tree type: '.$treeListener->getStrategy($em, $class->name)->getName());
+            }
+
+            $this->repoUtils = new RepositoryUtils($this->_em, $this->getClassMetadata(), $this->getTreeListener(), $this);
+        }
+
         return $this->repoUtils;
     }
 
@@ -131,7 +149,7 @@ abstract class AbstractTreeRepository extends EntityRepository implements Reposi
      */
     public function childrenHierarchy($node = null, $direct = false, array $options = [], $includeNode = false)
     {
-        return $this->repoUtils->childrenHierarchy($node, $direct, $options, $includeNode);
+        return $this->getRepoUtils()->childrenHierarchy($node, $direct, $options, $includeNode);
     }
 
     /**
@@ -139,7 +157,7 @@ abstract class AbstractTreeRepository extends EntityRepository implements Reposi
      */
     public function buildTree(array $nodes, array $options = [])
     {
-        return $this->repoUtils->buildTree($nodes, $options);
+        return $this->getRepoUtils()->buildTree($nodes, $options);
     }
 
     /**
@@ -147,7 +165,7 @@ abstract class AbstractTreeRepository extends EntityRepository implements Reposi
      */
     public function buildTreeArray(array $nodes)
     {
-        return $this->repoUtils->buildTreeArray($nodes);
+        return $this->getRepoUtils()->buildTreeArray($nodes);
     }
 
     /**
@@ -155,7 +173,7 @@ abstract class AbstractTreeRepository extends EntityRepository implements Reposi
      */
     public function setChildrenIndex($childrenIndex)
     {
-        $this->repoUtils->setChildrenIndex($childrenIndex);
+        $this->getRepoUtils()->setChildrenIndex($childrenIndex);
     }
 
     /**
@@ -163,7 +181,7 @@ abstract class AbstractTreeRepository extends EntityRepository implements Reposi
      */
     public function getChildrenIndex()
     {
-        return $this->repoUtils->getChildrenIndex();
+        return $this->getRepoUtils()->getChildrenIndex();
     }
 
     /**

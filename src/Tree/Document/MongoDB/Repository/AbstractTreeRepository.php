@@ -30,31 +30,38 @@ abstract class AbstractTreeRepository extends DocumentRepository implements Repo
     public function __construct(DocumentManager $em, UnitOfWork $uow, ClassMetadata $class)
     {
         parent::__construct($em, $uow, $class);
-        $treeListener = null;
-        foreach ($em->getEventManager()->getListeners() as $listeners) {
-            foreach ($listeners as $listener) {
-                if ($listener instanceof \Gedmo\Tree\TreeListener) {
-                    $treeListener = $listener;
+    }
+
+    /**
+     * @return TreeListener
+     */
+    public function getTreeListener()
+    {
+        if (null === $this->listener) {
+            $treeListener = null;
+
+            foreach ($this->dm->getEventManager()->getListeners() as $listeners) {
+                foreach ($listeners as $listener) {
+                    if ($listener instanceof \Gedmo\Tree\TreeListener) {
+                        $treeListener = $listener;
+                        break;
+                    }
+                }
+                if ($treeListener) {
                     break;
                 }
             }
-            if ($treeListener) {
-                break;
+
+            if (is_null($treeListener)) {
+                throw new \Gedmo\Exception\InvalidMappingException('This repository can be attached only to ODM MongoDB tree listener');
             }
-        }
 
-        if (is_null($treeListener)) {
-            throw new \Gedmo\Exception\InvalidMappingException('This repository can be attached only to ODM MongoDB tree listener');
+            $this->listener = $treeListener;
         }
-
-        $this->listener = $treeListener;
-        if (!$this->validate()) {
-            throw new \Gedmo\Exception\InvalidMappingException('This repository cannot be used for tree type: '.$treeListener->getStrategy($em, $class->name)->getName());
-        }
-
-        $this->repoUtils = new RepositoryUtils($this->dm, $this->getClassMetadata(), $this->listener, $this);
+        
+        return $this->listener;
     }
-
+    
     /**
      * Sets the RepositoryUtilsInterface instance
      *
@@ -74,6 +81,16 @@ abstract class AbstractTreeRepository extends DocumentRepository implements Repo
      */
     public function getRepoUtils()
     {
+        if (null === $this->repoUtils) {
+            $listener = $this->getTreeListener();
+
+            if (!$this->validate()) {
+                throw new \Gedmo\Exception\InvalidMappingException('This repository cannot be used for tree type: ' . $treeListener->getStrategy($em, $class->name)->getName());
+            }
+
+            $this->repoUtils = new RepositoryUtils($this->dm, $this->getClassMetadata(), $listener, $this);
+        }
+
         return $this->repoUtils;
     }
 
@@ -82,7 +99,7 @@ abstract class AbstractTreeRepository extends DocumentRepository implements Repo
      */
     public function childrenHierarchy($node = null, $direct = false, array $options = [], $includeNode = false)
     {
-        return $this->repoUtils->childrenHierarchy($node, $direct, $options, $includeNode);
+        return $this->getRepoUtils()->childrenHierarchy($node, $direct, $options, $includeNode);
     }
 
     /**
@@ -90,7 +107,7 @@ abstract class AbstractTreeRepository extends DocumentRepository implements Repo
      */
     public function buildTree(array $nodes, array $options = [])
     {
-        return $this->repoUtils->buildTree($nodes, $options);
+        return $this->getRepoUtils()->buildTree($nodes, $options);
     }
 
     /**
@@ -98,7 +115,7 @@ abstract class AbstractTreeRepository extends DocumentRepository implements Repo
      */
     public function setChildrenIndex($childrenIndex)
     {
-        $this->repoUtils->setChildrenIndex($childrenIndex);
+        $this->getRepoUtils()->setChildrenIndex($childrenIndex);
     }
 
     /**
@@ -106,7 +123,7 @@ abstract class AbstractTreeRepository extends DocumentRepository implements Repo
      */
     public function getChildrenIndex()
     {
-        return $this->repoUtils->getChildrenIndex();
+        return $this->getRepoUtils()->getChildrenIndex();
     }
 
     /**
@@ -114,7 +131,7 @@ abstract class AbstractTreeRepository extends DocumentRepository implements Repo
      */
     public function buildTreeArray(array $nodes)
     {
-        return $this->repoUtils->buildTreeArray($nodes);
+        return $this->getRepoUtils()->buildTreeArray($nodes);
     }
 
     /**
