@@ -465,9 +465,9 @@ class SortableListener extends MappedEventSubscriber
                                 // If the object implements Comparable interface we can use its compareTo method
                                 // Otherwise we fallback to normal object comparison
                                 if ($gr instanceof Comparable) {
-                                    $matches = $gr->compareTo($value);
+                                    $matches = 0 === ($gr->compareTo($value));
                                 } else {
-                                    $matches = $gr == $value;
+                                    $matches = $gr === $value;
                                 }
                             } else {
                                 $matches = $gr === $value;
