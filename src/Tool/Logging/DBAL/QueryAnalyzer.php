@@ -2,6 +2,7 @@
 
 namespace Gedmo\Tool\Logging\DBAL;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Logging\SQLLogger;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
@@ -223,6 +224,8 @@ class QueryAnalyzer implements SQLLogger
                 }
                 if ($type instanceof Type) {
                     $value = $type->convertToDatabaseValue($value, $this->platform);
+                } elseif ($type === Connection::PARAM_INT_ARRAY || $type === Connection::PARAM_STR_ARRAY) {
+	                $value = serialize($value);
                 }
             } else {
                 if ($value instanceof \DateTimeInterface) {
