@@ -39,6 +39,8 @@ class Annotation extends AbstractAnnotationDriver
         'zenddate',
         'vardatetime',
         'integer',
+        'chronos_datetime',
+        'chronos_datetimetz',
     );
 
     /**
