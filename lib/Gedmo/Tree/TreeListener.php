@@ -57,6 +57,18 @@ class TreeListener extends MappedEventSubscriber
     }
 
     /**
+     * @param string   $name
+     * @param Gedmo\Tree\Strategy $instance
+     * @return self
+     */
+    public function addStrategyInstance($name, $instance)
+    {
+        if (!isset($this->strategyInstances[$name])) {
+            $this->strategyInstances[$name] = $instance;
+        }
+    }
+		  
+    /**
      * Get the used strategy for tree processing
      *
      * @param ObjectManager $om
@@ -83,7 +95,7 @@ class TreeListener extends MappedEventSubscriber
                 if (!class_exists($strategyClass)) {
                     throw new \Gedmo\Exception\InvalidArgumentException($managerName." TreeListener does not support tree type: {$config['strategy']}");
                 }
-                $this->strategyInstances[$config['strategy']] = new $strategyClass($this);
+                $this->addStrategyInstance($config['strategy'], new $strategyClass($this));
             }
             $this->strategies[$class] = $config['strategy'];
         }
