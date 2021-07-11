@@ -5,6 +5,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Cache\ArrayCache;
 use Composer\Autoload\ClassLoader;
+use Doctrine\DBAL\Types\Type;
 
 /**
  * This is bootstrap for phpUnit unit tests,
@@ -53,3 +54,16 @@ Gedmo\DoctrineExtensions::registerAnnotations();
 $reader = new AnnotationReader();
 $reader = new CachedReader($reader, new ArrayCache());
 $_ENV['annotation_reader'] = $reader;
+
+// Register datetime_immutable for legacy PHP/Doctrine versions.
+if (!Type::hasType('datetime_immutable')) {
+  Type::addType('datetime_immutable', Type::getType('datetime'));
+}
+
+// Fake DateTimeImmutable for PHP 5.4.
+if (!class_exists('DateTimeImmutable')) {
+  class DateTimeImmutable extends \DateTime
+  {
+    
+  }
+}

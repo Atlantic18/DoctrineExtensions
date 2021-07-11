@@ -24,7 +24,7 @@ class Address
     private $street;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $deletedAt;
 
