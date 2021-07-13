@@ -51,6 +51,14 @@ class Xml extends BaseXml
         if (isset($xmlDoctrine->field)) {
             $this->inspectElementForVersioned($xmlDoctrine->field, $config, $meta);
         }
+        if (
+            isset($xmlDoctrine->{'attribute-overrides'}) &&
+            isset($xmlDoctrine->{'attribute-overrides'}->{'attribute-override'})
+        ) {
+            foreach ($xmlDoctrine->{'attribute-overrides'}->{'attribute-override'} as $overrideMapping) {
+                $this->inspectElementForVersioned($overrideMapping, $config, $meta);
+            }
+        }
         if (isset($xmlDoctrine->{'many-to-one'})) {
             $this->inspectElementForVersioned($xmlDoctrine->{'many-to-one'}, $config, $meta);
         }
