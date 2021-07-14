@@ -424,12 +424,33 @@ class NestedTreeRepository extends AbstractTreeRepository
         if ($parent) {
             $wrappedParent = new EntityWrapper($parent, $this->_em);
             $qb->andWhere($qb->expr()->eq('node.'.$config['parent'], ':pid'));
-            $qb->setParameter('pid', $wrappedParent->getIdentifier());
+            $parentId = $wrappedParent->getIdentifier();
+            $parentType = null;
+            if (is_object($wrappedParent->getIdentifier())) {
+                /** @var ClassMetadata $newRootMeta */
+                $parentMeta = $wrappedParent->getMetadata();
+                $parentIdentifier = $parentMeta->identifier[0];
+                $parentType = $parentMeta->getFieldMapping($parentIdentifier)['type'];
+                $parentId = $wrappedParent->getIdentifier();
+            }
+            $qb->setParameter('pid', $parentId, $parentType);
         } elseif (isset($config['root']) && !$parent) {
             $qb->andWhere($qb->expr()->eq('node.'.$config['root'], ':root'));
             $qb->andWhere($qb->expr()->isNull('node.'.$config['parent']));
-            $method = $config['rootIdentifierMethod'];
-            $qb->setParameter('root', $node->$method());
+            $root = isset($config['root']) ? $wrapped->getPropertyValue($config['root']) : null;
+            $rootId = $root;
+            $rootType = null;
+            if ($root) {
+                $rootWrapped = new EntityWrapper($root, $this->_em);
+                if (is_object($rootWrapped->getIdentifier())) {
+                    /** @var ClassMetadata $rootMeta */
+                    $rootMeta = $rootWrapped->getMetadata();
+                    $rootIdentifier = $rootMeta->identifier[0];
+                    $rootType = $rootMeta->getFieldMapping($rootIdentifier)['type'];
+                    $rootId = $rootWrapped->getIdentifier();
+                }
+            }
+            $qb->setParameter('root', $rootId, $rootType);
         } else {
             $qb->andWhere($qb->expr()->isNull('node.'.$config['parent']));
         }

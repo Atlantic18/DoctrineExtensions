@@ -19,6 +19,9 @@ a release.
 ---
 
 ## [Unreleased]
+### Tree
+#### Fixed
+- Add support UUID in nested strategy (#2216)
 
 ## [3.1.0] - 2021-06-22
 ### Fixed
